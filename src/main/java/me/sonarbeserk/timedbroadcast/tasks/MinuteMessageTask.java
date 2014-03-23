@@ -121,9 +121,16 @@ public class MinuteMessageTask extends BukkitRunnable {
 
             if(messageMap.get(messageName) == plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval")) {
 
-                
+                if(plugin.getConfig().getBoolean("settings.prefix-messages")) {
 
-                plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("settings.messages." + messageName + ".message-text")));
+                    String prefix = plugin.getConfig().getString("settings.prefix").replace("{name}", plugin.getName());
+
+                    plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getConfig().getString("settings.messages." + messageName + ".message-text")));
+                } else {
+
+                    plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("settings.messages." + messageName + ".message-text")));
+                }
+                
                 messageMap.put(messageName, 0);
                 continue;
             }
