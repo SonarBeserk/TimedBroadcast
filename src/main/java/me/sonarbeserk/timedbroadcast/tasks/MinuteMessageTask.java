@@ -44,17 +44,19 @@ public class MinuteMessageTask extends BukkitRunnable {
         this.plugin = plugin;
 
         buildMessageMap();
+
+        addPersistedData();
     }
 
-    public void buildMessageMap() {
-
-        messageMap = new HashMap<String, Integer>();
+    public void addPersistedData() {
 
         if(plugin.getConfig().getBoolean("settings.resume-on-restart")) {
 
             if(plugin.getData().get("message-times") == null || ((List<String>) plugin.getData().get("message-times")).size() == 0) {return;}
 
             for(String timeString: ((List<String>) plugin.getData().get("message-times"))) {
+
+                if(timeString.equalsIgnoreCase("") || timeString.equalsIgnoreCase(" ")) {continue;}
 
                 String split[] = timeString.split("\\|");
 
@@ -77,6 +79,11 @@ public class MinuteMessageTask extends BukkitRunnable {
 
             plugin.getData().set("message-times", null);
         }
+    }
+
+    public void buildMessageMap() {
+
+        messageMap = new HashMap<String, Integer>();
 
         ConfigurationSection messageSection = plugin.getConfig().getConfigurationSection("settings.messages");
 
@@ -105,15 +112,21 @@ public class MinuteMessageTask extends BukkitRunnable {
 
         for(String messageName: messageMap.keySet()) {
 
+            messageMap.put(messageName, messageMap.get(messageName) + 1);
+
+            if(messageMap.get(messageName) > plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval")) {
+
+                messageMap.put(messageName, plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval"));
+            }
+
             if(messageMap.get(messageName) == plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval")) {
+
+                
 
                 plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("settings.messages." + messageName + ".message-text")));
                 messageMap.put(messageName, 0);
                 continue;
             }
-
-            messageMap.put(messageName, messageMap.get(messageName) + 1);
-            continue;
         }
     }
 }
