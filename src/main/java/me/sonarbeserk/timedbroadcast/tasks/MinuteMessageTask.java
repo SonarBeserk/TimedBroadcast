@@ -4,7 +4,7 @@ import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.scheduler.BukkitRunnable;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,11 +52,13 @@ public class MinuteMessageTask extends BukkitRunnable {
 
         if(plugin.getConfig().getBoolean("settings.resume-on-restart")) {
 
-            if(plugin.getData().get("message-times") == null || ((List<String>) plugin.getData().get("message-times")).size() == 0) {return;}
+            List<String> messageTimes = (ArrayList<String>) plugin.getData().get("message-times");
 
-            for(String timeString: ((List<String>) plugin.getData().get("message-times"))) {
+            if(messageTimes == null || messageTimes.size() == 0) {return;}
 
-                if(timeString.equalsIgnoreCase("") || timeString.equalsIgnoreCase(" ")) {continue;}
+            for(String timeString: messageTimes) {
+
+                if(timeString == null || timeString.equalsIgnoreCase("") || timeString.equalsIgnoreCase(" ")) {continue;}
 
                 String split[] = timeString.split("\\|");
 
@@ -82,6 +84,11 @@ public class MinuteMessageTask extends BukkitRunnable {
     }
 
     public void buildMessageMap() {
+
+        if(messageMap != null) {
+
+            messageMap = null;
+        }
 
         messageMap = new HashMap<String, Integer>();
 
@@ -130,7 +137,7 @@ public class MinuteMessageTask extends BukkitRunnable {
 
                     plugin.getServer().broadcastMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("settings.messages." + messageName + ".message-text")));
                 }
-                
+
                 messageMap.put(messageName, 0);
                 continue;
             }
