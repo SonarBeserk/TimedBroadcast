@@ -14,3 +14,25 @@ settings:
 
   # What prefix should be used for the plugin? | {name} is replaced with the plugin name
   prefix: "&f[&r&b{name}&r&f]"
+
+  # Should the progress of displaying messages be saved and resumed when the server is restarted?
+  resume-on-restart: true
+
+  # Message Settings
+  messages:
+
+    # Settings for the first message
+    message1:
+
+      # Is the message enabled?
+      enabled: true
+
+      # What is the message to broadcast? (Allows formatting codes)
+      message-text: "&2Example Message"
+
+      # What time unit should be used for the message? (minute, second)
+      time-unit: minute
+
+      # How long should the message wait between broadcasts?
+      time-interval: 2
+
