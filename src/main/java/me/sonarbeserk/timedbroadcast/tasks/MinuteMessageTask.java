@@ -143,4 +143,27 @@ public class MinuteMessageTask extends BukkitRunnable {
             }
         }
     }
+
+    public void persistData() {
+
+        if(plugin.getConfig().getBoolean("settings.resume-on-restart")) {
+
+            List<String> persistenceStringList = null;
+
+            if(plugin.getData().get("message-times") == null) {
+
+                persistenceStringList = new ArrayList<String>();
+            } else {
+
+                persistenceStringList = (ArrayList<String>) plugin.getData().get("message-times");
+            }
+
+            for(String messageName: messageMap.keySet()) {
+
+                persistenceStringList.add(messageName + "|" + plugin.getConfig().getString("settings.messages." + messageName + ".time-unit") + "|" + messageMap.get(messageName));
+            }
+
+            plugin.getData().set("message-times", persistenceStringList);
+        }
+    }
 }

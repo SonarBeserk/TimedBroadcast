@@ -95,6 +95,9 @@ public class TimedBroadcast extends JavaPlugin {
 
     public void onDisable() {
 
+        messageTask.persistData();
+
+        data.save();
         data = null;
 
         messaging = null;
