@@ -71,7 +71,7 @@ public class MinuteMessageTask extends BukkitRunnable {
 
                 if(plugin.getConfig().get("settings.messages." + split[0]) == null || plugin.getConfig().get("settings.messages." + split[0] + ".enabled") == null || plugin.getConfig().get("settings.messages." + split[0] + ".message-text") == null || plugin.getConfig().get("settings.messages." + split[0] + ".time-unit") == null || plugin.getConfig().get("settings.messages." + split[0] + ".time-interval") == null) {continue;}
 
-                if(!plugin.getConfig().getBoolean("settings.messages." + split[0] + ".enabled") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || !plugin.getConfig().getString("settings.messages." + split[0] + ".time-unit").equalsIgnoreCase("minute") || plugin.getConfig().getInt("settings.messages." + split[0] + ".time-inverval") == 0) {continue;}
+                if(!plugin.getConfig().getBoolean("settings.messages." + split[0] + ".enabled") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || !plugin.getConfig().getString("settings.messages." + split[0] + ".time-unit").equalsIgnoreCase("minute") || plugin.getConfig().getInt("settings.messages." + split[0] + ".time-interval") == 0) {continue;}
                 /* Bound Checking */
 
                 if(!split[1].equalsIgnoreCase("minute")) {continue;}
