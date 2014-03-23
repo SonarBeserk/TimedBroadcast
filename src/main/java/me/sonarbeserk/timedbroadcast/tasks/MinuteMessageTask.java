@@ -58,7 +58,7 @@ public class MinuteMessageTask extends BukkitRunnable {
 
                 String split[] = timeString.split("\\|");
 
-                if(split.length == 1) {continue;}
+                if(split.length == 1 || split.length == 2) {continue;}
 
                 if(split[1].replaceAll("[a-zA-Z]", "") == null) {continue;}
 
@@ -70,7 +70,9 @@ public class MinuteMessageTask extends BukkitRunnable {
                 if(!plugin.getConfig().getBoolean("settings.messages." + split[0] + ".enabled") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || !plugin.getConfig().getString("settings.messages." + split[0] + ".time-unit").equalsIgnoreCase("minute") || plugin.getConfig().getInt("settings.messages." + split[0] + ".time-inverval") == 0) {continue;}
                 /* Bound Checking */
 
-                messageMap.put(split[0], Integer.parseInt(split[1]));
+                if(!split[1].equalsIgnoreCase("minute")) {continue;}
+
+                messageMap.put(split[0], Integer.parseInt(split[2]));
             }
 
             plugin.getData().set("message-times", null);
