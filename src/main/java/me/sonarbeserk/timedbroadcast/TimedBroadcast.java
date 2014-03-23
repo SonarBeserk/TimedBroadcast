@@ -41,9 +41,9 @@ public class TimedBroadcast extends JavaPlugin {
 
     private Messaging messaging = null;
 
-    private SecondMessageTask secondMessageTask = null;
+    public SecondMessageTask secondMessageTask = null;
 
-    private MinuteMessageTask minuteMessageTask = null;
+    public MinuteMessageTask minuteMessageTask = null;
 
     public void onEnable() {
 

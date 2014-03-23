@@ -88,6 +88,9 @@ public class MainCmd implements CommandExecutor {
                 plugin.getLanguage().reload();
                 plugin.reloadConfig();
 
+                plugin.secondMessageTask.buildMessageMap();
+                plugin.minuteMessageTask.buildMessageMap();
+
                 if(sender instanceof Player) {
 
                     plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("reloaded"));
