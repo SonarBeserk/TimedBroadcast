@@ -24,3 +24,20 @@ out-of-date-config: "&4The version of the config file being run is out of date! 
 
 # Message to send when the locale file being run is out of date
 out-of-date-locale: "&4The version of the locale file being run is out of date! Please delete the file and reload the plugin to generate the new version! (Backup the old version first!)"
+
+# Updater
+
+# Sent when the updater reports it is up to date
+updater-up-to-date: "The version of the plugin being run is up to date!"
+
+# Sent when the updater finds a new plugin version | {new} - new version | {link} - link to the new version
+updater-notify: "The latest released version is {new}. Please go to {link} to download!"
+
+# Sent when the updater downloads the new plugin version | {new} - new version
+updater-updated: "The latest released version: {new} has been downloaded and will be loaded upon the next restart!"
+
+# Sent when a user with permission is authed, it is used to inform them of the plugin update
+update-found: "&2The latest released version is {new}. Please go to {link} to download!"
+
+# Sent when a user with permission is authed, it is used to inform them that the plugin has been updated and to restart the server
+update-downloaded: "&2The latest released version: {new} has been downloaded and will be loaded upon the next restart!"

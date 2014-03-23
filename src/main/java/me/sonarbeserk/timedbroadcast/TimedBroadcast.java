@@ -4,6 +4,8 @@ import me.sonarbeserk.commands.MainCmd;
 import me.sonarbeserk.listeners.FileVersionListener;
 import me.sonarbeserk.timedbroadcast.tasks.MinuteMessageTask;
 import me.sonarbeserk.timedbroadcast.tasks.SecondMessageTask;
+import me.sonarbeserk.updating.UpdateListener;
+import me.sonarbeserk.updating.Updater;
 import me.sonarbeserk.utils.Data;
 import me.sonarbeserk.utils.Language;
 import me.sonarbeserk.utils.Messaging;
@@ -45,6 +47,14 @@ public class TimedBroadcast extends JavaPlugin {
 
     public MinuteMessageTask minuteMessageTask = null;
 
+    private Updater updater = null;
+
+    private boolean upToDate = false;
+
+    public boolean updateFound = false;
+
+    public boolean updateDownloaded = false;
+
     public void onEnable() {
 
         saveDefaultConfig();
@@ -68,6 +78,55 @@ public class TimedBroadcast extends JavaPlugin {
 
         // 20 ticks = 1 sec 60 sec = 1 min 20x60 = 1200
         minuteMessageTask.runTaskTimer(this, 0, 1200);
+
+        checkForUpdates();
+    }
+
+    private void checkForUpdates() {
+
+        if(getConfig().getBoolean("settings.updater.enabled")) {
+
+            if(getConfig().getString("settings.updater.mode").equalsIgnoreCase("notify")) {
+
+                updater = new Updater(this, 00000 /*replace with the proper id when distributing*/, getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
+
+                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
+
+                    getLogger().info(getLanguage().getMessage("updater-up-to-date"));
+                    upToDate = true;
+                }
+
+                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) < Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", "")) && updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE && !upToDate) {
+
+                    getLogger().info(getLanguage().getMessage("updater-notify").replace("{new}", updater.getLatestName()).replace("{link}", updater.getLatestFileLink()));
+                }
+            } else if(getConfig().getString("settings.updater.mode").equalsIgnoreCase("update")) {
+
+                updater = new Updater(this, 00000 /*replace with the proper id when distributing*/, getFile(), Updater.UpdateType.DEFAULT, getConfig().getBoolean("settings.updater.log-downloads"));
+
+                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
+
+                    getLogger().info(getLanguage().getMessage("updater-up-to-date"));
+                    upToDate = true;
+                }
+
+                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) < Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", "")) && updater.getResult() == Updater.UpdateResult.SUCCESS && !upToDate) {
+
+                    getLogger().info(getLanguage().getMessage("updater-updated").replace("{new}", updater.getLatestName()));
+                }
+            }
+
+            getServer().getPluginManager().registerEvents(new UpdateListener(this), this);
+        }
+    }
+
+    /**
+     * Returns the plugin updater instance
+     * @return the plugin updater instance
+     */
+    public Updater getUpdater()
+    {
+        return this.updater;
     }
 
     /**
