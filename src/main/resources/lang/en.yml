@@ -1,0 +1,26 @@
+# English Language File
+
+# Version
+version: "1.0"
+
+# Sent when a sender lacks permission to do something
+no-permission: "&4You do not have permission to do that!"
+
+# Sent when the config is reloaded
+reloaded: "&7The configuration has been reloaded!"
+
+# Sent when a player is required for a command
+command-player-required: "You must be a player to use this command!"
+
+# Usage
+
+# Usage for the plugin master command | {name} - the name of the plugin
+usage-timedbroadcast: "&7Subcommands: \n reload - reloads the all the plugin's files"
+
+# Out of date
+
+# Message to send when the config file being run is out of date
+out-of-date-config: "&4The version of the config file being run is out of date! Please delete the file and reload the plugin to generate the new version! (Backup the old version first!)"
+
+# Message to send when the locale file being run is out of date
+out-of-date-locale: "&4The version of the locale file being run is out of date! Please delete the file and reload the plugin to generate the new version! (Backup the old version first!)"

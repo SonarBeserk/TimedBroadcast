@@ -1,0 +1,20 @@
+name: ${project.name}
+version: ${project.version}
+description: ${project.description}
+author: SonarBeserk
+
+main: me.sonarbeserk.timedbroadcast.TimedBroadcast
+
+permissions:
+  timedbroadcast.notify.files:
+    description: notifies players with this permission of files being out of date
+    default: op
+  timedbroadcast.commands.reload:
+    description: allows use of the reload subcommand
+    default: op
+
+commands:
+  timedbroadcast:
+    description: master command system for the plugin
+    usage: "TimedBroadcast Usage: /timedbroadcast help"
+    aliases: [tb]
