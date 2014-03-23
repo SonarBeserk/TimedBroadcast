@@ -3,6 +3,7 @@ package me.sonarbeserk.timedbroadcast;
 import me.sonarbeserk.commands.MainCmd;
 import me.sonarbeserk.listeners.FileVersionListener;
 import me.sonarbeserk.timedbroadcast.tasks.MinuteMessageTask;
+import me.sonarbeserk.timedbroadcast.tasks.SecondMessageTask;
 import me.sonarbeserk.utils.Data;
 import me.sonarbeserk.utils.Language;
 import me.sonarbeserk.utils.Messaging;
@@ -40,9 +41,9 @@ public class TimedBroadcast extends JavaPlugin {
 
     private Messaging messaging = null;
 
-    // second task here
+    private SecondMessageTask secondMessageTask = null;
 
-    private MinuteMessageTask messageTask = null;
+    private MinuteMessageTask minuteMessageTask = null;
 
     public void onEnable() {
 
@@ -58,12 +59,15 @@ public class TimedBroadcast extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new FileVersionListener(this), this);
 
-        // second task here
+        secondMessageTask = new SecondMessageTask(this);
 
-        messageTask = new MinuteMessageTask(this);
+        // 20 ticks = 1 sec 20x1 = 20
+        secondMessageTask.runTaskTimer(this, 0, 20);
+
+        minuteMessageTask = new MinuteMessageTask(this);
 
         // 20 ticks = 1 sec 60 sec = 1 min 20x60 = 1200
-        messageTask.runTaskTimer(this, 0, 1200);
+        minuteMessageTask.runTaskTimer(this, 0, 1200);
     }
 
     /**
@@ -95,7 +99,9 @@ public class TimedBroadcast extends JavaPlugin {
 
     public void onDisable() {
 
-        messageTask.persistData();
+        secondMessageTask.persistData();
+
+        minuteMessageTask.persistData();
 
         data.save();
         data = null;
