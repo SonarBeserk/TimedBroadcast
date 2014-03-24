@@ -67,6 +67,14 @@ public class TimedBroadcast extends JavaPlugin {
 
         messaging = new Messaging(this);
 
+        if(getConfig().getBoolean("settings.save-state")) {
+
+            if (getData().get("updater-state") != null) {
+
+                running = Boolean.parseBoolean(String.valueOf(getData().get("updater-state")));
+            }
+        }
+
         getCommand(getDescription().getName().toLowerCase()).setExecutor(new MainCmd(this));
 
         getServer().getPluginManager().registerEvents(new FileVersionListener(this), this);
@@ -163,6 +171,11 @@ public class TimedBroadcast extends JavaPlugin {
         secondMessageTask.persistData();
 
         minuteMessageTask.persistData();
+
+        if(getConfig().getBoolean("settings.save-state")) {
+
+            data.set("updater-state", running);
+        }
 
         data.save();
         data = null;

@@ -115,7 +115,7 @@ public class MinuteMessageTask extends BukkitRunnable {
 
     public void run() {
 
-        if(messageMap == null || messageMap.size() == 0) {return;}
+        if(!plugin.running || messageMap == null || messageMap.size() == 0) {return;}
 
         for(String messageName: messageMap.keySet()) {
 
