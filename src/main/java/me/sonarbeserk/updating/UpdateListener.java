@@ -1,16 +1,15 @@
 package me.sonarbeserk.updating;
 
+import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class UpdateListener implements Listener {
 
-    // needs to be replaced with a plugin with the proper methods
-    private JavaPlugin plugin = null;
+    private TimedBroadcast plugin = null;
 
-    public UpdateListener(JavaPlugin plugin) {
+    public UpdateListener(TimedBroadcast plugin) {
 
         this.plugin = plugin;
     }
@@ -18,8 +17,7 @@ public class UpdateListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void playerJoin(PlayerJoinEvent e) {
 
-        // perm needs to be updated
-        if(!e.getPlayer().hasPermission("pluginname.notify.update")) return;
+        if(!e.getPlayer().hasPermission("timedbroadcast.notify.update")) return;
 
         if(plugin.updateFound) {
 
