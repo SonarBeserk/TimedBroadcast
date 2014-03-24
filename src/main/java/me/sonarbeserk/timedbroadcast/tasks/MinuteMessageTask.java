@@ -108,7 +108,7 @@ public class MinuteMessageTask extends BukkitRunnable {
 
             if(!messageMap.keySet().contains(messageName)) {
 
-                messageMap.put(messageName, plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval"));
+                messageMap.put(messageName, 0);
             }
         }
     }
