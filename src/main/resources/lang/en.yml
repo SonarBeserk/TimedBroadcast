@@ -21,7 +21,7 @@ not-running: "&4Broadcasts are not running!"
 already-running: "&4Broadcasts are already running!"
 
 # Sent when broadcasts are stopped
-broadcasts-stopped: "&2Broadcasts have been stopped.
+broadcasts-stopped: "&2Broadcasts have been stopped."
 
 # Sent when broadcasts are started
 broadcasts-started: "&2Broadcasts have been started!"
