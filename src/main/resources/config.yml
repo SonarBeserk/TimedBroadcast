@@ -49,11 +49,26 @@ settings:
       enabled: true
 
       # What is the message to broadcast? (Allows formatting codes)
-      message-text: "&2Example Message"
+      message-text: "&2Message with a 2 minute interval"
 
       # What time unit should be used for the message? (minute, second)
       time-unit: minute
 
       # How long should the message wait between broadcasts?
       time-interval: 2
+
+    # Settings for the seconds message
+    message2:
+
+      # Is the message enabled?
+      enabled: true
+
+      # What is the message to broadcast? (Allows formatting codes)
+      message-text: "&7Message with a 20 second interval"
+
+      # What time unit should be used for the message? (minute, second)
+      time-unit: second
+
+      # How long should the message wait between broadcasts?
+      time-interval: 20
 
