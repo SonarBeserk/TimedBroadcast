@@ -39,6 +39,9 @@ settings:
   # Should the state of broadcasting be saved between restarts? (Will stay off if they were off or on if they were on)
   save-state: true
 
+  # How many players are required to broadcast messages?
+  minimum-player-count: 1
+
   # Message Settings
   messages:
 

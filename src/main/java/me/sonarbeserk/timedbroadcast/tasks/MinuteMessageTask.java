@@ -126,6 +126,8 @@ public class MinuteMessageTask extends BukkitRunnable {
                 messageMap.put(messageName, plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval"));
             }
 
+            if(plugin.getServer().getOnlinePlayers().length < plugin.getConfig().getInt("settings.minimum-player-count")) {return;}
+
             if(messageMap.get(messageName) == plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval")) {
 
                 if(plugin.getConfig().getBoolean("settings.prefix-messages")) {
