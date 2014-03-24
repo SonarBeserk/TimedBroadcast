@@ -12,6 +12,13 @@ permissions:
   timedbroadcast.commands.reload:
     description: allows use of the reload subcommand
     default: op
+  timedbroadcast.commands.stop:
+    description: allows use of the stop subcommand
+    default: op
+  timedbroadcast.commands.start:
+    description: allows use of the start subcommand
+    default: op
+
 
 commands:
   timedbroadcast:

@@ -12,6 +12,20 @@ reloaded: "&7The configuration has been reloaded!"
 # Sent when a player is required for a command
 command-player-required: "You must be a player to use this command!"
 
+# Status
+
+# Sent when broadcasts are not running
+not-running: "&4Broadcasts are not running!"
+
+# Sent when broadcasts are already running
+already-running: "&4Broadcasts are already running!"
+
+# Sent when broadcasts are stopped
+broadcasts-stopped: "&2Broadcasts have been stopped.
+
+# Sent when broadcasts are started
+broadcasts-started: "&2Broadcasts have been started!"
+
 # Usage
 
 # Usage for the plugin master command | {name} - the name of the plugin

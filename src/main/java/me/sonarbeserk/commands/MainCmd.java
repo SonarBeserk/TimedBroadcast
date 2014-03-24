@@ -102,6 +102,88 @@ public class MainCmd implements CommandExecutor {
                 }
             }
 
+            if(args[0].equalsIgnoreCase("stop")) {
+
+                if(!sender.hasPermission("timedbroadcast.commands.stop")) {
+
+                    if(sender instanceof Player) {
+
+                        plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("no-permission"));
+                        return true;
+                    } else {
+
+                        plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("no-permission"));
+                        return true;
+                    }
+                }
+
+                if(!plugin.running) {
+
+                    if(sender instanceof Player) {
+
+                        plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("not-running"));
+                        return true;
+                    } else {
+
+                        plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("not-running"));
+                        return true;
+                    }
+                }
+
+                plugin.running = false;
+
+                if(sender instanceof Player) {
+
+                    plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("broadcasts-stopped"));
+                    return true;
+                } else {
+
+                    plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("broadcasts-stopped"));
+                    return true;
+                }
+            }
+
+            if(args[0].equalsIgnoreCase("start")) {
+
+                if(!sender.hasPermission("timedbroadcast.commands.start")) {
+
+                    if(sender instanceof Player) {
+
+                        plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("no-permission"));
+                        return true;
+                    } else {
+
+                        plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("no-permission"));
+                        return true;
+                    }
+                }
+
+                if(plugin.running) {
+
+                    if(sender instanceof Player) {
+
+                        plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("already-running"));
+                        return true;
+                    } else {
+
+                        plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("already-running"));
+                        return true;
+                    }
+                }
+
+                plugin.running = true;
+
+                if(sender instanceof Player) {
+
+                    plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("broadcasts-started"));
+                    return true;
+                } else {
+
+                    plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("broadcasts-started"));
+                    return true;
+                }
+            }
+
             if(sender instanceof Player) {
 
                 plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usage-timedbroadcast").replace("{name}", plugin.getDescription().getName()));
