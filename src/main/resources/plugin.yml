@@ -9,6 +9,9 @@ permissions:
   timedbroadcast.notify.files:
     description: notifies players with this permission of files being out of date
     default: op
+  timedbroadcast.notify.updates:
+    description: notifies players with this permission of updates
+    default: op
   timedbroadcast.commands.reload:
     description: allows use of the reload subcommand
     default: op
@@ -18,8 +21,6 @@ permissions:
   timedbroadcast.commands.start:
     description: allows use of the start subcommand
     default: op
-
-
 commands:
   timedbroadcast:
     description: master command system for the plugin

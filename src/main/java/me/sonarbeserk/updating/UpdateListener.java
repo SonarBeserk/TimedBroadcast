@@ -17,7 +17,7 @@ public class UpdateListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void playerJoin(PlayerJoinEvent e) {
 
-        if(!e.getPlayer().hasPermission("timedbroadcast.notify.update")) return;
+        if(!e.getPlayer().hasPermission("timedbroadcast.notify.updates")) return;
 
         if(plugin.updateFound) {
 
