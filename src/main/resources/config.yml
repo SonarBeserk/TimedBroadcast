@@ -42,10 +42,10 @@ settings:
   # How many players are required to broadcast messages?
   minimum-player-count: 1
 
-  # Message Settings
+  # Message Settings (To add a new message add a new section and then the properties. The section name doesn't matter.)
   messages:
 
-    # Settings for the first message
+    # Settings for the first message (Section name)
     message1:
 
       # Is the message enabled?
@@ -60,7 +60,7 @@ settings:
       # How long should the message wait between broadcasts?
       time-interval: 2
 
-    # Settings for the seconds message
+    # Settings for the second message (Section name)
     message2:
 
       # Is the message enabled?
