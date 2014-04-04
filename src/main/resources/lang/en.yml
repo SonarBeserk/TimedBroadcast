@@ -29,7 +29,7 @@ broadcasts-started: "&2Broadcasts have been started!"
 # Usage
 
 # Usage for the plugin master command | {name} - the name of the plugin
-usage-timedbroadcast: "&7Subcommands: \n reload - reloads the all the plugin's files"
+usage-timedbroadcast: "&7Subcommands: \n reload - reloads the all the plugin's files \n stop - stops broadcasting \n start - starts broadcasting"
 
 # Out of date
 
