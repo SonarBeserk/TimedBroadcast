@@ -5,7 +5,7 @@
     <name>TimedBroadcast</name>
     <groupId>me.sonarbeserk</groupId>
     <artifactId>timedbroadcast</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <inceptionYear>2012</inceptionYear>
     <description>Provides a timed auto messaging system</description>
 
