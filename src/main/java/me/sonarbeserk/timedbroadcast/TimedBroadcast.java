@@ -174,7 +174,7 @@ public class TimedBroadcast extends JavaPlugin {
 
         if(getConfig().getBoolean("settings.save-state")) {
 
-            data.set("updater-state", running);
+            data.set("save-broadcast-state", running);
         }
 
         data.save();
