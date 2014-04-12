@@ -193,5 +193,4 @@ public class SecondMessageTask extends BukkitRunnable {
 
         return running;
     }
-
 }
