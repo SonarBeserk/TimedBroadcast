@@ -40,6 +40,8 @@ public class SecondMessageTask extends BukkitRunnable {
 
     private Map<String, Integer> messageMap = null;
 
+    private boolean running = false;
+
     public SecondMessageTask(TimedBroadcast plugin) {
 
         this.plugin = plugin;
@@ -118,6 +120,8 @@ public class SecondMessageTask extends BukkitRunnable {
 
         if(!plugin.running || messageMap == null || messageMap.size() == 0) {return;}
 
+        if(!running) {running = true;}
+
         for(String messageName: messageMap.keySet()) {
 
             messageMap.put(messageName, messageMap.get(messageName) + 1);
@@ -169,4 +173,25 @@ public class SecondMessageTask extends BukkitRunnable {
             plugin.getData().set("message-times", persistenceStringList);
         }
     }
+
+    /**
+     * Cancels the task in a way that supports run checking
+     */
+    public void safeCancel() {
+
+        if(!running) {return;}
+
+        running = false;
+        cancel();
+    }
+
+    /**
+     * Returns if the task is running
+     * @return if the task is running
+     */
+    public boolean isRunning() {
+
+        return running;
+    }
+
 }

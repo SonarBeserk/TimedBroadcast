@@ -172,6 +172,10 @@ public class TimedBroadcast extends JavaPlugin {
 
         minuteMessageTask.persistData();
 
+        secondMessageTask.safeCancel();
+
+        minuteMessageTask.safeCancel();
+
         if(getConfig().getBoolean("settings.save-state")) {
 
             data.set("save-broadcast-state", running);
