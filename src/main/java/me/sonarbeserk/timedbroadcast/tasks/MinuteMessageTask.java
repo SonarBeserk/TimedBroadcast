@@ -199,19 +199,6 @@ public class MinuteMessageTask extends BukkitRunnable {
     }
 
     /**
-     * Cancels the task in a way that supports run checking
-     */
-    public void safeCancel() {
-
-        if (!running) {
-            return;
-        }
-
-        running = false;
-        cancel();
-    }
-
-    /**
      * Returns if the task is running
      *
      * @return if the task is running

@@ -75,11 +75,9 @@ public class TimedBroadcast extends BeserkUpdatingJavaPlugin {
 
         minuteMessageTask.persistData();
 
-        secondMessageTask.safeCancel();
+        getServer().getScheduler().cancelTasks(this);
 
         secondMessageTask = null;
-
-        minuteMessageTask.safeCancel();
 
         minuteMessageTask = null;
 
