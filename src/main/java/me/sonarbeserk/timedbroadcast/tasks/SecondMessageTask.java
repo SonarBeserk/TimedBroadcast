@@ -197,14 +197,4 @@ public class SecondMessageTask extends BukkitRunnable {
 
         plugin.getData().set("message-times", persistenceStringList);
     }
-
-    /**
-     * Returns if the task is running
-     *
-     * @return if the task is running
-     */
-    public boolean isRunning() {
-
-        return running;
-    }
 }
