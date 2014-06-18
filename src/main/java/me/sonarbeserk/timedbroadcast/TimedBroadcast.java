@@ -67,6 +67,9 @@ public class TimedBroadcast extends BeserkUpdatingJavaPlugin {
     @Override
     public boolean checkFileVersions() {return true;}
 
+    @Override
+    public int getProjectID() {return 00000;}
+
     public void onDisable() {
 
         secondMessageTask.persistData();
