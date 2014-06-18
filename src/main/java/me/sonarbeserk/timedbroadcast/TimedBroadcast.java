@@ -83,7 +83,7 @@ public class TimedBroadcast extends BeserkUpdatingJavaPlugin {
 
         minuteMessageTask = null;
 
-        if (getConfig().getBoolean("settings.save-state")) {
+        if (getConfig().getBoolean("settings.save-broadcast-state")) {
 
             getData().set("broadcast-state", running);
         }
