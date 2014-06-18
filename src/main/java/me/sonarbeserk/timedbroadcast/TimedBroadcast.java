@@ -1,7 +1,7 @@
 package me.sonarbeserk.timedbroadcast;
 
-import me.sonarbeserk.beserkcore.commands.MainCmd;
 import me.sonarbeserk.beserkcore.plugin.BeserkUpdatingJavaPlugin;
+import me.sonarbeserk.timedbroadcast.commands.MainCMD;
 import me.sonarbeserk.timedbroadcast.tasks.MinuteMessageTask;
 import me.sonarbeserk.timedbroadcast.tasks.SecondMessageTask;
 
@@ -50,7 +50,7 @@ public class TimedBroadcast extends BeserkUpdatingJavaPlugin {
             }
         }
 
-        getCommand(getDescription().getName().toLowerCase()).setExecutor(new MainCmd(this));
+        getCommand(getDescription().getName().toLowerCase()).setExecutor(new MainCMD(this));
 
         secondMessageTask = new SecondMessageTask(this);
 
