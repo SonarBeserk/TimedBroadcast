@@ -1,15 +1,9 @@
 package me.sonarbeserk.timedbroadcast;
 
-import me.sonarbeserk.commands.MainCmd;
-import me.sonarbeserk.listeners.FileVersionListener;
+import me.sonarbeserk.beserkcore.commands.MainCmd;
+import me.sonarbeserk.beserkcore.plugin.BeserkUpdatingJavaPlugin;
 import me.sonarbeserk.timedbroadcast.tasks.MinuteMessageTask;
 import me.sonarbeserk.timedbroadcast.tasks.SecondMessageTask;
-import me.sonarbeserk.updating.UpdateListener;
-import me.sonarbeserk.updating.Updater;
-import me.sonarbeserk.utils.Data;
-import me.sonarbeserk.utils.Language;
-import me.sonarbeserk.utils.Messaging;
-import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * ********************************************************************************************************************
@@ -37,28 +31,16 @@ import org.bukkit.plugin.java.JavaPlugin;
  * <p/>
  * *********************************************************************************************************************
  */
-public class TimedBroadcast extends JavaPlugin {
+public class TimedBroadcast extends BeserkUpdatingJavaPlugin {
 
     public boolean running = true;
     public SecondMessageTask secondMessageTask = null;
     public MinuteMessageTask minuteMessageTask = null;
-    public boolean updateFound = false;
-    public boolean updateDownloaded = false;
-    private Language language = null;
-    private Data data = null;
-    private Messaging messaging = null;
-    private Updater updater = null;
     private boolean upToDate = false;
 
     public void onEnable() {
 
-        saveDefaultConfig();
-
-        language = new Language(this);
-
-        data = new Data(this);
-
-        messaging = new Messaging(this);
+        super.onEnable();
 
         if (getConfig().getBoolean("settings.save-state")) {
 
@@ -70,8 +52,6 @@ public class TimedBroadcast extends JavaPlugin {
 
         getCommand(getDescription().getName().toLowerCase()).setExecutor(new MainCmd(this));
 
-        getServer().getPluginManager().registerEvents(new FileVersionListener(this), this);
-
         secondMessageTask = new SecondMessageTask(this);
 
         // 20 ticks = 1 sec 20x1 = 20
@@ -81,86 +61,13 @@ public class TimedBroadcast extends JavaPlugin {
 
         // 20 ticks = 1 sec 60 sec = 1 min 20x60 = 1200
         minuteMessageTask.runTaskTimer(this, 0, 1200);
-
-        checkForUpdates();
     }
 
-    private void checkForUpdates() {
+    @Override
+    public boolean shouldSaveData() {return true;}
 
-        if (getConfig().getBoolean("settings.updater.enabled")) {
-
-            if (getConfig().getString("settings.updater.mode").equalsIgnoreCase("notify")) {
-
-                updater = new Updater(this, 00000 /*replace with the proper id when distributing*/, getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
-
-                if (Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
-
-                    getLogger().info(getLanguage().getMessage("updater-up-to-date"));
-                    upToDate = true;
-                }
-
-                if (Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) < Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", "")) && updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE && !upToDate) {
-
-                    getLogger().info(getLanguage().getMessage("updater-notify").replace("{new}", updater.getLatestName()).replace("{link}", updater.getLatestFileLink()));
-                }
-            } else if (getConfig().getString("settings.updater.mode").equalsIgnoreCase("update")) {
-
-                updater = new Updater(this, 00000 /*replace with the proper id when distributing*/, getFile(), Updater.UpdateType.DEFAULT, getConfig().getBoolean("settings.updater.log-downloads"));
-
-                if (Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
-
-                    getLogger().info(getLanguage().getMessage("updater-up-to-date"));
-                    upToDate = true;
-                }
-
-                if (Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) < Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", "")) && updater.getResult() == Updater.UpdateResult.SUCCESS && !upToDate) {
-
-                    getLogger().info(getLanguage().getMessage("updater-updated").replace("{new}", updater.getLatestName()));
-                }
-            }
-
-            getServer().getPluginManager().registerEvents(new UpdateListener(this), this);
-        }
-    }
-
-    /**
-     * Returns the plugin updater instance
-     *
-     * @return the plugin updater instance
-     */
-    public Updater getUpdater() {
-        return this.updater;
-    }
-
-    /**
-     * Returns the language in use
-     *
-     * @return the language in use
-     */
-    public Language getLanguage() {
-
-        return language;
-    }
-
-    /**
-     * Returns the data instance
-     *
-     * @return the data instance
-     */
-    public Data getData() {
-
-        return data;
-    }
-
-    /**
-     * Returns the plugin messaging instance
-     *
-     * @return the plugin messaging instance
-     */
-    public Messaging getMessaging() {
-
-        return messaging;
-    }
+    @Override
+    public boolean checkFileVersions() {return true;}
 
     public void onDisable() {
 
@@ -178,14 +85,9 @@ public class TimedBroadcast extends JavaPlugin {
 
         if (getConfig().getBoolean("settings.save-state")) {
 
-            data.set("save-broadcast-state", running);
+            getData().set("save-broadcast-state", running);
         }
 
-        data.save();
-        data = null;
-
-        messaging = null;
-
-        language = null;
+        super.onDisable();
     }
 }
