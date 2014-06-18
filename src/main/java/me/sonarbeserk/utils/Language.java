@@ -3,35 +3,38 @@ package me.sonarbeserk.utils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 
-/***********************************************************************************************************************
- *
+/**
+ * ********************************************************************************************************************
+ * <p/>
  * BeserkUtils - Premade classes for use in my bukkit plugins
  * ===========================================================================
- *
+ * <p/>
  * Copyright (C) 2014 by SonarBeserk
  * https://github.com/SonarBeserk/BeserkUtils
- *
- ***********************************************************************************************************************
- *
+ * <p/>
+ * **********************************************************************************************************************
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- ***********************************************************************************************************************/
+ * <p/>
+ * *********************************************************************************************************************
+ */
 public class Language {
 
     private JavaPlugin plugin = null;
@@ -115,7 +118,9 @@ public class Language {
 
     private void save() {
 
-        if (locale == null || localeFile == null) {return;}
+        if (locale == null || localeFile == null) {
+            return;
+        }
 
         try {
 
@@ -128,8 +133,9 @@ public class Language {
 
     /**
      * Sets the message specified, does not persist
+     *
      * @param messagePath the path to the message
-     * @param message the message
+     * @param message     the message
      */
     public void setMessage(String messagePath, String message) {
 
@@ -138,6 +144,7 @@ public class Language {
 
     /**
      * Returns the message specified if found
+     *
      * @param messagePath the path to the message
      * @return the message specified if found
      */

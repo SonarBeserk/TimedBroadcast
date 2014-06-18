@@ -6,30 +6,32 @@ import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/***********************************************************************************************************************
- *
+/**
+ * ********************************************************************************************************************
+ * <p/>
  * BeserkUtils - Premade classes for use in my bukkit plugins
  * ===========================================================================
- *
+ * <p/>
  * Copyright (C) 2014 by SonarBeserk
  * https://github.com/SonarBeserk/BeserkUtils
- *
- ***********************************************************************************************************************
- *
+ * <p/>
+ * **********************************************************************************************************************
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- ***********************************************************************************************************************/
+ * <p/>
+ * *********************************************************************************************************************
+ */
 public class Messaging {
 
     private JavaPlugin plugin = null;
@@ -41,24 +43,27 @@ public class Messaging {
 
     /**
      * Sends a commandsender a message
-     * @param receiver the commandsender to send a message to
+     *
+     * @param receiver     the commandsender to send a message to
      * @param shouldPrefix should the plugin prefix be added to the message?
-     * @param colored if the message should be colored
-     * @param msg the message to send
+     * @param colored      if the message should be colored
+     * @param msg          the message to send
      */
     public void sendMessage(CommandSender receiver, boolean shouldPrefix, boolean colored, String msg) {
 
-        if(receiver == null || msg == null) {return;}
+        if (receiver == null || msg == null) {
+            return;
+        }
 
-        if(receiver instanceof ConsoleCommandSender) {
+        if (receiver instanceof ConsoleCommandSender) {
 
             receiver.sendMessage(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', msg)));
             return;
         }
 
-        if(colored) {
+        if (colored) {
 
-            if(shouldPrefix) {
+            if (shouldPrefix) {
 
                 String prefix = plugin.getConfig().getString("settings.prefix").replace("{name}", plugin.getName());
 
@@ -70,7 +75,7 @@ public class Messaging {
             return;
         } else {
 
-            if(shouldPrefix) {
+            if (shouldPrefix) {
 
                 String prefix = plugin.getConfig().getString("settings.prefix").replace("{name}", plugin.getName());
 
@@ -85,18 +90,21 @@ public class Messaging {
 
     /**
      * Sends a player a message
-     * @param receiver the plater to send a message to
+     *
+     * @param receiver     the plater to send a message to
      * @param shouldPrefix should the plugin prefix be added to the message?
-     * @param colored if the message should be colored
-     * @param msg the message to send
+     * @param colored      if the message should be colored
+     * @param msg          the message to send
      */
     public void sendMessage(Player receiver, boolean shouldPrefix, boolean colored, String msg) {
 
-        if(receiver == null || msg == null) {return;}
+        if (receiver == null || msg == null) {
+            return;
+        }
 
-        if(colored) {
+        if (colored) {
 
-            if(shouldPrefix) {
+            if (shouldPrefix) {
 
                 String prefix = plugin.getConfig().getString("settings.prefix").replace("{name}", plugin.getName());
 
@@ -108,7 +116,7 @@ public class Messaging {
             return;
         } else {
 
-            if(shouldPrefix) {
+            if (shouldPrefix) {
 
                 String prefix = plugin.getConfig().getString("settings.prefix").replace("{name}", plugin.getName());
 
@@ -123,20 +131,23 @@ public class Messaging {
 
     /**
      * Sends a named player a message
-     * @param playerName the plater to send a message to
+     *
+     * @param playerName   the plater to send a message to
      * @param shouldPrefix should the plugin prefix be added to the message?
-     * @param colored if the message should be colored
-     * @param msg the message to send
+     * @param colored      if the message should be colored
+     * @param msg          the message to send
      */
     public void sendMessage(String playerName, boolean shouldPrefix, boolean colored, String msg) {
 
         Player receiver = plugin.getServer().getPlayer(playerName);
 
-        if(receiver == null || msg == null) {return;}
+        if (receiver == null || msg == null) {
+            return;
+        }
 
-        if(colored) {
+        if (colored) {
 
-            if(shouldPrefix) {
+            if (shouldPrefix) {
 
                 String prefix = plugin.getConfig().getString("settings.prefix").replace("{name}", plugin.getName());
 
@@ -148,7 +159,7 @@ public class Messaging {
             return;
         } else {
 
-            if(shouldPrefix) {
+            if (shouldPrefix) {
 
                 String prefix = plugin.getConfig().getString("settings.prefix").replace("{name}", plugin.getName());
 
@@ -163,11 +174,14 @@ public class Messaging {
 
     /**
      * Logs a debug message to the JavaPlugin's logger
+     *
      * @param message the message to log
      */
     public void debug(String message) {
 
-        if(!plugin.getConfig().getBoolean("settings.debug")) {return;}
+        if (!plugin.getConfig().getBoolean("settings.debug")) {
+            return;
+        }
 
         plugin.getLogger().info(message);
     }

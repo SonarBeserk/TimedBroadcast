@@ -4,35 +4,38 @@ import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.scheduler.BukkitRunnable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/***********************************************************************************************************************
- *
+/**
+ * ********************************************************************************************************************
+ * <p/>
  * TimedBroadcast - Bukkit plugin to broadcast timed messages
  * ===========================================================================
- *
+ * <p/>
  * Copyright (C) 2012, 2013, 2014 by SonarBeserk
  * http://dev.bukkit.org/bukkit-plugins/timedbroadcast/
- *
- ***********************************************************************************************************************
- *
+ * <p/>
+ * **********************************************************************************************************************
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- ***********************************************************************************************************************/
+ * <p/>
+ * *********************************************************************************************************************
+ */
 public class MinuteMessageTask extends BukkitRunnable {
 
     private TimedBroadcast plugin = null;
@@ -52,31 +55,47 @@ public class MinuteMessageTask extends BukkitRunnable {
 
     public void addPersistedData() {
 
-        if(plugin.getConfig().getBoolean("settings.resume-on-restart")) {
+        if (plugin.getConfig().getBoolean("settings.resume-on-restart")) {
 
             List<String> messageTimes = (ArrayList<String>) plugin.getData().get("message-times");
 
-            if(messageTimes == null || messageTimes.size() == 0) {return;}
+            if (messageTimes == null || messageTimes.size() == 0) {
+                return;
+            }
 
-            for(String timeString: messageTimes) {
+            for (String timeString : messageTimes) {
 
-                if(timeString == null || timeString.equalsIgnoreCase("") || timeString.equalsIgnoreCase(" ")) {continue;}
+                if (timeString == null || timeString.equalsIgnoreCase("") || timeString.equalsIgnoreCase(" ")) {
+                    continue;
+                }
 
                 String split[] = timeString.split("\\|");
 
-                if(split.length == 1 || split.length == 2) {continue;}
+                if (split.length == 1 || split.length == 2) {
+                    continue;
+                }
 
-                if(split[1].replaceAll("[a-zA-Z]", "") == null) {continue;}
+                if (split[1].replaceAll("[a-zA-Z]", "") == null) {
+                    continue;
+                }
 
                 /* Bound Checking */
-                if(plugin.getConfig().getConfigurationSection("settings.messages") == null) {continue;}
+                if (plugin.getConfig().getConfigurationSection("settings.messages") == null) {
+                    continue;
+                }
 
-                if(plugin.getConfig().get("settings.messages." + split[0]) == null || plugin.getConfig().get("settings.messages." + split[0] + ".enabled") == null || plugin.getConfig().get("settings.messages." + split[0] + ".message-text") == null || plugin.getConfig().get("settings.messages." + split[0] + ".time-unit") == null || plugin.getConfig().get("settings.messages." + split[0] + ".time-interval") == null) {continue;}
+                if (plugin.getConfig().get("settings.messages." + split[0]) == null || plugin.getConfig().get("settings.messages." + split[0] + ".enabled") == null || plugin.getConfig().get("settings.messages." + split[0] + ".message-text") == null || plugin.getConfig().get("settings.messages." + split[0] + ".time-unit") == null || plugin.getConfig().get("settings.messages." + split[0] + ".time-interval") == null) {
+                    continue;
+                }
 
-                if(!plugin.getConfig().getBoolean("settings.messages." + split[0] + ".enabled") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || !plugin.getConfig().getString("settings.messages." + split[0] + ".time-unit").equalsIgnoreCase("minute") || plugin.getConfig().getInt("settings.messages." + split[0] + ".time-interval") == 0) {continue;}
+                if (!plugin.getConfig().getBoolean("settings.messages." + split[0] + ".enabled") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || !plugin.getConfig().getString("settings.messages." + split[0] + ".time-unit").equalsIgnoreCase("minute") || plugin.getConfig().getInt("settings.messages." + split[0] + ".time-interval") == 0) {
+                    continue;
+                }
                 /* Bound Checking */
 
-                if(!split[1].equalsIgnoreCase("minute")) {continue;}
+                if (!split[1].equalsIgnoreCase("minute")) {
+                    continue;
+                }
 
                 messageMap.put(split[0], Integer.parseInt(split[2]));
             }
@@ -87,7 +106,7 @@ public class MinuteMessageTask extends BukkitRunnable {
 
     public void buildMessageMap() {
 
-        if(messageMap != null) {
+        if (messageMap != null) {
 
             messageMap = null;
         }
@@ -96,19 +115,27 @@ public class MinuteMessageTask extends BukkitRunnable {
 
         ConfigurationSection messageSection = plugin.getConfig().getConfigurationSection("settings.messages");
 
-        if(messageSection.getKeys(false).size() == 0) {return;}
+        if (messageSection.getKeys(false).size() == 0) {
+            return;
+        }
 
-        for(String messageName: messageSection.getKeys(false)) {
+        for (String messageName : messageSection.getKeys(false)) {
 
              /* Bound Checking */
-            if(plugin.getConfig().getConfigurationSection("settings.messages") == null) {continue;}
+            if (plugin.getConfig().getConfigurationSection("settings.messages") == null) {
+                continue;
+            }
 
-            if(plugin.getConfig().get("settings.messages." + messageName) == null || plugin.getConfig().get("settings.messages." + messageName + ".enabled") == null || plugin.getConfig().get("settings.messages." + messageName + ".message-text") == null || plugin.getConfig().get("settings.messages." + messageName + ".time-unit") == null || plugin.getConfig().get("settings.messages." + messageName + ".time-interval") == null) {continue;}
+            if (plugin.getConfig().get("settings.messages." + messageName) == null || plugin.getConfig().get("settings.messages." + messageName + ".enabled") == null || plugin.getConfig().get("settings.messages." + messageName + ".message-text") == null || plugin.getConfig().get("settings.messages." + messageName + ".time-unit") == null || plugin.getConfig().get("settings.messages." + messageName + ".time-interval") == null) {
+                continue;
+            }
 
-            if(!plugin.getConfig().getBoolean("settings.messages." + messageName + ".enabled") || plugin.getConfig().getString("settings.messages." + messageName + ".message-text").equalsIgnoreCase("") || plugin.getConfig().getString("settings.messages." + messageName + ".message-text").equalsIgnoreCase("") || !plugin.getConfig().getString("settings.messages." + messageName + ".time-unit").equalsIgnoreCase("minute") || plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval") == 0) {continue;}
+            if (!plugin.getConfig().getBoolean("settings.messages." + messageName + ".enabled") || plugin.getConfig().getString("settings.messages." + messageName + ".message-text").equalsIgnoreCase("") || plugin.getConfig().getString("settings.messages." + messageName + ".message-text").equalsIgnoreCase("") || !plugin.getConfig().getString("settings.messages." + messageName + ".time-unit").equalsIgnoreCase("minute") || plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval") == 0) {
+                continue;
+            }
             /* Bound Checking */
 
-            if(!messageMap.keySet().contains(messageName)) {
+            if (!messageMap.keySet().contains(messageName)) {
 
                 messageMap.put(messageName, 0);
             }
@@ -117,24 +144,30 @@ public class MinuteMessageTask extends BukkitRunnable {
 
     public void run() {
 
-        if(!plugin.running || messageMap == null || messageMap.size() == 0) {return;}
+        if (!plugin.running || messageMap == null || messageMap.size() == 0) {
+            return;
+        }
 
-        if(!running) {running = true;}
+        if (!running) {
+            running = true;
+        }
 
-        for(String messageName: messageMap.keySet()) {
+        for (String messageName : messageMap.keySet()) {
 
             messageMap.put(messageName, messageMap.get(messageName) + 1);
 
-            if(messageMap.get(messageName) > plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval")) {
+            if (messageMap.get(messageName) > plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval")) {
 
                 messageMap.put(messageName, plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval"));
             }
 
-            if(plugin.getServer().getOnlinePlayers().length < plugin.getConfig().getInt("settings.minimum-player-count")) {return;}
+            if (plugin.getServer().getOnlinePlayers().length < plugin.getConfig().getInt("settings.minimum-player-count")) {
+                return;
+            }
 
-            if(messageMap.get(messageName) == plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval")) {
+            if (messageMap.get(messageName) == plugin.getConfig().getInt("settings.messages." + messageName + ".time-interval")) {
 
-                if(plugin.getConfig().getBoolean("settings.prefix-messages")) {
+                if (plugin.getConfig().getBoolean("settings.prefix-messages")) {
 
                     String prefix = plugin.getConfig().getString("settings.messenger-prefix").replace("{name}", plugin.getName());
 
@@ -152,11 +185,11 @@ public class MinuteMessageTask extends BukkitRunnable {
 
     public void persistData() {
 
-        if(plugin.getConfig().getBoolean("settings.resume-on-restart")) {
+        if (plugin.getConfig().getBoolean("settings.resume-on-restart")) {
 
             List<String> persistenceStringList = null;
 
-            if(plugin.getData().get("message-times") == null) {
+            if (plugin.getData().get("message-times") == null) {
 
                 persistenceStringList = new ArrayList<String>();
             } else {
@@ -164,7 +197,7 @@ public class MinuteMessageTask extends BukkitRunnable {
                 persistenceStringList = (ArrayList<String>) plugin.getData().get("message-times");
             }
 
-            for(String messageName: messageMap.keySet()) {
+            for (String messageName : messageMap.keySet()) {
 
                 persistenceStringList.add(messageName + "|" + plugin.getConfig().getString("settings.messages." + messageName + ".time-unit") + "|" + messageMap.get(messageName));
             }
@@ -178,7 +211,9 @@ public class MinuteMessageTask extends BukkitRunnable {
      */
     public void safeCancel() {
 
-        if(!running) {return;}
+        if (!running) {
+            return;
+        }
 
         running = false;
         cancel();
@@ -186,6 +221,7 @@ public class MinuteMessageTask extends BukkitRunnable {
 
     /**
      * Returns if the task is running
+     *
      * @return if the task is running
      */
     public boolean isRunning() {

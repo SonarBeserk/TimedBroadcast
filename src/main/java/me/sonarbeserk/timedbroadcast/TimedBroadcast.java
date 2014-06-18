@@ -11,51 +11,44 @@ import me.sonarbeserk.utils.Language;
 import me.sonarbeserk.utils.Messaging;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/***********************************************************************************************************************
- *
+/**
+ * ********************************************************************************************************************
+ * <p/>
  * TimedBroadcast - Bukkit plugin to broadcast timed messages
  * ===========================================================================
- *
+ * <p/>
  * Copyright (C) 2012, 2013, 2014 by SonarBeserk
  * http://dev.bukkit.org/bukkit-plugins/timedbroadcast/
- *
- ***********************************************************************************************************************
- *
+ * <p/>
+ * **********************************************************************************************************************
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- ***********************************************************************************************************************/
+ * <p/>
+ * *********************************************************************************************************************
+ */
 public class TimedBroadcast extends JavaPlugin {
 
-    private Language language = null;
-
-    private Data data = null;
-
-    private Messaging messaging = null;
-
     public boolean running = true;
-
     public SecondMessageTask secondMessageTask = null;
-
     public MinuteMessageTask minuteMessageTask = null;
-
-    private Updater updater = null;
-
-    private boolean upToDate = false;
-
     public boolean updateFound = false;
-
     public boolean updateDownloaded = false;
+    private Language language = null;
+    private Data data = null;
+    private Messaging messaging = null;
+    private Updater updater = null;
+    private boolean upToDate = false;
 
     public void onEnable() {
 
@@ -67,7 +60,7 @@ public class TimedBroadcast extends JavaPlugin {
 
         messaging = new Messaging(this);
 
-        if(getConfig().getBoolean("settings.save-state")) {
+        if (getConfig().getBoolean("settings.save-state")) {
 
             if (getData().get("updater-state") != null) {
 
@@ -94,33 +87,33 @@ public class TimedBroadcast extends JavaPlugin {
 
     private void checkForUpdates() {
 
-        if(getConfig().getBoolean("settings.updater.enabled")) {
+        if (getConfig().getBoolean("settings.updater.enabled")) {
 
-            if(getConfig().getString("settings.updater.mode").equalsIgnoreCase("notify")) {
+            if (getConfig().getString("settings.updater.mode").equalsIgnoreCase("notify")) {
 
                 updater = new Updater(this, 00000 /*replace with the proper id when distributing*/, getFile(), Updater.UpdateType.NO_DOWNLOAD, false);
 
-                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
+                if (Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
 
                     getLogger().info(getLanguage().getMessage("updater-up-to-date"));
                     upToDate = true;
                 }
 
-                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) < Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", "")) && updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE && !upToDate) {
+                if (Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) < Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", "")) && updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE && !upToDate) {
 
                     getLogger().info(getLanguage().getMessage("updater-notify").replace("{new}", updater.getLatestName()).replace("{link}", updater.getLatestFileLink()));
                 }
-            } else if(getConfig().getString("settings.updater.mode").equalsIgnoreCase("update")) {
+            } else if (getConfig().getString("settings.updater.mode").equalsIgnoreCase("update")) {
 
                 updater = new Updater(this, 00000 /*replace with the proper id when distributing*/, getFile(), Updater.UpdateType.DEFAULT, getConfig().getBoolean("settings.updater.log-downloads"));
 
-                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
+                if (Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) == Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", ""))) {
 
                     getLogger().info(getLanguage().getMessage("updater-up-to-date"));
                     upToDate = true;
                 }
 
-                if(Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) < Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", "")) && updater.getResult() == Updater.UpdateResult.SUCCESS && !upToDate) {
+                if (Double.parseDouble(getDescription().getVersion().replaceAll("[a-zA-Z]", "")) < Double.parseDouble(updater.getLatestName().replaceAll("[a-zA-Z]", "")) && updater.getResult() == Updater.UpdateResult.SUCCESS && !upToDate) {
 
                     getLogger().info(getLanguage().getMessage("updater-updated").replace("{new}", updater.getLatestName()));
                 }
@@ -132,15 +125,16 @@ public class TimedBroadcast extends JavaPlugin {
 
     /**
      * Returns the plugin updater instance
+     *
      * @return the plugin updater instance
      */
-    public Updater getUpdater()
-    {
+    public Updater getUpdater() {
         return this.updater;
     }
 
     /**
      * Returns the language in use
+     *
      * @return the language in use
      */
     public Language getLanguage() {
@@ -150,6 +144,7 @@ public class TimedBroadcast extends JavaPlugin {
 
     /**
      * Returns the data instance
+     *
      * @return the data instance
      */
     public Data getData() {
@@ -159,6 +154,7 @@ public class TimedBroadcast extends JavaPlugin {
 
     /**
      * Returns the plugin messaging instance
+     *
      * @return the plugin messaging instance
      */
     public Messaging getMessaging() {
@@ -180,7 +176,7 @@ public class TimedBroadcast extends JavaPlugin {
 
         minuteMessageTask = null;
 
-        if(getConfig().getBoolean("settings.save-state")) {
+        if (getConfig().getBoolean("settings.save-state")) {
 
             data.set("save-broadcast-state", running);
         }

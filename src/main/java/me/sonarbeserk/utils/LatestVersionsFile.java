@@ -4,77 +4,80 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import java.io.File;
 import java.io.InputStream;
 
-/***********************************************************************************************************************
- *
+/**
+ * ********************************************************************************************************************
+ * <p/>
  * BeserkUtils - Premade classes for use in my bukkit plugins
  * ===========================================================================
- *
+ * <p/>
  * Copyright (C) 2014 by SonarBeserk
  * https://github.com/SonarBeserk/BeserkUtils
- *
- ***********************************************************************************************************************
- *
+ * <p/>
+ * **********************************************************************************************************************
+ * <p/>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p/>
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p/>
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- ***********************************************************************************************************************/
+ * <p/>
+ * *********************************************************************************************************************
+ */
 public class LatestVersionsFile {
 
     private JavaPlugin plugin = null;
 
-	private FileConfiguration versions = null;
-	private File versionsFile = null;
+    private FileConfiguration versions = null;
+    private File versionsFile = null;
 
-	public LatestVersionsFile(JavaPlugin plugin) {
-		
-		this.plugin = plugin;
-	}
+    public LatestVersionsFile(JavaPlugin plugin) {
+
+        this.plugin = plugin;
+    }
 
     /**
      * Reloads the data file
      */
-	public void reload() {
-		
-		InputStream defConfigStream = plugin.getResource("latest-versions.yml");
-		
-		if(defConfigStream != null) {
-			
-			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
-			versions = defConfig;
-		} else {
-			
-			plugin.getLogger().severe("Unable to load version data.");
-			return;
-		}
-	}
-	
-	private FileConfiguration getFileConfiguration() {
-		
-		if(versions == null) {
-			
-			reload();
-		}
-		
-		return versions;
-	}
+    public void reload() {
+
+        InputStream defConfigStream = plugin.getResource("latest-versions.yml");
+
+        if (defConfigStream != null) {
+
+            YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(defConfigStream);
+            versions = defConfig;
+        } else {
+
+            plugin.getLogger().severe("Unable to load version data.");
+            return;
+        }
+    }
+
+    private FileConfiguration getFileConfiguration() {
+
+        if (versions == null) {
+
+            reload();
+        }
+
+        return versions;
+    }
 
     /**
      * Saves the default version of the data file if it was not found
      */
-	/*
+    /*
     private void saveDefault() {
 		
 		if(versionsFile == null) {
@@ -123,6 +126,7 @@ public class LatestVersionsFile {
 
     /**
      * Returns a version entry from the path specified
+     *
      * @param path the path to the entry
      * @return a version entry from the path specified
      */
@@ -134,6 +138,7 @@ public class LatestVersionsFile {
 
     /**
      * Returns the configuration section at the path specified
+     *
      * @param path the path to the configuration section
      * @return the configuration section at the path specified
      */

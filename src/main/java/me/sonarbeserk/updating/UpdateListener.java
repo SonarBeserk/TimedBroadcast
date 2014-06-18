@@ -17,13 +17,14 @@ public class UpdateListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void playerJoin(PlayerJoinEvent e) {
 
-        if(!e.getPlayer().hasPermission("timedbroadcast.notify.updates")) return;
+        if (!e.getPlayer().hasPermission("timedbroadcast.notify.updates")) return;
 
-        if(plugin.updateFound) {
+        if (plugin.updateFound) {
 
             plugin.getMessaging().sendMessage(e.getPlayer(), true, true, plugin.getLanguage().getMessage("update-found").replace("{new}", plugin.getUpdater().getLatestName()).replace("{link}", plugin.getUpdater().getLatestFileLink()));
             return;
-        } if(plugin.updateDownloaded) {
+        }
+        if (plugin.updateDownloaded) {
 
             plugin.getMessaging().sendMessage(e.getPlayer(), true, true, plugin.getLanguage().getMessage("update-downloaded").replace("{new}", plugin.getUpdater().getLatestName()));
             return;
