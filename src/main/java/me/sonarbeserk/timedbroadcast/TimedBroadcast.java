@@ -42,11 +42,11 @@ public class TimedBroadcast extends BeserkUpdatingJavaPlugin {
 
         super.onEnable();
 
-        if (getConfig().getBoolean("settings.save-state")) {
+        if (getConfig().getBoolean("settings.save-broadcast-state")) {
 
-            if (getData().get("updater-state") != null) {
+            if (getData().get("broadcast-state") != null) {
 
-                running = Boolean.parseBoolean(String.valueOf(getData().get("updater-state")));
+                running = Boolean.parseBoolean(String.valueOf(getData().get("broadcast-state")));
             }
         }
 
