@@ -42,7 +42,7 @@ settings:
   # How many players are required to broadcast messages?
   minimum-player-count: 1
 
-  # Message Settings (To add a new message add a new section and then the properties. The section name doesn't matter.)
+  # Message Settings (To add a new message add a new section and then the properties. The section name doesn't matter as long as no name is repeated.)
   messages:
 
     # Settings for the first message (Section name)
