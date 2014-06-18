@@ -62,7 +62,7 @@ public class SecondMessageTask extends BukkitRunnable {
 
         for (String timeString : messageTimes) {
 
-            if (timeString == null || timeString.equalsIgnoreCase("") || timeString.equalsIgnoreCase(" ")) {
+            if (timeString == null || timeString.trim().equalsIgnoreCase("")) {
                 continue;
             }
 
@@ -76,7 +76,7 @@ public class SecondMessageTask extends BukkitRunnable {
                 continue;
             }
 
-                /* Bound Checking */
+            /* Validity Checking */
             if (plugin.getConfig().getConfigurationSection("settings.messages") == null) {
                 continue;
             }
@@ -85,10 +85,10 @@ public class SecondMessageTask extends BukkitRunnable {
                 continue;
             }
 
-            if (!plugin.getConfig().getBoolean("settings.messages." + split[0] + ".enabled") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || !plugin.getConfig().getString("settings.messages." + split[0] + ".time-unit").equalsIgnoreCase("second") || plugin.getConfig().getInt("settings.messages." + split[0] + ".time-interval") == 0) {
+            if (!plugin.getConfig().getBoolean("settings.messages." + split[0] + ".enabled") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").trim().equalsIgnoreCase("") || !plugin.getConfig().getString("settings.messages." + split[0] + ".time-unit").equalsIgnoreCase("second") || plugin.getConfig().getInt("settings.messages." + split[0] + ".time-interval") == 0) {
                 continue;
             }
-                /* Bound Checking */
+            /* Bound Checking */
 
             if (!split[1].equalsIgnoreCase("second")) {
                 continue;
@@ -180,26 +180,22 @@ public class SecondMessageTask extends BukkitRunnable {
     }
 
     public void persistData() {
+        List<String> persistenceStringList = null;
 
-        if (plugin.getConfig().getBoolean("settings.resume-on-restart")) {
+        if (plugin.getData().get("message-times") == null) {
 
-            List<String> persistenceStringList = null;
+            persistenceStringList = new ArrayList<String>();
+        } else {
 
-            if (plugin.getData().get("message-times") == null) {
-
-                persistenceStringList = new ArrayList<String>();
-            } else {
-
-                persistenceStringList = (ArrayList<String>) plugin.getData().get("message-times");
-            }
-
-            for (String messageName : messageMap.keySet()) {
-
-                persistenceStringList.add(messageName + "|" + plugin.getConfig().getString("settings.messages." + messageName + ".time-unit") + "|" + messageMap.get(messageName));
-            }
-
-            plugin.getData().set("message-times", persistenceStringList);
+            persistenceStringList = (ArrayList<String>) plugin.getData().get("message-times");
         }
+
+        for (String messageName : messageMap.keySet()) {
+
+            persistenceStringList.add(messageName + "|" + plugin.getConfig().getString("settings.messages." + messageName + ".time-unit") + "|" + messageMap.get(messageName));
+        }
+
+        plugin.getData().set("message-times", persistenceStringList);
     }
 
     /**
