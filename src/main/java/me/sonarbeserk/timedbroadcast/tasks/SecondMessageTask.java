@@ -54,54 +54,50 @@ public class SecondMessageTask extends BukkitRunnable {
     }
 
     public void addPersistedData() {
+        List<String> messageTimes = (ArrayList<String>) plugin.getData().get("message-times");
 
-        if (plugin.getConfig().getBoolean("settings.resume-on-restart")) {
-
-            List<String> messageTimes = (ArrayList<String>) plugin.getData().get("message-times");
-
-            if (messageTimes == null || messageTimes.size() == 0) {
-                return;
-            }
-
-            for (String timeString : messageTimes) {
-
-                if (timeString == null || timeString.equalsIgnoreCase("") || timeString.equalsIgnoreCase(" ")) {
-                    continue;
-                }
-
-                String split[] = timeString.split("\\|");
-
-                if (split.length == 1 || split.length == 2) {
-                    continue;
-                }
-
-                if (split[1].replaceAll("[a-zA-Z]", "") == null) {
-                    continue;
-                }
-
-                /* Bound Checking */
-                if (plugin.getConfig().getConfigurationSection("settings.messages") == null) {
-                    continue;
-                }
-
-                if (plugin.getConfig().get("settings.messages." + split[0]) == null || plugin.getConfig().get("settings.messages." + split[0] + ".enabled") == null || plugin.getConfig().get("settings.messages." + split[0] + ".message-text") == null || plugin.getConfig().get("settings.messages." + split[0] + ".time-unit") == null || plugin.getConfig().get("settings.messages." + split[0] + ".time-interval") == null) {
-                    continue;
-                }
-
-                if (!plugin.getConfig().getBoolean("settings.messages." + split[0] + ".enabled") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || !plugin.getConfig().getString("settings.messages." + split[0] + ".time-unit").equalsIgnoreCase("second") || plugin.getConfig().getInt("settings.messages." + split[0] + ".time-interval") == 0) {
-                    continue;
-                }
-                /* Bound Checking */
-
-                if (!split[1].equalsIgnoreCase("second")) {
-                    continue;
-                }
-
-                messageMap.put(split[0], Integer.parseInt(split[2]));
-            }
-
-            plugin.getData().set("message-times", null);
+        if (messageTimes == null || messageTimes.size() == 0) {
+            return;
         }
+
+        for (String timeString : messageTimes) {
+
+            if (timeString == null || timeString.equalsIgnoreCase("") || timeString.equalsIgnoreCase(" ")) {
+                continue;
+            }
+
+            String split[] = timeString.split("\\|");
+
+            if (split.length == 1 || split.length == 2) {
+                continue;
+            }
+
+            if (split[1].replaceAll("[a-zA-Z]", "") == null) {
+                continue;
+            }
+
+                /* Bound Checking */
+            if (plugin.getConfig().getConfigurationSection("settings.messages") == null) {
+                continue;
+            }
+
+            if (plugin.getConfig().get("settings.messages." + split[0]) == null || plugin.getConfig().get("settings.messages." + split[0] + ".enabled") == null || plugin.getConfig().get("settings.messages." + split[0] + ".message-text") == null || plugin.getConfig().get("settings.messages." + split[0] + ".time-unit") == null || plugin.getConfig().get("settings.messages." + split[0] + ".time-interval") == null) {
+                continue;
+            }
+
+            if (!plugin.getConfig().getBoolean("settings.messages." + split[0] + ".enabled") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || plugin.getConfig().getString("settings.messages." + split[0] + ".message-text").equalsIgnoreCase("") || !plugin.getConfig().getString("settings.messages." + split[0] + ".time-unit").equalsIgnoreCase("second") || plugin.getConfig().getInt("settings.messages." + split[0] + ".time-interval") == 0) {
+                continue;
+            }
+                /* Bound Checking */
+
+            if (!split[1].equalsIgnoreCase("second")) {
+                continue;
+            }
+
+            messageMap.put(split[0], Integer.parseInt(split[2]));
+        }
+
+        plugin.getData().set("message-times", null);
     }
 
     public void buildMessageMap() {

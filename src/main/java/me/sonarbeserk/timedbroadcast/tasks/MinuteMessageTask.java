@@ -184,26 +184,22 @@ public class MinuteMessageTask extends BukkitRunnable {
     }
 
     public void persistData() {
+        List<String> persistenceStringList = null;
 
-        if (plugin.getConfig().getBoolean("settings.resume-on-restart")) {
+        if (plugin.getData().get("message-times") == null) {
 
-            List<String> persistenceStringList = null;
+            persistenceStringList = new ArrayList<String>();
+        } else {
 
-            if (plugin.getData().get("message-times") == null) {
-
-                persistenceStringList = new ArrayList<String>();
-            } else {
-
-                persistenceStringList = (ArrayList<String>) plugin.getData().get("message-times");
-            }
-
-            for (String messageName : messageMap.keySet()) {
-
-                persistenceStringList.add(messageName + "|" + plugin.getConfig().getString("settings.messages." + messageName + ".time-unit") + "|" + messageMap.get(messageName));
-            }
-
-            plugin.getData().set("message-times", persistenceStringList);
+            persistenceStringList = (ArrayList<String>) plugin.getData().get("message-times");
         }
+
+        for (String messageName : messageMap.keySet()) {
+
+            persistenceStringList.add(messageName + "|" + plugin.getConfig().getString("settings.messages." + messageName + ".time-unit") + "|" + messageMap.get(messageName));
+        }
+
+        plugin.getData().set("message-times", persistenceStringList);
     }
 
     /**

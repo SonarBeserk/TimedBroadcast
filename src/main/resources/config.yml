@@ -33,9 +33,6 @@ settings:
   # Should messages be prefixed?
   prefix-messages: true
 
-  # Should the progress of displaying messages be saved and resumed when the server is restarted?
-  resume-on-restart: true
-
   # Should the state of broadcasting be saved between restarts? (Will stay off if they were off or on if they were on)
   save-broadcast-state: true
 
