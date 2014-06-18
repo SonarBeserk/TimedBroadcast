@@ -42,6 +42,16 @@ public class TimedBroadcast extends BeserkUpdatingJavaPlugin {
 
         super.onEnable();
 
+        getCommand(getDescription().getName().toLowerCase()).setExecutor(new MainCMD(this));
+
+        secondMessageTask = new SecondMessageTask(this);
+
+        secondMessageTask.runTaskTimer(this, 0, 20);
+
+        minuteMessageTask = new MinuteMessageTask(this);
+
+        minuteMessageTask.runTaskTimer(this, 0, 1200);
+
         if (getConfig().getBoolean("settings.save-broadcast-state")) {
 
             if (getData().get("broadcast-state") != null) {
@@ -49,18 +59,6 @@ public class TimedBroadcast extends BeserkUpdatingJavaPlugin {
                 running = Boolean.parseBoolean(String.valueOf(getData().get("broadcast-state")));
             }
         }
-
-        getCommand(getDescription().getName().toLowerCase()).setExecutor(new MainCMD(this));
-
-        secondMessageTask = new SecondMessageTask(this);
-
-        // 20 ticks = 1 sec 20x1 = 20
-        secondMessageTask.runTaskTimer(this, 0, 20);
-
-        minuteMessageTask = new MinuteMessageTask(this);
-
-        // 20 ticks = 1 sec 60 sec = 1 min 20x60 = 1200
-        minuteMessageTask.runTaskTimer(this, 0, 1200);
     }
 
     @Override
