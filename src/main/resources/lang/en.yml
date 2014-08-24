@@ -34,3 +34,65 @@ outOfDateConfig: "&4The version of the config file being run is out of date! Ple
 
 # Message to send when the language file being run is out of date
 outOfDateLanguage: "&4The version of the language file being run is out of date! Please delete the file and reload the plugin to generate the new version! (Backup the old version first!)"
+
+# Display Name
+
+# Term used for next
+termNext: "Next"
+
+# Term used for exiting message creation
+termExit: "Cancel"
+
+# Term used for seconds
+termSecond: "Second"
+
+# Term used for minutes
+termMinute: "Minute"
+
+# Term used for global
+termGlobally: "Globally"
+
+# Term used for local
+termWorld: "In a world"
+
+# Term used for none
+termNone: "None"
+
+# Term used for confirm
+termConfirm: "Confirm"
+
+# Message Builder
+
+# Prefix used for the message builder
+messageBuilderPrefix: "&bMessage Builder: "
+
+# Prompt
+
+# The message to use for initial prompt for creating a message
+promptMessageAddStart: "&7You are adding a new message, please choose &b{termNext} &7to continue or &c{termExit} &7to exit message creation"
+
+# The message used when asking what message should be used
+promptMessage: "&7What should the message say?"
+
+# The message used when asking what time unit should be used
+promptTimeUnit: "&7What time unit should be used for this message? &b"
+
+# The message used when asking how long it should be before a message is broadcasted again | {unit} - the unit of time
+promptInterval: "&7How many {unit}(s) should be waited for before this message is broadcasted again?"
+
+# The message used when asking at what level this message is visible
+promptLevel: "&7Should this message be shown globally or only in a world? &b \n"
+
+# The message used when asking what would a message should be only visible in | {worlds} - the worlds available
+promptWorld: "&7What world should this message only be visible to? &b{worlds}"
+
+# The message used to confirm settings | {message} - the message for the message | {world} - the world the message is restricted to
+promptConfirm: "&7Please confirm these settings: \n Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n"
+
+# message
+
+# The message used when a message is added
+messageAdded: "&2Message has been added!"
+
+# The message used when message creation times out or is cancelled
+messageAdditionCancelled: "&cMessage creation has either been cancelled or timed out."
