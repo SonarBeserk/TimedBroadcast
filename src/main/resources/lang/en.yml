@@ -81,7 +81,7 @@ promptTimeUnit: "&7What time unit should be used for this message? &b"
 promptInterval: "&7How many {unit}(s) should be waited for before this message is broadcasted again?"
 
 # The message used when asking at what level this message is visible
-promptLevel: "&7Where should this message be shown? &b"
+promptWhere: "&7Where should this message be shown? &b"
 
 # The message used when asking what would a message should be only visible in | {worlds} - the worlds available
 promptWorld: "&7What world should this message only be visible to? &b{worlds}"

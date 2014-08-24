@@ -39,7 +39,7 @@ public class ChooseMessageLevel extends FixedSetPrompt {
 
     @Override
     protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
-        conversationContext.setSessionData("level", s);
+        conversationContext.setSessionData("where", s);
 
         if(s.equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
             return new ConfirmSettingsPrompt(plugin);
@@ -52,6 +52,6 @@ public class ChooseMessageLevel extends FixedSetPrompt {
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptLevel")) + " " + formatFixedSet();
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptWhere")) + " " + formatFixedSet();
     }
 }

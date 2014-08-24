@@ -45,7 +45,7 @@ public class ConfirmSettingsPrompt extends FixedSetPrompt {
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        if(String.valueOf(conversationContext.getSessionData("level")).equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
+        if(String.valueOf(conversationContext.getSessionData("where")).equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
 
             return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptConfirm")
                     .replace("{message}", String.valueOf(conversationContext.getSessionData("message")))
