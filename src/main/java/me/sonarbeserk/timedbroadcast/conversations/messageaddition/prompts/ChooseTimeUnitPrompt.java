@@ -21,29 +21,33 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversations.prompts.messageaddition;
+package me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
-import org.bukkit.conversations.NumericPrompt;
+import org.bukkit.conversations.FixedSetPrompt;
 import org.bukkit.conversations.Prompt;
 
-public class InputIntervalPrompt extends NumericPrompt {
+
+public class ChooseTimeUnitPrompt extends FixedSetPrompt {
     private TimedBroadcast plugin = null;
 
-    public InputIntervalPrompt(TimedBroadcast plugin) {
+    public ChooseTimeUnitPrompt(TimedBroadcast plugin) {
+        super(plugin.getLanguage().getMessage("termSecond"), plugin.getLanguage().getMessage("termMinute"));
+
         this.plugin = plugin;
     }
 
     @Override
-    protected Prompt acceptValidatedInput(ConversationContext conversationContext, Number number) {
-        conversationContext.setSessionData("interval", number);
-        return new ChooseMessageLevel(plugin);
+    protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
+        conversationContext.setSessionData("unit", s);
+
+        return new InputIntervalPrompt(plugin);
     }
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptInterval").replace("{unit}", String.valueOf(conversationContext.getSessionData("unit"))));
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptTimeUnit")) + " " + formatFixedSet();
     }
 }

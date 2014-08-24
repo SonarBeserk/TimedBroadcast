@@ -21,22 +21,29 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversations.prompts.messageaddition.messageBuilder;
+package me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
-import org.bukkit.conversations.ConversationPrefix;
+import org.bukkit.conversations.Prompt;
+import org.bukkit.conversations.StringPrompt;
 
-public class MessageBuilderPrefix implements ConversationPrefix {
+public class InputMessagePrompt extends StringPrompt {
     private TimedBroadcast plugin = null;
 
-    public MessageBuilderPrefix(TimedBroadcast plugin) {
+    public InputMessagePrompt(TimedBroadcast plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public String getPrefix(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("messageBuilderPrefix"));
+    public String getPromptText(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessage"));
+    }
+
+    @Override
+    public Prompt acceptInput(ConversationContext conversationContext, String s) {
+        conversationContext.setSessionData("message", s);
+        return new ChooseTimeUnitPrompt(plugin);
     }
 }

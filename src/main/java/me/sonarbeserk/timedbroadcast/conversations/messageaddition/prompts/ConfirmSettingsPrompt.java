@@ -21,7 +21,7 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversations.prompts.messageaddition;
+package me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
@@ -29,22 +29,39 @@ import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.FixedSetPrompt;
 import org.bukkit.conversations.Prompt;
 
-public class AddingMessageStartPrompt extends FixedSetPrompt {
+public class ConfirmSettingsPrompt extends FixedSetPrompt {
     private TimedBroadcast plugin = null;
 
-    public AddingMessageStartPrompt(TimedBroadcast plugin) {
-        super(plugin.getLanguage().getMessage("termNext"));
+    public ConfirmSettingsPrompt(TimedBroadcast plugin) {
+        super(plugin.getLanguage().getMessage("termConfirm"));
 
         this.plugin = plugin;
     }
 
     @Override
     protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
-        return new InputMessagePrompt(plugin);
+        // add new message
+
+        return Prompt.END_OF_CONVERSATION;
     }
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageAddStart").replace("{termNext}", plugin.getLanguage().getMessage("termNext")).replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
+        if(String.valueOf(conversationContext.getSessionData("level")).equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
+
+            return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptConfirm")
+                    .replace("{message}", String.valueOf(conversationContext.getSessionData("message")))
+                    .replace("{interval}", String.valueOf(conversationContext.getSessionData("interval")))
+                    .replace("{unit}", String.valueOf(conversationContext.getSessionData("unit")))
+                    .replace("{world}", plugin.getLanguage().getMessage("termNone"))
+                    + formatFixedSet());
+        } else {
+            return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptConfirm")
+                    .replace("{message}", String.valueOf(conversationContext.getSessionData("message")))
+                    .replace("{interval}", String.valueOf(conversationContext.getSessionData("interval")))
+                    .replace("{unit}", String.valueOf(conversationContext.getSessionData("unit")))
+                    .replace("{world}", String.valueOf(conversationContext.getSessionData("world")))
+                    + formatFixedSet());
+        }
     }
 }

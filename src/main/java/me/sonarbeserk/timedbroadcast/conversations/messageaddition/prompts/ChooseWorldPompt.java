@@ -21,47 +21,46 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversations.prompts.messageaddition;
+package me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
+import org.bukkit.World;
 import org.bukkit.conversations.ConversationContext;
-import org.bukkit.conversations.FixedSetPrompt;
 import org.bukkit.conversations.Prompt;
+import org.bukkit.conversations.StringPrompt;
 
-public class ConfirmSettingsPrompt extends FixedSetPrompt {
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class ChooseWorldPompt extends StringPrompt {
     private TimedBroadcast plugin = null;
 
-    public ConfirmSettingsPrompt(TimedBroadcast plugin) {
-        super(plugin.getLanguage().getMessage("termConfirm"));
+    private ArrayList<String> worldNames = null;
 
+    public ChooseWorldPompt(TimedBroadcast plugin) {
         this.plugin = plugin;
-    }
 
-    @Override
-    protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
-        // add new message
+        worldNames = new ArrayList<String>();
 
-        return Prompt.END_OF_CONVERSATION;
+        for(World world: plugin.getServer().getWorlds()) {
+            worldNames.add(world.getName());
+        }
     }
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        if(String.valueOf(conversationContext.getSessionData("level")).equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptWorld").replace("{worlds}", Arrays.toString(worldNames.toArray())));
+    }
 
-            return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptConfirm")
-                    .replace("{message}", String.valueOf(conversationContext.getSessionData("message")))
-                    .replace("{interval}", String.valueOf(conversationContext.getSessionData("interval")))
-                    .replace("{unit}", String.valueOf(conversationContext.getSessionData("unit")))
-                    .replace("{world}", plugin.getLanguage().getMessage("termNone"))
-                    + formatFixedSet());
-        } else {
-            return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptConfirm")
-                    .replace("{message}", String.valueOf(conversationContext.getSessionData("message")))
-                    .replace("{interval}", String.valueOf(conversationContext.getSessionData("interval")))
-                    .replace("{unit}", String.valueOf(conversationContext.getSessionData("unit")))
-                    .replace("{world}", String.valueOf(conversationContext.getSessionData("world")))
-                    + formatFixedSet());
+    @Override
+    public Prompt acceptInput(ConversationContext conversationContext, String s) {
+        if(!worldNames.contains(s)) {
+            return new ChooseWorldPompt(plugin);
         }
+
+        conversationContext.setSessionData("world", s);
+
+        return new ConfirmSettingsPrompt(plugin);
     }
 }

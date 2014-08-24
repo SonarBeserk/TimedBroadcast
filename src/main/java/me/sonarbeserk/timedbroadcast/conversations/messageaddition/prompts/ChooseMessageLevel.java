@@ -21,22 +21,37 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversations.messageBuilder;
+package me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
-import org.bukkit.conversations.ConversationPrefix;
+import org.bukkit.conversations.FixedSetPrompt;
+import org.bukkit.conversations.Prompt;
 
-public class MessageBuilderPrefix implements ConversationPrefix {
+public class ChooseMessageLevel extends FixedSetPrompt {
     private TimedBroadcast plugin = null;
 
-    public MessageBuilderPrefix(TimedBroadcast plugin) {
+    public ChooseMessageLevel(TimedBroadcast plugin) {
+        super(plugin.getLanguage().getMessage("termGlobally"), plugin.getLanguage().getMessage("termWorld"));
         this.plugin = plugin;
     }
 
     @Override
-    public String getPrefix(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("messageBuilderPrefix"));
+    protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
+        conversationContext.setSessionData("level", s);
+
+        if(s.equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
+            return new ConfirmSettingsPrompt(plugin);
+        } else if(s.equalsIgnoreCase(plugin.getLanguage().getMessage("termWorld"))) {
+            return new ChooseWorldPompt(plugin);
+        }
+
+        return null;
+     }
+
+    @Override
+    public String getPromptText(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptLevel")) + " " + formatFixedSet();
     }
 }

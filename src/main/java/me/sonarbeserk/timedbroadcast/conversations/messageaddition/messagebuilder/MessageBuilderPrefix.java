@@ -21,46 +21,22 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversations.prompts.messageaddition;
+package me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
-import org.bukkit.World;
 import org.bukkit.conversations.ConversationContext;
-import org.bukkit.conversations.Prompt;
-import org.bukkit.conversations.StringPrompt;
+import org.bukkit.conversations.ConversationPrefix;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-public class ChooseWorldPompt extends StringPrompt {
+public class MessageBuilderPrefix implements ConversationPrefix {
     private TimedBroadcast plugin = null;
 
-    private ArrayList<String> worldNames = null;
-
-    public ChooseWorldPompt(TimedBroadcast plugin) {
+    public MessageBuilderPrefix(TimedBroadcast plugin) {
         this.plugin = plugin;
-
-        worldNames = new ArrayList<String>();
-
-        for(World world: plugin.getServer().getWorlds()) {
-            worldNames.add(world.getName());
-        }
     }
 
     @Override
-    public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptWorld").replace("{worlds}", Arrays.toString(worldNames.toArray())));
-    }
-
-    @Override
-    public Prompt acceptInput(ConversationContext conversationContext, String s) {
-        if(!worldNames.contains(s)) {
-            return new ChooseWorldPompt(plugin);
-        }
-
-        conversationContext.setSessionData("world", s);
-
-        return new ConfirmSettingsPrompt(plugin);
+    public String getPrefix(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("messageBuilderPrefix"));
     }
 }

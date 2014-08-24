@@ -21,28 +21,30 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversations.messageBuilder;
+package me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
-import org.bukkit.conversations.ConversationAbandonedEvent;
-import org.bukkit.conversations.ConversationAbandonedListener;
+import org.bukkit.conversations.ConversationContext;
+import org.bukkit.conversations.FixedSetPrompt;
+import org.bukkit.conversations.Prompt;
 
-public class MessageBuilderAbandonedListener implements ConversationAbandonedListener {
+public class AddingMessageStartPrompt extends FixedSetPrompt {
     private TimedBroadcast plugin = null;
 
-    public MessageBuilderAbandonedListener(TimedBroadcast plugin) {
+    public AddingMessageStartPrompt(TimedBroadcast plugin) {
+        super(plugin.getLanguage().getMessage("termNext"));
+
         this.plugin = plugin;
     }
 
     @Override
-    public void conversationAbandoned(ConversationAbandonedEvent conversationAbandonedEvent) {
-        String prefix = plugin.getLanguage().getMessage("messageBuilderPrefix");
+    protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
+        return new InputMessagePrompt(plugin);
+    }
 
-        if(conversationAbandonedEvent.gracefulExit()) {
-            conversationAbandonedEvent.getContext().getForWhom().sendRawMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getLanguage().getMessage("messageAdded")));
-        } else {
-            conversationAbandonedEvent.getContext().getForWhom().sendRawMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getLanguage().getMessage("messageAdditionCancelled")));
-        }
+    @Override
+    public String getPromptText(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageAddStart").replace("{termNext}", plugin.getLanguage().getMessage("termNext")).replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
     }
 }

@@ -21,29 +21,28 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversations.prompts.messageaddition;
+package me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
-import org.bukkit.conversations.ConversationContext;
-import org.bukkit.conversations.Prompt;
-import org.bukkit.conversations.StringPrompt;
+import org.bukkit.conversations.ConversationAbandonedEvent;
+import org.bukkit.conversations.ConversationAbandonedListener;
 
-public class InputMessagePrompt extends StringPrompt {
+public class MessageBuilderAbandonedListener implements ConversationAbandonedListener {
     private TimedBroadcast plugin = null;
 
-    public InputMessagePrompt(TimedBroadcast plugin) {
+    public MessageBuilderAbandonedListener(TimedBroadcast plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessage"));
-    }
+    public void conversationAbandoned(ConversationAbandonedEvent conversationAbandonedEvent) {
+        String prefix = plugin.getLanguage().getMessage("messageBuilderPrefix");
 
-    @Override
-    public Prompt acceptInput(ConversationContext conversationContext, String s) {
-        conversationContext.setSessionData("message", s);
-        return new ChooseTimeUnitPrompt(plugin);
+        if(conversationAbandonedEvent.gracefulExit()) {
+            conversationAbandonedEvent.getContext().getForWhom().sendRawMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getLanguage().getMessage("messageAdded")));
+        } else {
+            conversationAbandonedEvent.getContext().getForWhom().sendRawMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getLanguage().getMessage("messageAdditionCancelled")));
+        }
     }
 }
