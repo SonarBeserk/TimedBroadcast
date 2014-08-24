@@ -4,10 +4,12 @@
 version: "1.0"
 
 # Sent when a sender lacks permission to do something
-noPermission: "&4You do not have permission to do that!"
+noPermission: "&cYou do not have permission to do that!"
 
 # Sent when the config is reloaded
 reloaded: "&7The configuration has been reloaded!"
+
+# Command
 
 # Sent when a player is required for a command
 commandPlayerRequired: "You must be a player to use this command!"
@@ -15,43 +17,20 @@ commandPlayerRequired: "You must be a player to use this command!"
 # Usage
 
 # Usage for the plugin master command | {name} - the name of the plugin
-usageMain: "&7Subcommands: \n reload - reloads the all the plugin's files \n stop - stops broadcasting \n start - starts broadcasting"
+usageMain: "&7Subcommands: \n reload - reloads the all the plugin's files"
 
-# Status
+# Missing Version
 
-# Sent when broadcasts are not running
-notRunning: "&4Broadcasts are not running!"
+# Sent when a version can not be found in the config file
+missingVersionConfig: "No version was found in the config file! Please report this issue to the plugin developer!"
 
-# Sent when broadcasts are already running
-alreadyRunning: "&4Broadcasts are already running!"
-
-# Sent when broadcasts are stopped
-broadcastsStopped: "&2Broadcasts have been stopped."
-
-# Sent when broadcasts are started
-broadcastsStarted: "&2Broadcasts have been started!"
+# Sent when a version can not be found in the language file
+missingVersionLanguage: "No version was found in the language file! Please report this issue to the plugin developer if this is a default language file!"
 
 # Out of date
 
 # Message to send when the config file being run is out of date
 outOfDateConfig: "&4The version of the config file being run is out of date! Please delete the file and reload the plugin to generate the new version! (Backup the old version first!)"
 
-# Message to send when the locale file being run is out of date
-outOfDateLocale: "&4The version of the locale file being run is out of date! Please delete the file and reload the plugin to generate the new version! (Backup the old version first!)"
-
-# Updater
-
-# Sent when the updater reports it is up to date
-updaterUpToDate: "The version of the plugin being run is up to date!"
-
-# Sent when the updater finds a new plugin version | {new} - new version | {link} - link to the new version
-updaterNotify: "The latest released version is {new}. Please go to {link} to download!"
-
-# Sent when the updater downloads the new plugin version | {new} - new version
-updaterUpdated: "The latest released version: {new} has been downloaded and will be loaded upon the next restart!"
-
-# Sent when a user with permission is authed, it is used to inform them of the plugin update
-updateFound: "&2The latest released version is {new}. Please go to {link} to download!"
-
-# Sent when a user with permission is authed, it is used to inform them that the plugin has been updated and to restart the server
-updateDownloaded: "&2The latest released version: {new} has been downloaded and will be loaded upon the next restart!"
+# Message to send when the language file being run is out of date
+outOfDateLanguage: "&4The version of the language file being run is out of date! Please delete the file and reload the plugin to generate the new version! (Backup the old version first!)"

@@ -1,28 +1,19 @@
 name: ${project.name}
 version: ${project.version}
+author: ${project.author}
 description: ${project.description}
-author: SonarBeserk
 
-main: me.sonarbeserk.timedbroadcast.TimedBroadcast
+depend: ${project.depends}
+main: ${project.main}
 
-permissions:
-  timedbroadcast.notify.files:
-    description: notifies players with this permission of files being out of date
-    default: op
-  timedbroadcast.notify.updates:
-    description: notifies players with this permission of updates
-    default: op
-  timedbroadcast.commands.reload:
-    description: allows use of the reload subcommand
-    default: op
-  timedbroadcast.commands.stop:
-    description: allows use of the stop subcommand
-    default: op
-  timedbroadcast.commands.start:
-    description: allows use of the start subcommand
-    default: op
 commands:
-  timedbroadcast:
-    description: master command system for the plugin
-    usage: "TimedBroadcast Usage: /timedbroadcast help"
-    aliases: [tb]
+  ${project.name}:
+    description: master command system for the ${project.name}
+    usage: "${project.name} Usage: /${project.name.lowercase} help"
+    aliases: [${project.name.short}]
+permissions:
+
+  # Singular Nodes
+  ${project.name}.commands.reload:
+    description: "Allows use of the reload subcommand"
+    default: op
