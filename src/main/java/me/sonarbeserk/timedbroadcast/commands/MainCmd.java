@@ -25,8 +25,8 @@ package me.sonarbeserk.timedbroadcast.commands;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import me.sonarbeserk.timedbroadcast.conversations.prompts.messageaddition.AddingMessageStartPrompt;
-import me.sonarbeserk.timedbroadcast.conversations.messageBuilder.MessageBuilderAbandonedListener;
-import me.sonarbeserk.timedbroadcast.conversations.messageBuilder.MessageBuilderPrefix;
+import me.sonarbeserk.timedbroadcast.conversations.prompts.messageaddition.messageBuilder.MessageBuilderAbandonedListener;
+import me.sonarbeserk.timedbroadcast.conversations.prompts.messageaddition.messageBuilder.MessageBuilderPrefix;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

@@ -21,33 +21,28 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversation.prompts.messageaddition;
+package me.sonarbeserk.timedbroadcast.conversations.prompts.messageaddition.messageBuilder;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
-import org.bukkit.conversations.ConversationContext;
-import org.bukkit.conversations.FixedSetPrompt;
-import org.bukkit.conversations.Prompt;
+import org.bukkit.conversations.ConversationAbandonedEvent;
+import org.bukkit.conversations.ConversationAbandonedListener;
 
-
-public class ChooseTimeUnitPrompt extends FixedSetPrompt {
+public class MessageBuilderAbandonedListener implements ConversationAbandonedListener {
     private TimedBroadcast plugin = null;
 
-    public ChooseTimeUnitPrompt(TimedBroadcast plugin) {
-        super(plugin.getLanguage().getMessage("termSecond"), plugin.getLanguage().getMessage("termMinute"));
-
+    public MessageBuilderAbandonedListener(TimedBroadcast plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
-        conversationContext.setSessionData("unit", s);
+    public void conversationAbandoned(ConversationAbandonedEvent conversationAbandonedEvent) {
+        String prefix = plugin.getLanguage().getMessage("messageBuilderPrefix");
 
-        return new InputIntervalPrompt(plugin);
-    }
-
-    @Override
-    public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptTimeUnit")) + " " + formatFixedSet();
+        if(conversationAbandonedEvent.gracefulExit()) {
+            conversationAbandonedEvent.getContext().getForWhom().sendRawMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getLanguage().getMessage("messageAdded")));
+        } else {
+            conversationAbandonedEvent.getContext().getForWhom().sendRawMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getLanguage().getMessage("messageAdditionCancelled")));
+        }
     }
 }

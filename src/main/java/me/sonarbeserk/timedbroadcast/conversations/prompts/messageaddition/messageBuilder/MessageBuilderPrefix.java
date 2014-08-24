@@ -21,37 +21,22 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversation.prompts.messageaddition;
+package me.sonarbeserk.timedbroadcast.conversations.prompts.messageaddition.messageBuilder;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
-import org.bukkit.conversations.FixedSetPrompt;
-import org.bukkit.conversations.Prompt;
+import org.bukkit.conversations.ConversationPrefix;
 
-public class ChooseMessageLevel extends FixedSetPrompt {
+public class MessageBuilderPrefix implements ConversationPrefix {
     private TimedBroadcast plugin = null;
 
-    public ChooseMessageLevel(TimedBroadcast plugin) {
-        super(plugin.getLanguage().getMessage("termGlobally"), plugin.getLanguage().getMessage("termWorld"));
+    public MessageBuilderPrefix(TimedBroadcast plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
-        conversationContext.setSessionData("level", s);
-
-        if(s.equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
-            return new ConfirmSettingsPrompt(plugin);
-        } else if(s.equalsIgnoreCase(plugin.getLanguage().getMessage("termWorld"))) {
-            return new ChooseWorldPompt(plugin);
-        }
-
-        return null;
-     }
-
-    @Override
-    public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptLevel")) + " " + formatFixedSet();
+    public String getPrefix(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("messageBuilderPrefix"));
     }
 }
