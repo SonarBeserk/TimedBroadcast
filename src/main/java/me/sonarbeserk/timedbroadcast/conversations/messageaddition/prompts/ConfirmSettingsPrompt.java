@@ -40,8 +40,6 @@ public class ConfirmSettingsPrompt extends FixedSetPrompt {
 
     @Override
     protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
-        // add new message
-
         return Prompt.END_OF_CONVERSATION;
     }
 

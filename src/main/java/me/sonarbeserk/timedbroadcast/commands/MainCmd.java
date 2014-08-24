@@ -133,7 +133,7 @@ public class MainCmd implements CommandExecutor {
 
         ConversationFactory conversationFactory = new ConversationFactory(plugin);
 
-        Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageBuilderPrefix(plugin)).withFirstPrompt(new AddingMessageStartPrompt(plugin)).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(30).addConversationAbandonedListener(new MessageBuilderAbandonedListener(plugin)).buildConversation((Conversable) sender);
+        Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageBuilderPrefix(plugin)).withFirstPrompt(new AddingMessageStartPrompt(plugin)).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageAddition")).addConversationAbandonedListener(new MessageBuilderAbandonedListener(plugin)).buildConversation((Conversable) sender);
         conversation.begin();
     }
 }

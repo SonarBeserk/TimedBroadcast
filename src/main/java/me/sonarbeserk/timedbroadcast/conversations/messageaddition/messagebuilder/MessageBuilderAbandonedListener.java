@@ -41,6 +41,7 @@ public class MessageBuilderAbandonedListener implements ConversationAbandonedLis
 
         if(conversationAbandonedEvent.gracefulExit()) {
             conversationAbandonedEvent.getContext().getForWhom().sendRawMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getLanguage().getMessage("messageAdded")));
+            // Add message
         } else {
             conversationAbandonedEvent.getContext().getForWhom().sendRawMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getLanguage().getMessage("messageAdditionCancelled")));
         }
