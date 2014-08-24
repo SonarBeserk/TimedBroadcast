@@ -5,9 +5,25 @@
     <name>TimedBroadcast</name>
     <groupId>me.sonarbeserk</groupId>
     <artifactId>timedbroadcast</artifactId>
-    <version>1.1</version>
+    <version>2.0</version>
     <inceptionYear>2012</inceptionYear>
-    <description>Provides a timed auto messaging system</description>
+    <description>Automatically broadcast messages to the server</description>
+	<url>http://dev.bukkit.org/bukkit-plugins/timedbroadcast</url>
+
+    <!-- Properties -->
+    <properties>
+		<project.name.lowercase>timedbroadcast</project.name.lowercase>
+	    <project.name.short>tb</project.name.short>
+	
+        <project.main>me.sonarbeserk.timedbroadcast.TimedBroadcast</project.main>
+        <project.author>SonarBeserk</project.author>
+
+        <project.depends>[BeserkCore]</project.depends>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <jdk.version>1.7</jdk.version>
+    </properties>
 
     <!-- Repositories -->
     <repositories>
@@ -16,48 +32,96 @@
             <url>http://repo.bukkit.org/content/groups/public</url>
         </repository>
     </repositories>
- 
+
     <!-- Dependencies -->
     <dependencies>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.6.4-R2.0</version>
-            <scope>provided</scope>
+            <version>1.7.9-R0.3-SNAPSHOT</version>
         </dependency>
+		
+		<dependency>
+	        <groupId>me.sonarbeserk</groupId>
+            <artifactId>beserkcore</artifactId>
+            <version>1.1</version>
+		</dependency>
     </dependencies>
  
     <!-- Build settings -->
     <build>
-        <finalName>${project.name}</finalName>
-        <defaultGoal>clean package</defaultGoal>
- 
+        <finalName>TimedBroadcast</finalName>
+
         <!-- Resources -->
         <resources>
             <resource>
                 <targetPath>.</targetPath>
-                <directory>${basedir}/src/main/resources/</directory>
                 <filtering>true</filtering>
-                <includes>
-                    <include>*.yml</include>
-                    <include>*.dat</include>
-                    <include>lang/</include>
-                </includes>
+                <directory>${basedir}/src/main/resources/</directory>
             </resource>
         </resources>
- 
-        <!-- Plugins -->
+
         <plugins>
-            <!-- Compiler -->
+            <!-- Include the source jar as well -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Also generate java docs -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-docs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Define JDK for compilation -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.4</version>
+                <version>3.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                    <showDeprecation>true</showDeprecation>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
                 </configuration>
+            </plugin>
+			
+            <plugin>
+                <groupId>com.google.code.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.3.1</version>
+                <configuration>
+                    <header>${basedir}/src/main/resources/LICENSE.txt</header>
+                    <failIfMissing>true</failIfMissing>
+                    <includes>
+                        <include>**/**.java</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
