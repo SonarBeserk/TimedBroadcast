@@ -3,6 +3,7 @@ package me.sonarbeserk.timedbroadcast;
 import me.sonarbeserk.beserkcore.plugin.JavaPlugin;
 
 public class TimedBroadcast extends JavaPlugin {
+
     public void onEnable() {
         super.onEnable();
     }
