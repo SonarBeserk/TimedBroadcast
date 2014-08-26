@@ -26,25 +26,23 @@ package me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts;
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
-import org.bukkit.conversations.FixedSetPrompt;
+import org.bukkit.conversations.MessagePrompt;
 import org.bukkit.conversations.Prompt;
 
-public class AddingMessageStartPrompt extends FixedSetPrompt {
+public class AddingMessageStartPrompt extends MessagePrompt {
     private TimedBroadcast plugin = null;
 
     public AddingMessageStartPrompt(TimedBroadcast plugin) {
-        super(plugin.getLanguage().getMessage("termNext"));
-
         this.plugin = plugin;
     }
 
     @Override
-    protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
-        return new InputMessagePrompt(plugin);
+    public String getPromptText(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageAddStart").replace("{termExit}", plugin.getLanguage().getMessage("termExit")).replace("{newline}", "\n"));
     }
 
     @Override
-    public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageAddStart").replace("{termNext}", plugin.getLanguage().getMessage("termNext")).replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
+    protected Prompt getNextPrompt(ConversationContext conversationContext) {
+        return new InputMessagePrompt(plugin);
     }
 }

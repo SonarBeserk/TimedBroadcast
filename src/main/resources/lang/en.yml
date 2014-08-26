@@ -37,9 +37,6 @@ outOfDateLanguage: "&4The version of the language file being run is out of date!
 
 # Display Name
 
-# Term used for next
-termNext: "Next"
-
 # Term used for exiting message creation
 termExit: "Cancel"
 
@@ -69,10 +66,10 @@ messageBuilderPrefix: "&bMessage Builder: "
 # Prompt
 
 # The message to use for initial prompt for creating a message
-promptMessageAddStart: "&7You are adding a new message, please choose &b{termNext} &7to continue or &c{termExit} &7to exit message creation"
+promptMessageAddStart: "&7You are adding a new message, Enter &c{termExit} &7 at any time to exit message creation"
 
 # The message used when asking what message should be used
-promptMessage: "&7What should the message say?"
+promptMessage: "&7What should the message say? (Enter {newline} to make the message go down a line)"
 
 # The message used when asking what time unit should be used
 promptTimeUnit: "&7What time unit should be used for this message? &b"
