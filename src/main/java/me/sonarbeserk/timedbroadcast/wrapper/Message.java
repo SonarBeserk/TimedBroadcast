@@ -5,7 +5,7 @@
  *  Copyright (C) 2012-2014 by SonarBeserk
  * http://dev.bukkit.org/bukkit-plugins/timedbroadcast/
  * *********************************************************************************************************************
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * *********************************************************************************************************************
  * Please refer to LICENSE for the full license. If it is not there, see <http://www.gnu.org/licenses/>.
  * *********************************************************************************************************************
@@ -51,6 +51,7 @@ public class Message {
 
     /**
      * Returns the message of the message
+     *
      * @return the message of the message
      */
     public String getMessage() {
@@ -59,6 +60,7 @@ public class Message {
 
     /**
      * Returns the time unit of the message
+     *
      * @return the time unit of the message
      */
     public TimeUnit getUnit() {
@@ -67,6 +69,7 @@ public class Message {
 
     /**
      * Returns the message interval
+     *
      * @return the message interval
      */
     public int getInterval() {
@@ -75,6 +78,7 @@ public class Message {
 
     /**
      * Returns the location of the message
+     *
      * @return the location of the message
      */
     public MessageLocation getLocation() {
@@ -83,6 +87,7 @@ public class Message {
 
     /**
      * Returns the name of the world the message should show in
+     *
      * @return the name of the world the message should show in
      */
     public String getWorldName() {

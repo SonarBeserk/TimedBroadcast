@@ -5,7 +5,7 @@
  *  Copyright (C) 2012-2014 by SonarBeserk
  * http://dev.bukkit.org/bukkit-plugins/timedbroadcast/
  * *********************************************************************************************************************
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * *********************************************************************************************************************
  * Please refer to LICENSE for the full license. If it is not there, see <http://www.gnu.org/licenses/>.
  * *********************************************************************************************************************
@@ -41,14 +41,14 @@ public class ChooseMessageLocationPrompt extends FixedSetPrompt {
     protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
         conversationContext.setSessionData("where", s);
 
-        if(s.equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
+        if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
             return new ConfirmSettingsPrompt(plugin);
-        } else if(s.equalsIgnoreCase(plugin.getLanguage().getMessage("termWorld"))) {
+        } else if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termWorld"))) {
             return new ChooseWorldPompt(plugin);
         }
 
         return null;
-     }
+    }
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {

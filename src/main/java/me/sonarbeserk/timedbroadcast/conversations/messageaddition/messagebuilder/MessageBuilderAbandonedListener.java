@@ -5,7 +5,7 @@
  *  Copyright (C) 2012-2014 by SonarBeserk
  * http://dev.bukkit.org/bukkit-plugins/timedbroadcast/
  * *********************************************************************************************************************
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * *********************************************************************************************************************
  * Please refer to LICENSE for the full license. If it is not there, see <http://www.gnu.org/licenses/>.
  * *********************************************************************************************************************
@@ -42,16 +42,16 @@ public class MessageBuilderAbandonedListener implements ConversationAbandonedLis
     public void conversationAbandoned(ConversationAbandonedEvent conversationAbandonedEvent) {
         String prefix = plugin.getLanguage().getMessage("messageBuilderPrefix");
 
-        if(conversationAbandonedEvent.gracefulExit()) {
+        if (conversationAbandonedEvent.gracefulExit()) {
             conversationAbandonedEvent.getContext().getForWhom().sendRawMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getLanguage().getMessage("messageAdded")));
 
             String message = String.valueOf(conversationAbandonedEvent.getContext().getSessionData("message"));
 
             TimeUnit timeUnit = null;
 
-            if(String.valueOf(conversationAbandonedEvent.getContext().getSessionData("unit")).equalsIgnoreCase(plugin.getLanguage().getMessage("termSecond"))) {
+            if (String.valueOf(conversationAbandonedEvent.getContext().getSessionData("unit")).equalsIgnoreCase(plugin.getLanguage().getMessage("termSecond"))) {
                 timeUnit = TimeUnit.SECOND;
-            } else if(String.valueOf(conversationAbandonedEvent.getContext().getSessionData("unit")).equalsIgnoreCase(plugin.getLanguage().getMessage("termMinute"))) {
+            } else if (String.valueOf(conversationAbandonedEvent.getContext().getSessionData("unit")).equalsIgnoreCase(plugin.getLanguage().getMessage("termMinute"))) {
                 timeUnit = TimeUnit.MINUTE;
             }
 
@@ -59,9 +59,9 @@ public class MessageBuilderAbandonedListener implements ConversationAbandonedLis
 
             MessageLocation location = null;
 
-            if(String.valueOf(conversationAbandonedEvent.getContext().getSessionData("where")).equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
+            if (String.valueOf(conversationAbandonedEvent.getContext().getSessionData("where")).equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
                 location = MessageLocation.GLOBALLY;
-            } else if(String.valueOf(conversationAbandonedEvent.getContext().getSessionData("where")).equalsIgnoreCase(plugin.getLanguage().getMessage("termWorld"))) {
+            } else if (String.valueOf(conversationAbandonedEvent.getContext().getSessionData("where")).equalsIgnoreCase(plugin.getLanguage().getMessage("termWorld"))) {
                 location = MessageLocation.WORLD;
             }
 

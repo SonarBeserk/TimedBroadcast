@@ -5,7 +5,7 @@
  *  Copyright (C) 2012-2014 by SonarBeserk
  * http://dev.bukkit.org/bukkit-plugins/timedbroadcast/
  * *********************************************************************************************************************
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -15,7 +15,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * *********************************************************************************************************************
  * Please refer to LICENSE for the full license. If it is not there, see <http://www.gnu.org/licenses/>.
  * *********************************************************************************************************************
@@ -43,7 +43,7 @@ public class ChooseWorldPompt extends StringPrompt {
 
         worldNames = new ArrayList<String>();
 
-        for(World world: plugin.getServer().getWorlds()) {
+        for (World world : plugin.getServer().getWorlds()) {
             worldNames.add(world.getName());
         }
     }
@@ -55,7 +55,7 @@ public class ChooseWorldPompt extends StringPrompt {
 
     @Override
     public Prompt acceptInput(ConversationContext conversationContext, String s) {
-        if(!worldNames.contains(s)) {
+        if (!worldNames.contains(s)) {
             return new ChooseWorldPompt(plugin);
         }
 

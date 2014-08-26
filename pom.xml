@@ -1,6 +1,7 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
- 
+
     <!-- Project information -->
     <name>TimedBroadcast</name>
     <groupId>me.sonarbeserk</groupId>
@@ -8,13 +9,13 @@
     <version>2.0</version>
     <inceptionYear>2012</inceptionYear>
     <description>Automatically broadcasts messages to the server</description>
-	<url>http://dev.bukkit.org/bukkit-plugins/timedbroadcast</url>
+    <url>http://dev.bukkit.org/bukkit-plugins/timedbroadcast</url>
 
     <!-- Properties -->
     <properties>
-		<project.name.lowercase>timedbroadcast</project.name.lowercase>
-	    <project.name.short>tb</project.name.short>
-	
+        <project.name.lowercase>timedbroadcast</project.name.lowercase>
+        <project.name.short>tb</project.name.short>
+
         <project.main>me.sonarbeserk.timedbroadcast.TimedBroadcast</project.main>
         <project.author>SonarBeserk</project.author>
 
@@ -40,14 +41,14 @@
             <artifactId>bukkit</artifactId>
             <version>1.7.9-R0.3-SNAPSHOT</version>
         </dependency>
-		
-		<dependency>
-	        <groupId>me.sonarbeserk</groupId>
+
+        <dependency>
+            <groupId>me.sonarbeserk</groupId>
             <artifactId>beserkcore</artifactId>
             <version>1.1</version>
-		</dependency>
+        </dependency>
     </dependencies>
- 
+
     <!-- Build settings -->
     <build>
         <finalName>TimedBroadcast</finalName>
@@ -102,7 +103,7 @@
                     <target>${jdk.version}</target>
                 </configuration>
             </plugin>
-			
+
             <plugin>
                 <groupId>com.google.code.maven-license-plugin</groupId>
                 <artifactId>maven-license-plugin</artifactId>
