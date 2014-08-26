@@ -24,6 +24,9 @@
 package me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
+import me.sonarbeserk.timedbroadcast.enums.MessageLocation;
+import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
+import me.sonarbeserk.timedbroadcast.wrapper.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.conversations.ConversationAbandonedListener;
@@ -41,7 +44,30 @@ public class MessageBuilderAbandonedListener implements ConversationAbandonedLis
 
         if(conversationAbandonedEvent.gracefulExit()) {
             conversationAbandonedEvent.getContext().getForWhom().sendRawMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getLanguage().getMessage("messageAdded")));
-            // Add message
+
+            String message = String.valueOf(conversationAbandonedEvent.getContext().getSessionData("message"));
+
+            TimeUnit timeUnit = null;
+
+            if(String.valueOf(conversationAbandonedEvent.getContext().getSessionData("unit")).equalsIgnoreCase(plugin.getLanguage().getMessage("termSecond"))) {
+                timeUnit = TimeUnit.SECOND;
+            } else if(String.valueOf(conversationAbandonedEvent.getContext().getSessionData("unit")).equalsIgnoreCase(plugin.getLanguage().getMessage("termMinute"))) {
+                timeUnit = TimeUnit.MINUTE;
+            }
+
+            int interval = Integer.parseInt(String.valueOf(conversationAbandonedEvent.getContext().getSessionData("interval")));
+
+            MessageLocation location = null;
+
+            if(String.valueOf(conversationAbandonedEvent.getContext().getSessionData("where")).equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
+                location = MessageLocation.GLOBALLY;
+            } else if(String.valueOf(conversationAbandonedEvent.getContext().getSessionData("where")).equalsIgnoreCase(plugin.getLanguage().getMessage("termWorld"))) {
+                location = MessageLocation.WORLD;
+            }
+
+            String worldName = String.valueOf(conversationAbandonedEvent.getContext().getSessionData("world"));
+
+            Message messageWrapper = new Message(message, timeUnit, interval, location, worldName);
         } else {
             conversationAbandonedEvent.getContext().getForWhom().sendRawMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getLanguage().getMessage("messageAdditionCancelled")));
         }
