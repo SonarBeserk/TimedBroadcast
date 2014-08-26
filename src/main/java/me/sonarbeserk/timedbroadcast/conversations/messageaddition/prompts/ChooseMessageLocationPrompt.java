@@ -29,10 +29,10 @@ import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.FixedSetPrompt;
 import org.bukkit.conversations.Prompt;
 
-public class ChooseMessageLevel extends FixedSetPrompt {
+public class ChooseMessageLocationPrompt extends FixedSetPrompt {
     private TimedBroadcast plugin = null;
 
-    public ChooseMessageLevel(TimedBroadcast plugin) {
+    public ChooseMessageLocationPrompt(TimedBroadcast plugin) {
         super(plugin.getLanguage().getMessage("termGlobally"), plugin.getLanguage().getMessage("termWorld"));
         this.plugin = plugin;
     }
