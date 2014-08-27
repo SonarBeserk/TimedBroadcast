@@ -20,3 +20,18 @@ settings:
 
     # How long should a player be able to idle when adding a new message? (In Seconds)
     messageAddition: 30
+
+  # Broadcast settings
+  broadcast:
+
+    # Should messages be prefixed?
+    prefixEnabled: true
+
+    # What prefix should be used before messages?
+    prefix: "&f[&r&2Broadcast&r&f]&r "
+
+    # How many players are required for broadcasts to send?
+    requiredPlayers: 1
+
+    # Should message counters ignore player counts and keep counting up when there are not enough players on?
+    counterIgnoresPlayerCount: false
