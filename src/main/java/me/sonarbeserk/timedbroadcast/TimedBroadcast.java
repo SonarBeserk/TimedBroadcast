@@ -40,6 +40,8 @@ public class TimedBroadcast extends JavaPlugin {
 
     private MinuteTask minuteTask = null;
 
+    private boolean broadcast = true;
+
     public void onEnable() {
         super.onEnable();
 
@@ -99,6 +101,22 @@ public class TimedBroadcast extends JavaPlugin {
     @Override
     public String getPermissionPrefix() {
         return getName().toLowerCase();
+    }
+
+    /**
+     * Returns if the server should broadcast messages
+     * @return if the server should broadcast messages
+     */
+    public boolean shouldBroadcast() {
+        return broadcast;
+    }
+
+    /**
+     * Sets if broadcasts should happen
+     * @param broadcast if broadcasts should happen
+     */
+    public void shouldBroadcast(boolean broadcast) {
+        this.broadcast = broadcast;
     }
 
     /**

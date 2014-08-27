@@ -40,6 +40,8 @@ public class MinuteTask extends BukkitRunnable {
 
     @Override
     public void run() {
+        if(!plugin.shouldBroadcast()) {return;}
+
         for(Message message: plugin.getMessages()) {
             if(!plugin.getConfig().getBoolean("settings.broadcast.counterIgnoresPlayerCount") && plugin.getServer().getOnlinePlayers().size() < plugin.getConfig().getInt("settings.broadcast.requiredPlayers")) {return;}
 
