@@ -69,7 +69,7 @@ messageBuilderPrefix: "&bMessage Builder: "
 promptMessageAddStart: "&7You are adding a new message, Enter &c{termExit} &7 at any time to exit message creation"
 
 # The message used when asking what message should be used
-promptMessage: "&7What should the message say? (Enter {newline} to make the message go down a line)"
+promptMessage: "&7What should the message say? (Enter '{n}' to make the message go down a line)"
 
 # The message used when asking what time unit should be used
 promptTimeUnit: "&7What time unit should be used for this message? &b"
