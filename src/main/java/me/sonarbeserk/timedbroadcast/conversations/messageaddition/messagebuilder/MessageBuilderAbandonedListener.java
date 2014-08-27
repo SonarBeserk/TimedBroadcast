@@ -65,7 +65,11 @@ public class MessageBuilderAbandonedListener implements ConversationAbandonedLis
                 location = MessageLocation.WORLD;
             }
 
-            String worldName = String.valueOf(conversationAbandonedEvent.getContext().getSessionData("world"));
+            String worldName = null;
+
+            if(conversationAbandonedEvent.getContext().getSessionData("world") != null) {
+                worldName = String.valueOf(conversationAbandonedEvent.getContext().getSessionData("world"));
+            }
 
             Message messageWrapper = new Message(message, timeUnit, interval, location, worldName);
 
