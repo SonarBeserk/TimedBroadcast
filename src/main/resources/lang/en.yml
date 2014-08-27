@@ -17,7 +17,7 @@ commandPlayerRequired: "You must be a player to use this command!"
 # Usage
 
 # Usage for the plugin master command | {name} - the name of the plugin
-usageMain: "&7Subcommands: \n reload - reloads the all the plugin's files"
+usageMain: "&7Subcommands: \n reload - reloads the all the plugin's files \ n add - guides you through adding a new message for broadcasting"
 
 # Missing Version
 
