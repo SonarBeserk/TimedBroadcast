@@ -25,13 +25,19 @@ package me.sonarbeserk.timedbroadcast;
 
 import me.sonarbeserk.beserkcore.plugin.JavaPlugin;
 import me.sonarbeserk.timedbroadcast.commands.MainCmd;
+import me.sonarbeserk.timedbroadcast.wrapper.Message;
+
+import java.util.ArrayList;
 
 public class TimedBroadcast extends JavaPlugin {
+    private ArrayList<Message> messages = null;
 
     public void onEnable() {
         super.onEnable();
 
         getCommand(getName().toLowerCase()).setExecutor(new MainCmd(this));
+
+        messages = new ArrayList<Message>();
     }
 
     @Override
@@ -47,6 +53,30 @@ public class TimedBroadcast extends JavaPlugin {
     @Override
     public String getPermissionPrefix() {
         return getName().toLowerCase();
+    }
+
+    /**
+     * Returns the list of messages
+     * @return the list of messages
+     */
+    public ArrayList<Message> getMessages() {
+        return messages;
+    }
+
+    /**
+     * Adds a message to be broadcasted
+     * @param message the message to add
+     */
+    public void addMessage(Message message) {
+        messages.add(message);
+    }
+
+    /**
+     * Removes a message from broadcasting
+     * @param message the message to remove
+     */
+    public void removeMessage(Message message) {
+        messages.remove(message);
     }
 
     public void onDisable() {

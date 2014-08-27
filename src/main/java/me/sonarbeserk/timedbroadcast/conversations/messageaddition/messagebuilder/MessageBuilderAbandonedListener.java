@@ -68,6 +68,8 @@ public class MessageBuilderAbandonedListener implements ConversationAbandonedLis
             String worldName = String.valueOf(conversationAbandonedEvent.getContext().getSessionData("world"));
 
             Message messageWrapper = new Message(message, timeUnit, interval, location, worldName);
+
+            plugin.addMessage(messageWrapper);
         } else {
             conversationAbandonedEvent.getContext().getForWhom().sendRawMessage(ChatColor.translateAlternateColorCodes('&', prefix + plugin.getLanguage().getMessage("messageAdditionCancelled")));
         }

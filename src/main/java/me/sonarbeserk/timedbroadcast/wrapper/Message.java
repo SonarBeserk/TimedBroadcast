@@ -93,5 +93,4 @@ public class Message {
     public String getWorldName() {
         return worldName;
     }
-
 }
