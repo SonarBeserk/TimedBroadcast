@@ -19,7 +19,7 @@ settings:
   timeout:
 
     # How long should a player be able to idle when adding a new message? (In Seconds)
-    messageAddition: 30
+    messageAddition: 60
 
   # Broadcast settings
   broadcast:
