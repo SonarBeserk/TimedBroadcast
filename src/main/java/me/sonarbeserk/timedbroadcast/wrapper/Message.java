@@ -37,6 +37,8 @@ public class Message {
 
     private String worldName = null;
 
+    private int counter = 0;
+
     public Message(String message, TimeUnit unit, int interval, MessageLocation location, String worldName) {
         this.message = message;
 
@@ -92,5 +94,21 @@ public class Message {
      */
     public String getWorldName() {
         return worldName;
+    }
+
+    /**
+     * Returns the counter for the message
+     * @return the counter for the message
+     */
+    public int getCounter() {
+        return counter;
+    }
+
+    /**
+     * Sets the message's counter
+     * @param counter the counter of the message
+     */
+    public void setCounter(int counter) {
+        this.counter = counter;
     }
 }
