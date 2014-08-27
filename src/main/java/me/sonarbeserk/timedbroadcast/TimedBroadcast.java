@@ -25,6 +25,8 @@ package me.sonarbeserk.timedbroadcast;
 
 import me.sonarbeserk.beserkcore.plugin.JavaPlugin;
 import me.sonarbeserk.timedbroadcast.commands.MainCmd;
+import me.sonarbeserk.timedbroadcast.tasks.MinuteTask;
+import me.sonarbeserk.timedbroadcast.tasks.SecondTask;
 import me.sonarbeserk.timedbroadcast.wrapper.Message;
 
 import java.util.ArrayList;
@@ -32,12 +34,22 @@ import java.util.ArrayList;
 public class TimedBroadcast extends JavaPlugin {
     private ArrayList<Message> messages = null;
 
+    private SecondTask secondTask = null;
+
+    private MinuteTask minuteTask = null;
+
     public void onEnable() {
         super.onEnable();
 
         getCommand(getName().toLowerCase()).setExecutor(new MainCmd(this));
 
         messages = new ArrayList<Message>();
+
+        secondTask = new SecondTask(this);
+        secondTask.runTaskTimer(this, 0, 20);
+
+        minuteTask = new MinuteTask(this);
+        minuteTask.runTaskTimer(this, 0, 1200);
     }
 
     @Override
@@ -80,6 +92,12 @@ public class TimedBroadcast extends JavaPlugin {
     }
 
     public void onDisable() {
+        secondTask.cancel();
+
+        minuteTask.cancel();
+
+        messages = null;
+
         super.onDisable();
     }
 }
