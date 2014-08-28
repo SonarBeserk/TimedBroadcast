@@ -19,22 +19,33 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversations.messageremoval.messagebuilder;
+package me.sonarbeserk.timedbroadcast.conversations.messagelisting.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
+import me.sonarbeserk.timedbroadcast.conversations.generic.prompts.NoMessagesPrompt;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
-import org.bukkit.conversations.ConversationPrefix;
+import org.bukkit.conversations.MessagePrompt;
+import org.bukkit.conversations.Prompt;
 
-public class MessageRemoverPrefix implements ConversationPrefix {
+public class ListMessageStartPrompt extends MessagePrompt {
     private TimedBroadcast plugin = null;
 
-    public MessageRemoverPrefix(TimedBroadcast plugin) {
+    public ListMessageStartPrompt(TimedBroadcast plugin) {
         this.plugin = plugin;
     }
 
     @Override
-    public String getPrefix(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("messageRemoverPrefix"));
+    public String getPromptText(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageListStart").replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
+    }
+
+    @Override
+    protected Prompt getNextPrompt(ConversationContext conversationContext) {
+        if (plugin.getMessages().size() == 0) {
+            return new NoMessagesPrompt(plugin);
+        }
+
+        return new ChooseMessagePrompt(plugin);
     }
 }

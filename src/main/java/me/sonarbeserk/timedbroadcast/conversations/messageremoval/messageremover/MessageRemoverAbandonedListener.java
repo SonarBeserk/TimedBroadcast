@@ -19,7 +19,7 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversations.messageremoval.messagebuilder;
+package me.sonarbeserk.timedbroadcast.conversations.messageremoval.messageremover;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import me.sonarbeserk.timedbroadcast.wrapper.Message;

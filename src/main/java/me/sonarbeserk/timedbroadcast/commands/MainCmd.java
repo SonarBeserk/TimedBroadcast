@@ -25,8 +25,11 @@ import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder.MessageBuilderAbandonedListener;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder.MessageBuilderPrefix;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts.AddingMessageStartPrompt;
-import me.sonarbeserk.timedbroadcast.conversations.messageremoval.messagebuilder.MessageRemoverAbandonedListener;
-import me.sonarbeserk.timedbroadcast.conversations.messageremoval.messagebuilder.MessageRemoverPrefix;
+import me.sonarbeserk.timedbroadcast.conversations.messagelisting.messagelister.MessageListerAbandonedListener;
+import me.sonarbeserk.timedbroadcast.conversations.messagelisting.messagelister.MessageListerPrefix;
+import me.sonarbeserk.timedbroadcast.conversations.messagelisting.prompts.ListMessageStartPrompt;
+import me.sonarbeserk.timedbroadcast.conversations.messageremoval.messageremover.MessageRemoverAbandonedListener;
+import me.sonarbeserk.timedbroadcast.conversations.messageremoval.messageremover.MessageRemoverPrefix;
 import me.sonarbeserk.timedbroadcast.conversations.messageremoval.prompts.RemoveMessageStartPrompt;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -68,6 +71,11 @@ public class MainCmd implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("add")) {
                 addSubCommand(sender);
+                return true;
+            }
+
+            if (args[0].equalsIgnoreCase("list")) {
+                listSubCommand(sender);
                 return true;
             }
 
@@ -151,6 +159,28 @@ public class MainCmd implements CommandExecutor {
         ConversationFactory conversationFactory = new ConversationFactory(plugin);
 
         Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageBuilderPrefix(plugin)).withFirstPrompt(new AddingMessageStartPrompt(plugin)).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageAddition")).addConversationAbandonedListener(new MessageBuilderAbandonedListener(plugin)).buildConversation((Conversable) sender);
+        conversation.begin();
+    }
+
+    private void listSubCommand(CommandSender sender) {
+        if (!(sender instanceof Player)) {
+            plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("commandPlayerRequired"));
+            return;
+        }
+
+        if (!sender.hasPermission(plugin.getPermissionPrefix() + ".commands.list")) {
+            if (sender instanceof Player) {
+                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
+                return;
+            } else {
+                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("noPermission"));
+                return;
+            }
+        }
+
+        ConversationFactory conversationFactory = new ConversationFactory(plugin);
+
+        Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageListerPrefix(plugin)).withFirstPrompt(new ListMessageStartPrompt(plugin)).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageListing")).addConversationAbandonedListener(new MessageListerAbandonedListener(plugin)).buildConversation((Conversable) sender);
         conversation.begin();
     }
 
