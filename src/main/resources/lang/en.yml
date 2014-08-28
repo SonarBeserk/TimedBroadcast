@@ -17,7 +17,7 @@ commandPlayerRequired: "You must be a player to use this command!"
 # Usage
 
 # Usage for the plugin master command | {name} - the name of the plugin
-usageMain: "&7Subcommands: \n reload - reloads the all the plugin's files \ n add - guides you through adding a new message for broadcasting"
+usageMain: "&7Subcommands: \n reload - reloads the all the plugin's files \n add - guides you through adding a new message for broadcasting \n remove - guides you through removing a message"
 
 # Missing Version
 
@@ -64,16 +64,28 @@ termNone: "None"
 # Term used for confirm
 termConfirm: "Confirm"
 
+# Term used for back
+termBack: "Back"
+
 # Message
 
 # Prefix used for the message builder
 messageBuilderPrefix: "&bMessage Builder: "
 
+# Prefix used for the message remover
+messageRemoverPrefix: "&bMessage Remover: "
+
 # The message used when a message is added
 messageAdded: "&2Message has been added!"
 
+# The message used when a message is removed
+messageRemoved: "&2Message has been removed."
+
 # The message used when message creation times out or is cancelled
 messageAdditionCancelled: "&cMessage creation has either been cancelled or timed out."
+
+# The message used when message removal times out or is cancelled
+messageRemovalCancelled: "&cMessage removal has either been cancelled or timed out."
 
 # Prompt
 
@@ -97,3 +109,12 @@ promptWorld: "&7What world should this message only be visible to? &b{worlds}"
 
 # The message used to confirm settings | {message} - the message for the message | {world} - the world the message is restricted to
 promptConfirm: "&7Please confirm these settings: \n Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n"
+
+# The message to use for initial prompt for creating a message
+promptMessageRemovalStart: "&7You are removing a message, Enter &c{termExit} &7 at any time to exit."
+
+# The message to use when asking what message should be shown | {count} - the amount of messages
+promptChooseMessage: "&7There are &b{count} &7messages. Please enter an id between (1-{count}) to show the message."
+
+# The message used when the list of messages is empty
+promptMessageListEmpty: "&cThere are no messages to list!"

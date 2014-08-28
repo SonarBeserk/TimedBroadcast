@@ -5,7 +5,6 @@
  *  Copyright (C) 2012-2014 by SonarBeserk
  * http://dev.bukkit.org/bukkit-plugins/timedbroadcast/
  * *********************************************************************************************************************
- * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -15,7 +14,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
  * *********************************************************************************************************************
  * Please refer to LICENSE for the full license. If it is not there, see <http://www.gnu.org/licenses/>.
  * *********************************************************************************************************************
@@ -49,11 +47,11 @@ public class TimedBroadcast extends JavaPlugin {
 
         messages = new ArrayList<Message>();
 
-        if(getData().get("broadcastsEnabled") != null) {
+        if (getData().get("broadcastsEnabled") != null) {
             broadcast = Boolean.parseBoolean(String.valueOf(getData().get("broadcastsEnabled")));
         }
 
-        if(getData().getConfigurationSection("messages") != null) {
+        if (getData().getConfigurationSection("messages") != null) {
             for (String entry : getData().getConfigurationSection("messages").getKeys(false)) {
                 if (getData().get("messages." + entry + ".message") == null || getData().get("messages." + entry + ".unit") == null || getData().get("messages." + entry + ".interval") == null || getData().get("messages." + entry + ".location") == null || getData().get("messages." + entry + ".worldName") == null) {
                     continue;
@@ -109,6 +107,7 @@ public class TimedBroadcast extends JavaPlugin {
 
     /**
      * Returns if the server should broadcast messages
+     *
      * @return if the server should broadcast messages
      */
     public boolean shouldBroadcast() {
@@ -117,6 +116,7 @@ public class TimedBroadcast extends JavaPlugin {
 
     /**
      * Sets if broadcasts should happen
+     *
      * @param broadcast if broadcasts should happen
      */
     public void shouldBroadcast(boolean broadcast) {
@@ -125,6 +125,7 @@ public class TimedBroadcast extends JavaPlugin {
 
     /**
      * Returns the list of messages
+     *
      * @return the list of messages
      */
     public ArrayList<Message> getMessages() {
@@ -133,6 +134,7 @@ public class TimedBroadcast extends JavaPlugin {
 
     /**
      * Adds a message to be broadcasted
+     *
      * @param message the message to add
      */
     public void addMessage(Message message) {
@@ -141,6 +143,7 @@ public class TimedBroadcast extends JavaPlugin {
 
     /**
      * Removes a message from broadcasting
+     *
      * @param message the message to remove
      */
     public void removeMessage(Message message) {
@@ -154,15 +157,15 @@ public class TimedBroadcast extends JavaPlugin {
 
         getData().set("broadcastsEnabled", String.valueOf(broadcast));
 
-        for(int i = 0; i < getMessages().size(); i++) {
-            if(getMessages().get(i).getLocation() == MessageLocation.GLOBALLY) {
+        for (int i = 0; i < getMessages().size(); i++) {
+            if (getMessages().get(i).getLocation() == MessageLocation.GLOBALLY) {
                 getData().set("messages." + i + ".message", getMessages().get(i).getMessage());
                 getData().set("messages." + i + ".unit", getMessages().get(i).getUnit().name());
                 getData().set("messages." + i + ".interval", getMessages().get(i).getInterval());
                 getData().set("messages." + i + ".location", getMessages().get(i).getLocation().name());
                 getData().set("messages." + i + ".worldName", getLanguage().getMessage("termNone"));
                 getData().set("messages." + i + ".counter", getMessages().get(i).getCounter());
-            } else if(getMessages().get(i).getLocation() == MessageLocation.WORLD) {
+            } else if (getMessages().get(i).getLocation() == MessageLocation.WORLD) {
                 getData().set("messages." + i + ".message", getMessages().get(i).getMessage());
                 getData().set("messages." + i + ".unit", getMessages().get(i).getUnit().name());
                 getData().set("messages." + i + ".interval", getMessages().get(i).getInterval());

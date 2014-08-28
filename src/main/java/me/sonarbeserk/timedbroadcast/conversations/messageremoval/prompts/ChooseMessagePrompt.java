@@ -19,8 +19,38 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.enums;
+package me.sonarbeserk.timedbroadcast.conversations.messageremoval.prompts;
 
-public enum TimeUnit {
-    SECOND, MINUTE
+import me.sonarbeserk.timedbroadcast.TimedBroadcast;
+import org.bukkit.ChatColor;
+import org.bukkit.conversations.ConversationContext;
+import org.bukkit.conversations.NumericPrompt;
+import org.bukkit.conversations.Prompt;
+
+public class ChooseMessagePrompt extends NumericPrompt {
+    private TimedBroadcast plugin = null;
+
+    public ChooseMessagePrompt(TimedBroadcast plugin) {
+        this.plugin = plugin;
+    }
+
+    @Override
+    public String getPromptText(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptChooseMessage").replace("{count}", String.valueOf(plugin.getMessages().size())));
+    }
+
+    @Override
+    protected Prompt acceptValidatedInput(ConversationContext conversationContext, Number number) {
+        if (!(number instanceof Integer)) {
+            return new ChooseMessagePrompt(plugin);
+        }
+
+        if (number.intValue() > plugin.getMessages().size()) {
+            return new ChooseMessagePrompt(plugin);
+        }
+
+        conversationContext.setSessionData("messageID", number.intValue());
+
+        return new ConfirmRemovalPrompt(plugin);
+    }
 }

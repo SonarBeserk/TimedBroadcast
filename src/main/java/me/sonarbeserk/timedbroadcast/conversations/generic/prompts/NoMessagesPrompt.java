@@ -19,8 +19,29 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.enums;
+package me.sonarbeserk.timedbroadcast.conversations.generic.prompts;
 
-public enum TimeUnit {
-    SECOND, MINUTE
+import me.sonarbeserk.timedbroadcast.TimedBroadcast;
+import org.bukkit.ChatColor;
+import org.bukkit.conversations.ConversationContext;
+import org.bukkit.conversations.MessagePrompt;
+import org.bukkit.conversations.Prompt;
+
+public class NoMessagesPrompt extends MessagePrompt {
+    private TimedBroadcast plugin = null;
+
+    public NoMessagesPrompt(TimedBroadcast plugin) {
+        this.plugin = plugin;
+    }
+
+    @Override
+    public String getPromptText(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageListEmpty"));
+    }
+
+    @Override
+    protected Prompt getNextPrompt(ConversationContext conversationContext) {
+        conversationContext.getForWhom().acceptConversationInput(plugin.getLanguage().getMessage("termExit"));
+        return null;
+    }
 }

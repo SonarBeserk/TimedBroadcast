@@ -5,7 +5,6 @@
  *  Copyright (C) 2012-2014 by SonarBeserk
  * http://dev.bukkit.org/bukkit-plugins/timedbroadcast/
  * *********************************************************************************************************************
- * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -15,7 +14,6 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
  * *********************************************************************************************************************
  * Please refer to LICENSE for the full license. If it is not there, see <http://www.gnu.org/licenses/>.
  * *********************************************************************************************************************
@@ -27,6 +25,9 @@ import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder.MessageBuilderAbandonedListener;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder.MessageBuilderPrefix;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts.AddingMessageStartPrompt;
+import me.sonarbeserk.timedbroadcast.conversations.messageremoval.messagebuilder.MessageRemoverAbandonedListener;
+import me.sonarbeserk.timedbroadcast.conversations.messageremoval.messagebuilder.MessageRemoverPrefix;
+import me.sonarbeserk.timedbroadcast.conversations.messageremoval.prompts.RemoveMessageStartPrompt;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -70,6 +71,11 @@ public class MainCmd implements CommandExecutor {
                 return true;
             }
 
+            if (args[0].equalsIgnoreCase("remove")) {
+                removeSubCommand(sender);
+                return true;
+            }
+
             if (sender instanceof Player) {
                 plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usageMain").replace("{name}", plugin.getDescription().getName()));
                 return true;
@@ -104,6 +110,7 @@ public class MainCmd implements CommandExecutor {
         }
 
         plugin.getLanguage().reload();
+        plugin.getData().reload();
         plugin.reloadConfig();
 
         if (sender instanceof Player) {
@@ -134,6 +141,28 @@ public class MainCmd implements CommandExecutor {
         ConversationFactory conversationFactory = new ConversationFactory(plugin);
 
         Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageBuilderPrefix(plugin)).withFirstPrompt(new AddingMessageStartPrompt(plugin)).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageAddition")).addConversationAbandonedListener(new MessageBuilderAbandonedListener(plugin)).buildConversation((Conversable) sender);
+        conversation.begin();
+    }
+
+    private void removeSubCommand(CommandSender sender) {
+        if (!(sender instanceof Player)) {
+            plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("commandPlayerRequired"));
+            return;
+        }
+
+        if (!sender.hasPermission(plugin.getPermissionPrefix() + ".commands.remove")) {
+            if (sender instanceof Player) {
+                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
+                return;
+            } else {
+                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("noPermission"));
+                return;
+            }
+        }
+
+        ConversationFactory conversationFactory = new ConversationFactory(plugin);
+
+        Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageRemoverPrefix(plugin)).withFirstPrompt(new RemoveMessageStartPrompt(plugin)).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageRemoval")).addConversationAbandonedListener(new MessageRemoverAbandonedListener(plugin)).buildConversation((Conversable) sender);
         conversation.begin();
     }
 }

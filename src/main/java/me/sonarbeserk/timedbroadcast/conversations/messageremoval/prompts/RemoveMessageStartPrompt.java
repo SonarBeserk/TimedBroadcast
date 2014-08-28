@@ -19,8 +19,33 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.enums;
+package me.sonarbeserk.timedbroadcast.conversations.messageremoval.prompts;
 
-public enum TimeUnit {
-    SECOND, MINUTE
+import me.sonarbeserk.timedbroadcast.TimedBroadcast;
+import me.sonarbeserk.timedbroadcast.conversations.generic.prompts.NoMessagesPrompt;
+import org.bukkit.ChatColor;
+import org.bukkit.conversations.ConversationContext;
+import org.bukkit.conversations.MessagePrompt;
+import org.bukkit.conversations.Prompt;
+
+public class RemoveMessageStartPrompt extends MessagePrompt {
+    private TimedBroadcast plugin = null;
+
+    public RemoveMessageStartPrompt(TimedBroadcast plugin) {
+        this.plugin = plugin;
+    }
+
+    @Override
+    public String getPromptText(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageRemovalStart").replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
+    }
+
+    @Override
+    protected Prompt getNextPrompt(ConversationContext conversationContext) {
+        if (plugin.getMessages().size() == 0) {
+            return new NoMessagesPrompt(plugin);
+        }
+
+        return new ChooseMessagePrompt(plugin);
+    }
 }
