@@ -40,7 +40,8 @@ outOfDateConfig: "&cThe version of the config file being run is out of date! Ple
 
 # Message to send when the language file being run is out of date
 outOfDateLanguage: "&cThe version of the language file being run is out of date! Please delete the file and reload the plugin to generate the new version! (Backup the old version first!)"
-# Display Name
+
+# Terms
 
 # Term used for exiting message creation
 termExit: "Cancel"
