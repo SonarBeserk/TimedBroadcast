@@ -76,6 +76,16 @@ public class MainCmd implements CommandExecutor {
                 return true;
             }
 
+            if (args[0].equalsIgnoreCase("stop")) {
+                stopSubCommand(sender);
+                return true;
+            }
+
+            if (args[0].equalsIgnoreCase("start")) {
+                startSubCommand(sender);
+                return true;
+            }
+
             if (sender instanceof Player) {
                 plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usageMain").replace("{name}", plugin.getDescription().getName()));
                 return true;
@@ -164,5 +174,69 @@ public class MainCmd implements CommandExecutor {
 
         Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageRemoverPrefix(plugin)).withFirstPrompt(new RemoveMessageStartPrompt(plugin)).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageRemoval")).addConversationAbandonedListener(new MessageRemoverAbandonedListener(plugin)).buildConversation((Conversable) sender);
         conversation.begin();
+    }
+
+    private void stopSubCommand(CommandSender sender) {
+        if (!sender.hasPermission(plugin.getPermissionPrefix() + ".commands.stop")) {
+            if (sender instanceof Player) {
+                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
+                return;
+            } else {
+                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("noPermission"));
+                return;
+            }
+        }
+
+        if(plugin.shouldBroadcast()) {
+            plugin.shouldBroadcast(false);
+
+            if (sender instanceof Player) {
+                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("broadcastsStopped"));
+                return;
+            } else {
+                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("broadcastsStopped"));
+                return;
+            }
+        } else {
+            if (sender instanceof Player) {
+                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("broadcastsAlreadyStopped"));
+                return;
+            } else {
+                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("broadcastsAlreadyStopped"));
+                return;
+            }
+        }
+    }
+
+    private void startSubCommand(CommandSender sender) {
+        if (!sender.hasPermission(plugin.getPermissionPrefix() + ".commands.start")) {
+            if (sender instanceof Player) {
+                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
+                return;
+            } else {
+                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("noPermission"));
+                return;
+            }
+        }
+
+        if(!plugin.shouldBroadcast()) {
+            plugin.shouldBroadcast(true);
+
+            if (sender instanceof Player) {
+                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("broadcastsStarted"));
+                return;
+            } else {
+                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("broadcastsStarted"));
+                return;
+            }
+        } else {
+            if (sender instanceof Player) {
+                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("broadcastsAlreadyStarted"));
+                return;
+            } else {
+                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("broadcastsAlreadyStarted"));
+                return;
+            }
+        }
     }
 }

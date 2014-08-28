@@ -17,7 +17,7 @@ commandPlayerRequired: "You must be a player to use this command!"
 # Usage
 
 # Usage for the plugin master command | {name} - the name of the plugin
-usageMain: "&7Subcommands: \n reload - reloads the all the plugin's files \n add - guides you through adding a new message for broadcasting \n remove - guides you through removing a message"
+usageMain: "&7Subcommands: \n reload - reloads the all the plugin's files \n add - guides you through adding a new message for broadcasting \n remove - guides you through removing a message \n stop - stops broadcasts \n start - starts broadcasts"
 
 # Missing Version
 
@@ -118,3 +118,17 @@ promptChooseMessage: "&7There are &b{count} &7messages. Please enter an id betwe
 
 # The message used when the list of messages is empty
 promptMessageListEmpty: "&cThere are no messages to list!"
+
+# Broadcasts
+
+# The message to use when broadcasts have been stopped
+broadcastsStopped: "&2Broadcasts have been stopped!"
+
+# The message to send when broadcasts are not running
+broadcastsAlreadyStopped: "&cBroadcasts are not running!"
+
+# The message to use when broadcasts have been started
+broadcastsStarted: "&2Broadcasts have been started!"
+
+# The message to send when broadcasts have already been started
+broadcastsAlreadyStarted: "&cBroadcasts are already running!"
