@@ -75,11 +75,11 @@ termSecond: "Second"
 # Term used for minutes
 termMinute: "Minute"
 
-# Term used for global
+# Term used for globally
 termGlobally: "Globally"
 
-# Term used for local
-termWorld: "In a world"
+# Term used for world
+termWorld: "World"
 
 # Term used for none
 termNone: "None"
