@@ -41,6 +41,17 @@ outOfDateConfig: "&cThe version of the config file being run is out of date! Ple
 # Message to send when the language file being run is out of date
 outOfDateLanguage: "&cThe version of the language file being run is out of date! Please delete the file and reload the plugin to generate the new version! (Backup the old version first!)"
 
+# Vault
+
+# Message to send when Vault was successfully hooked
+vaultHooked: "Vault has been found and hooked!"
+
+# Message to send when Vault was not found or was not enabled
+vaultHookFailed: "Vault was not found or was not enabled! Vault based features will not function properly!"
+
+# Message to send when Vault when hooked but no hooked permission plugin was found
+vaultNoPermissionPlugin: "Vault has been hooked but no permission plugin has been found! Group based features will not work!"
+
 # Terms
 
 # Term used for exiting message creation

@@ -28,10 +28,14 @@ import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
 import me.sonarbeserk.timedbroadcast.tasks.MinuteTask;
 import me.sonarbeserk.timedbroadcast.tasks.SecondTask;
 import me.sonarbeserk.timedbroadcast.wrapper.Message;
+import net.milkbowl.vault.permission.Permission;
+import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.ArrayList;
 
 public class TimedBroadcast extends JavaPlugin {
+    public static Permission permission = null;
+
     private ArrayList<Message> messages = null;
 
     private SecondTask secondTask = null;
@@ -42,6 +46,18 @@ public class TimedBroadcast extends JavaPlugin {
 
     public void onEnable() {
         super.onEnable();
+
+        if(getServer().getPluginManager().getPlugin("Vault") != null && getServer().getPluginManager().getPlugin("Vault").isEnabled()) {
+            setupPermissions();
+
+            if(permission != null) {
+                getLogger().info(getLanguage().getMessage("vaultHooked"));
+            } else {
+                getLogger().warning(getLanguage().getMessage("vaultNoPermissionPlugin"));
+            }
+        } else {
+            getLogger().warning(getLanguage().getMessage("vaultHookFailed"));
+        }
 
         getCommand(getName().toLowerCase()).setExecutor(new MainCmd(this));
 
@@ -103,6 +119,16 @@ public class TimedBroadcast extends JavaPlugin {
     @Override
     public String getPermissionPrefix() {
         return getName().toLowerCase();
+    }
+
+    private boolean setupPermissions() {
+        RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.permission.Permission.class);
+
+        if (permissionProvider != null) {
+            permission = permissionProvider.getProvider();
+        }
+
+        return (permission != null);
     }
 
     /**
