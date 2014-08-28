@@ -50,7 +50,7 @@ public class TimedBroadcast extends JavaPlugin {
         messages = new ArrayList<Message>();
 
         if(getData().get("broadcastsEnabled") != null) {
-            broadcast = Boolean.getBoolean(String.valueOf(getData().get("broadcastsEnabled")));
+            broadcast = Boolean.parseBoolean(String.valueOf(getData().get("broadcastsEnabled")));
         }
 
         if(getData().getConfigurationSection("messages") != null) {
@@ -152,7 +152,7 @@ public class TimedBroadcast extends JavaPlugin {
 
         minuteTask.cancel();
 
-        getData().set("broadcastsEnabled", broadcast);
+        getData().set("broadcastsEnabled", String.valueOf(broadcast));
 
         for(int i = 0; i < getMessages().size(); i++) {
             if(getMessages().get(i).getLocation() == MessageLocation.GLOBALLY) {
