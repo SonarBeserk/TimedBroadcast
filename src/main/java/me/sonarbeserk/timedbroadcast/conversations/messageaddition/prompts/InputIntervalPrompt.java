@@ -42,6 +42,6 @@ public class InputIntervalPrompt extends NumericPrompt {
     @Override
     protected Prompt acceptValidatedInput(ConversationContext conversationContext, Number number) {
         conversationContext.setSessionData("interval", number);
-        return new ChooseMessageLocationPrompt(plugin);
+        return new RestrictedToWorldPrompt(plugin);
     }
 }

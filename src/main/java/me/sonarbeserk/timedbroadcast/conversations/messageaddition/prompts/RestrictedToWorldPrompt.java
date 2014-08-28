@@ -22,32 +22,33 @@
 package me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
+import me.sonarbeserk.timedbroadcast.conversations.messageremoval.prompts.ConfirmRemovalPrompt;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.FixedSetPrompt;
 import org.bukkit.conversations.Prompt;
 
-public class ChooseMessageLocationPrompt extends FixedSetPrompt {
+public class RestrictedToWorldPrompt extends FixedSetPrompt {
     private TimedBroadcast plugin = null;
 
-    public ChooseMessageLocationPrompt(TimedBroadcast plugin) {
-        super(plugin.getLanguage().getMessage("termGlobally"), plugin.getLanguage().getMessage("termWorld"));
+    public RestrictedToWorldPrompt(TimedBroadcast plugin) {
+        super(plugin.getLanguage().getMessage("termYes"), plugin.getLanguage().getMessage("termNo"));
         this.plugin = plugin;
     }
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptWhere")) + " " + formatFixedSet();
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptWorldRestricted")) + " " + formatFixedSet();
     }
 
     @Override
     protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
-        conversationContext.setSessionData("where", s);
-
-        if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
-            return new ConfirmSettingsPrompt(plugin);
-        } else if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termWorld"))) {
+        if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termYes"))) {
+            conversationContext.setSessionData("where", plugin.getLanguage().getMessage("termGlobally"));
             return new ChooseWorldPompt(plugin);
+        } else if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termNo"))) {
+            conversationContext.setSessionData("where", plugin.getLanguage().getMessage("termWorld"));
+            return new ConfirmRemovalPrompt(plugin);
         }
 
         return null;
