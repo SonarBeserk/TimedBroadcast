@@ -17,3 +17,11 @@ permissions:
   ${project.name}.commands.reload:
     description: "Allows use of the reload subcommand"
     default: op
+
+  ${project.name}.commands.add:
+    description: "Allows use of the add subcommand"
+    default: op
+
+  ${project.name}.commands.remove:
+    description: "Allows use of the remove subcommand"
+    default: op
