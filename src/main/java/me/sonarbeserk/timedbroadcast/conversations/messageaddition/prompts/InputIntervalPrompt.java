@@ -37,13 +37,13 @@ public class InputIntervalPrompt extends NumericPrompt {
     }
 
     @Override
-    protected Prompt acceptValidatedInput(ConversationContext conversationContext, Number number) {
-        conversationContext.setSessionData("interval", number);
-        return new ChooseMessageLocationPrompt(plugin);
+    public String getPromptText(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptInterval").replace("{unit}", String.valueOf(conversationContext.getSessionData("unit"))));
     }
 
     @Override
-    public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptInterval").replace("{unit}", String.valueOf(conversationContext.getSessionData("unit"))));
+    protected Prompt acceptValidatedInput(ConversationContext conversationContext, Number number) {
+        conversationContext.setSessionData("interval", number);
+        return new ChooseMessageLocationPrompt(plugin);
     }
 }

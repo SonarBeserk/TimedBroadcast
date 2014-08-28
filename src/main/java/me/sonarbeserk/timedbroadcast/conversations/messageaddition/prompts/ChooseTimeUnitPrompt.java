@@ -40,14 +40,15 @@ public class ChooseTimeUnitPrompt extends FixedSetPrompt {
     }
 
     @Override
+    public String getPromptText(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptTimeUnit")) + " " + formatFixedSet();
+    }
+
+
+    @Override
     protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
         conversationContext.setSessionData("unit", s);
 
         return new InputIntervalPrompt(plugin);
-    }
-
-    @Override
-    public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptTimeUnit")) + " " + formatFixedSet();
     }
 }

@@ -38,6 +38,11 @@ public class ChooseMessageLocationPrompt extends FixedSetPrompt {
     }
 
     @Override
+    public String getPromptText(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptWhere")) + " " + formatFixedSet();
+    }
+
+    @Override
     protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
         conversationContext.setSessionData("where", s);
 
@@ -48,10 +53,5 @@ public class ChooseMessageLocationPrompt extends FixedSetPrompt {
         }
 
         return null;
-    }
-
-    @Override
-    public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptWhere")) + " " + formatFixedSet();
     }
 }

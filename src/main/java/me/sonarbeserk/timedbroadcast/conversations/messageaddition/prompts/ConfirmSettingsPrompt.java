@@ -39,11 +39,6 @@ public class ConfirmSettingsPrompt extends FixedSetPrompt {
     }
 
     @Override
-    protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
-        return Prompt.END_OF_CONVERSATION;
-    }
-
-    @Override
     public String getPromptText(ConversationContext conversationContext) {
         if (String.valueOf(conversationContext.getSessionData("where")).equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
             return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptConfirm")
@@ -60,5 +55,10 @@ public class ConfirmSettingsPrompt extends FixedSetPrompt {
                     .replace("{world}", String.valueOf(conversationContext.getSessionData("world")))
                     + formatFixedSet());
         }
+    }
+
+    @Override
+    protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
+        return Prompt.END_OF_CONVERSATION;
     }
 }
