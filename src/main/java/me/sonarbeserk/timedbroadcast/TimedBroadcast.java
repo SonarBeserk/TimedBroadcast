@@ -21,7 +21,7 @@
 
 package me.sonarbeserk.timedbroadcast;
 
-import me.sonarbeserk.beserkcore.plugin.JavaPlugin;
+import me.sonarbeserk.beserkcore.plugin.UpdatingJavaPlugin;
 import me.sonarbeserk.timedbroadcast.commands.MainCmd;
 import me.sonarbeserk.timedbroadcast.enums.MessageLocation;
 import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
@@ -33,7 +33,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.ArrayList;
 
-public class TimedBroadcast extends JavaPlugin {
+public class TimedBroadcast extends UpdatingJavaPlugin {
     public static Permission permission = null;
 
     private ArrayList<Message> messages = null;
@@ -104,6 +104,11 @@ public class TimedBroadcast extends JavaPlugin {
 
         minuteTask = new MinuteTask(this);
         minuteTask.runTaskTimer(this, 0, 1200);
+    }
+
+    @Override
+    public int getProjectID() {
+        return 0; // Replace at distribution time;
     }
 
     @Override
