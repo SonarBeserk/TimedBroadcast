@@ -108,7 +108,7 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
 
     @Override
     public int getProjectID() {
-        return 0; // Replace at distribution time;
+        return 0; // Replace at distribution
     }
 
     @Override
