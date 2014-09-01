@@ -48,7 +48,7 @@ public class RestrictedToWorldPrompt extends FixedSetPrompt {
             return new ChooseWorldPompt(plugin);
         } else if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termNo"))) {
             conversationContext.setSessionData("where", plugin.getLanguage().getMessage("termWorld"));
-            return new ConfirmRemovalPrompt(plugin);
+            return new ConfirmSettingsPrompt(plugin);
         }
 
         return null;
