@@ -24,29 +24,45 @@ package me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts;
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
-import org.bukkit.conversations.FixedSetPrompt;
 import org.bukkit.conversations.Prompt;
+import org.bukkit.conversations.StringPrompt;
 
 
-public class ChooseTimeUnitPrompt extends FixedSetPrompt {
+public class ChooseTimeUnitPrompt extends StringPrompt {
     private TimedBroadcast plugin = null;
 
     public ChooseTimeUnitPrompt(TimedBroadcast plugin) {
-        super(plugin.getLanguage().getMessage("termSecond"), plugin.getLanguage().getMessage("termMinute"));
-
         this.plugin = plugin;
     }
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptTimeUnit")) + " " + formatFixedSet();
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptTimeUnit")
+                        .replace("{termSecond}", plugin.getLanguage().getMessage("termSecond"))
+                        .replace("{termMinute}", plugin.getLanguage().getMessage("termMinute"))
+        );
     }
 
-
     @Override
-    protected Prompt acceptValidatedInput(ConversationContext conversationContext, String s) {
-        conversationContext.setSessionData("unit", s);
+    public Prompt acceptInput(ConversationContext conversationContext, String s) {
+        if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termSecond")) || s.equalsIgnoreCase(String.valueOf(plugin.getLanguage().getMessage("termSecond").toCharArray()[0]))) {
+            conversationContext.setSessionData("unit", plugin.getLanguage().getMessage("termSecond"));
 
-        return new InputIntervalPrompt(plugin);
+            if (Boolean.parseBoolean(String.valueOf(conversationContext.getSessionData("correctionMode")))) {
+                return new DetailsCorrectPrompt(plugin);
+            }
+
+            return new InputIntervalPrompt(plugin);
+        } else if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termMinute")) || s.equalsIgnoreCase(String.valueOf(plugin.getLanguage().getMessage("termMinute").toCharArray()[0]))) {
+            conversationContext.setSessionData("unit", plugin.getLanguage().getMessage("termMinute"));
+
+            if (Boolean.parseBoolean(String.valueOf(conversationContext.getSessionData("correctionMode")))) {
+                return new DetailsCorrectPrompt(plugin);
+            }
+
+            return new InputIntervalPrompt(plugin);
+        }
+
+        return this;
     }
 }

@@ -47,10 +47,10 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
     public void onEnable() {
         super.onEnable();
 
-        if(getServer().getPluginManager().getPlugin("Vault") != null && getServer().getPluginManager().getPlugin("Vault").isEnabled()) {
+        if (getServer().getPluginManager().getPlugin("Vault") != null && getServer().getPluginManager().getPlugin("Vault").isEnabled()) {
             setupPermissions();
 
-            if(permission != null) {
+            if (permission != null) {
                 getLogger().info(getLanguage().getMessage("vaultHooked"));
             } else {
                 getLogger().warning(getLanguage().getMessage("vaultNoPermissionPlugin"));

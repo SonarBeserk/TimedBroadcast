@@ -53,12 +53,14 @@ public class ChooseWorldPompt extends StringPrompt {
 
     @Override
     public Prompt acceptInput(ConversationContext conversationContext, String s) {
-        if (!worldNames.contains(s)) {
-            return new ChooseWorldPompt(plugin);
+        for (String worldName : worldNames) {
+            if (s.equalsIgnoreCase(worldName)) {
+                conversationContext.setSessionData("world", s);
+
+                return new DetailsCorrectPrompt(plugin);
+            }
         }
 
-        conversationContext.setSessionData("world", s);
-
-        return new ConfirmSettingsPrompt(plugin);
+        return this;
     }
 }

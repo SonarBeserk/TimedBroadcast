@@ -42,6 +42,11 @@ public class InputMessagePrompt extends StringPrompt {
     @Override
     public Prompt acceptInput(ConversationContext conversationContext, String s) {
         conversationContext.setSessionData("message", s.replace("{n}", "\n"));
+
+        if (Boolean.parseBoolean(String.valueOf(conversationContext.getSessionData("correctionMode")))) {
+            return new DetailsCorrectPrompt(plugin);
+        }
+
         return new ChooseTimeUnitPrompt(plugin);
     }
 }

@@ -217,7 +217,7 @@ public class MainCmd implements CommandExecutor {
             }
         }
 
-        if(plugin.shouldBroadcast()) {
+        if (plugin.shouldBroadcast()) {
             plugin.shouldBroadcast(false);
 
             if (sender instanceof Player) {
@@ -249,7 +249,7 @@ public class MainCmd implements CommandExecutor {
             }
         }
 
-        if(!plugin.shouldBroadcast()) {
+        if (!plugin.shouldBroadcast()) {
             plugin.shouldBroadcast(true);
 
             if (sender instanceof Player) {

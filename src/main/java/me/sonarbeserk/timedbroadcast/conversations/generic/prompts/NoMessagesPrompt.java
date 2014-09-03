@@ -41,6 +41,7 @@ public class NoMessagesPrompt extends MessagePrompt {
 
     @Override
     protected Prompt getNextPrompt(ConversationContext conversationContext) {
+        conversationContext.setSessionData("noMessages", "true");
         conversationContext.getForWhom().acceptConversationInput(plugin.getLanguage().getMessage("termExit"));
         return null;
     }
