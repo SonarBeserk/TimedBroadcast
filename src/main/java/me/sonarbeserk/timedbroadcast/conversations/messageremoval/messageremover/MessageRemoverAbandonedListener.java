@@ -36,6 +36,10 @@ public class MessageRemoverAbandonedListener implements ConversationAbandonedLis
 
     @Override
     public void conversationAbandoned(ConversationAbandonedEvent conversationAbandonedEvent) {
+        if (conversationAbandonedEvent.getContext().getSessionData("noMessages") != null) {
+            return;
+        }
+
         String prefix = plugin.getLanguage().getMessage("messageRemoverPrefix");
 
         if (conversationAbandonedEvent.gracefulExit()) {
