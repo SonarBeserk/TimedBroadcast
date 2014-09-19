@@ -52,6 +52,6 @@ public class ChooseMessagePrompt extends NumericPrompt {
 
         conversationContext.setSessionData("messageID", number.intValue());
 
-        return new ConfirmRemovalPrompt(plugin);
+        return new MessageDetailsPrompt(plugin);
     }
 }
