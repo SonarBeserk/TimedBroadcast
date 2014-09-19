@@ -31,39 +31,34 @@ import org.bukkit.conversations.StringPrompt;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ChooseWorldPrompt extends StringPrompt {
+public class ChooseGroupPrompt extends StringPrompt {
     private TimedBroadcast plugin = null;
 
-    private ArrayList<String> worldNames = null;
+    private ArrayList<String> groupNames = null;
 
-    public ChooseWorldPrompt(TimedBroadcast plugin) {
+    public ChooseGroupPrompt(TimedBroadcast plugin) {
         this.plugin = plugin;
 
-        worldNames = new ArrayList<String>();
+        groupNames = new ArrayList<String>();
 
-        for (World world : plugin.getServer().getWorlds()) {
-            worldNames.add(world.getName());
+        for (String groupName: plugin.getPermissions().getGroups()) {
+            groupNames.add(groupName);
         }
     }
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptWorld")
-                .replace("{worlds}", Arrays.toString(worldNames.toArray())));
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptGroup")
+                .replace("{groups}", Arrays.toString(groupNames.toArray())));
     }
 
     @Override
     public Prompt acceptInput(ConversationContext conversationContext, String s) {
-        for (String worldName : worldNames) {
+        for (String worldName : groupNames) {
             if (s.equalsIgnoreCase(worldName)) {
-                conversationContext.setSessionData("world", s);
+                conversationContext.setSessionData("group", s);
 
-                if(plugin.getPermissions() != null) {
-                    return new RestrictedToGroupPrompt(plugin);
-                } else {
-                    conversationContext.setSessionData("group", plugin.getLanguage().getMessage("termNo"));
-                    return new DetailsCorrectPrompt(plugin);
-                }
+                return new DetailsCorrectPrompt(plugin);
             }
         }
 

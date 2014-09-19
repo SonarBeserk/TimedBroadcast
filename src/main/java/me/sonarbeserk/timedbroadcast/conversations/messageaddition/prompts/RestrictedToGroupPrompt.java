@@ -23,48 +23,31 @@ package me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
-import org.bukkit.World;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
 import org.bukkit.conversations.StringPrompt;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-public class ChooseWorldPrompt extends StringPrompt {
+public class RestrictedToGroupPrompt extends StringPrompt {
     private TimedBroadcast plugin = null;
 
-    private ArrayList<String> worldNames = null;
-
-    public ChooseWorldPrompt(TimedBroadcast plugin) {
+    public RestrictedToGroupPrompt(TimedBroadcast plugin) {
         this.plugin = plugin;
-
-        worldNames = new ArrayList<String>();
-
-        for (World world : plugin.getServer().getWorlds()) {
-            worldNames.add(world.getName());
-        }
     }
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptWorld")
-                .replace("{worlds}", Arrays.toString(worldNames.toArray())));
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptGroupRestricted")
+                        .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
+                        .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
+        );
     }
 
     @Override
     public Prompt acceptInput(ConversationContext conversationContext, String s) {
-        for (String worldName : worldNames) {
-            if (s.equalsIgnoreCase(worldName)) {
-                conversationContext.setSessionData("world", s);
-
-                if(plugin.getPermissions() != null) {
-                    return new RestrictedToGroupPrompt(plugin);
-                } else {
-                    conversationContext.setSessionData("group", plugin.getLanguage().getMessage("termNo"));
-                    return new DetailsCorrectPrompt(plugin);
-                }
-            }
+        if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termYes")) || s.equalsIgnoreCase(String.valueOf(plugin.getLanguage().getMessage("termYes").toCharArray()[0]))) {
+            return new ChooseGroupPrompt(plugin);
+        } else if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termNo")) || s.equalsIgnoreCase(String.valueOf(plugin.getLanguage().getMessage("termNo").toCharArray()[0]))) {
+            return new DetailsCorrectPrompt(plugin);
         }
 
         return this;
