@@ -19,7 +19,7 @@
  * *********************************************************************************************************************
  */
 
-package me.sonarbeserk.timedbroadcast.conversations.generic.prompts;
+package me.sonarbeserk.timedbroadcast.conversations.generic;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts.ChooseTimeUnitPrompt;

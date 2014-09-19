@@ -22,7 +22,7 @@
 package me.sonarbeserk.timedbroadcast.conversations.messageremoval.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
-import me.sonarbeserk.timedbroadcast.conversations.generic.prompts.NoMessagesPrompt;
+import me.sonarbeserk.timedbroadcast.conversations.generic.NoMessagesPrompt;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.MessagePrompt;

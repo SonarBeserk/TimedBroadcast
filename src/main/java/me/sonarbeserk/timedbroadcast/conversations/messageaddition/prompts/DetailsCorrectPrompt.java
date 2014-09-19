@@ -22,7 +22,7 @@
 package me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
-import me.sonarbeserk.timedbroadcast.conversations.generic.prompts.EditDetailsPrompt;
+import me.sonarbeserk.timedbroadcast.conversations.generic.EditDetailsPrompt;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
