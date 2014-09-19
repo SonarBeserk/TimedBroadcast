@@ -37,25 +37,31 @@ public class DetailsCorrectPrompt extends StringPrompt {
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        if (String.valueOf(conversationContext.getSessionData("where")).equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
-            return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptDetailsCorrect")
-                            .replace("{message}", String.valueOf(conversationContext.getSessionData("message")))
-                            .replace("{interval}", String.valueOf(conversationContext.getSessionData("interval")))
-                            .replace("{unit}", String.valueOf(conversationContext.getSessionData("unit")))
-                            .replace("{world}", plugin.getLanguage().getMessage("termNone"))
-                            .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
-                            .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
-            );
+        return ChatColor.translateAlternateColorCodes('&', replaceRestrictions(plugin.getLanguage().getMessage("promptDetailsCorrect"), conversationContext)
+                        .replace("{message}", String.valueOf(conversationContext.getSessionData("message")))
+                        .replace("{interval}", String.valueOf(conversationContext.getSessionData("interval")))
+                        .replace("{unit}", String.valueOf(conversationContext.getSessionData("unit")))
+                        .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
+                        .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
+        );
+    }
+
+    private String replaceRestrictions(String input, ConversationContext context) {
+        String newString = input;
+
+        if(context.getSessionData("world") == null) {
+            newString = newString.replace("{world}", plugin.getLanguage().getMessage("termNo"));
         } else {
-            return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptDetailsCorrect")
-                            .replace("{message}", String.valueOf(conversationContext.getSessionData("message")))
-                            .replace("{interval}", String.valueOf(conversationContext.getSessionData("interval")))
-                            .replace("{unit}", String.valueOf(conversationContext.getSessionData("unit")))
-                            .replace("{world}", String.valueOf(conversationContext.getSessionData("world")))
-                            .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
-                            .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
-            );
+            newString = newString.replace("{world", String.valueOf(context.getSessionData("world")));
         }
+
+        if(context.getSessionData("group") == null) {
+            newString = newString.replace("{group}", plugin.getLanguage().getMessage("termNo"));
+        } else {
+            newString = newString.replace("{group}", String.valueOf(context.getSessionData("group")));
+        }
+
+        return newString;
     }
 
     @Override

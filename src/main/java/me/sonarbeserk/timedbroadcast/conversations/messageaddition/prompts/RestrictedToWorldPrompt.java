@@ -45,10 +45,8 @@ public class RestrictedToWorldPrompt extends StringPrompt {
     @Override
     public Prompt acceptInput(ConversationContext conversationContext, String s) {
         if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termYes")) || s.equalsIgnoreCase(String.valueOf(plugin.getLanguage().getMessage("termYes").toCharArray()[0]))) {
-            conversationContext.setSessionData("where", plugin.getLanguage().getMessage("termWorld"));
-            return new ChooseWorldPompt(plugin);
+            return new ChooseWorldPrompt(plugin);
         } else if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termNo")) || s.equalsIgnoreCase(String.valueOf(plugin.getLanguage().getMessage("termNo").toCharArray()[0]))) {
-            conversationContext.setSessionData("where", plugin.getLanguage().getMessage("termGlobally"));
             return new DetailsCorrectPrompt(plugin);
         }
 
