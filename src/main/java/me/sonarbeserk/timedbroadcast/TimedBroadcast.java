@@ -33,7 +33,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import java.util.ArrayList;
 
 public class TimedBroadcast extends UpdatingJavaPlugin {
-    public static Permission permission = null;
+    private Permission permission = null;
 
     private ArrayList<Message> messages = null;
 
@@ -136,6 +136,14 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
     }
 
     /**
+     * Returns the permission instance
+     * @return the permission instance
+     */
+    public Permission getPermissions() {
+        return permission;
+    }
+
+    /**
      * Returns if the server should broadcast messages
      *
      * @return if the server should broadcast messages
@@ -204,8 +212,10 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
             }
         }
 
+        super.onDisable();
+
         messages = null;
 
-        super.onDisable();
+        permission = null;
     }
 }
