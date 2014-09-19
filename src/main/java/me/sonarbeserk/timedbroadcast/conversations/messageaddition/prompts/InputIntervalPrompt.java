@@ -36,7 +36,8 @@ public class InputIntervalPrompt extends NumericPrompt {
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptInterval").replace("{unit}", String.valueOf(conversationContext.getSessionData("unit"))));
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptInterval")
+                .replace("{unit}", String.valueOf(conversationContext.getSessionData("unit"))));
     }
 
     @Override

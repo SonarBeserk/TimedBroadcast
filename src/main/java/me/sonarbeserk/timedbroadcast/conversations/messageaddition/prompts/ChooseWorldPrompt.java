@@ -31,12 +31,12 @@ import org.bukkit.conversations.StringPrompt;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ChooseWorldPompt extends StringPrompt {
+public class ChooseWorldPrompt extends StringPrompt {
     private TimedBroadcast plugin = null;
 
     private ArrayList<String> worldNames = null;
 
-    public ChooseWorldPompt(TimedBroadcast plugin) {
+    public ChooseWorldPrompt(TimedBroadcast plugin) {
         this.plugin = plugin;
 
         worldNames = new ArrayList<String>();
@@ -48,7 +48,8 @@ public class ChooseWorldPompt extends StringPrompt {
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptWorld").replace("{worlds}", Arrays.toString(worldNames.toArray())));
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptWorld")
+                .replace("{worlds}", Arrays.toString(worldNames.toArray())));
     }
 
     @Override

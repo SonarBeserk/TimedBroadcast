@@ -36,7 +36,8 @@ public class ChooseMessagePrompt extends NumericPrompt {
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptChooseMessage").replace("{count}", String.valueOf(plugin.getMessages().size())));
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptChooseMessage")
+                .replace("{count}", String.valueOf(plugin.getMessages().size())));
     }
 
     @Override

@@ -37,7 +37,8 @@ public class ListMessageStartPrompt extends MessagePrompt {
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageListStart").replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageListStart")
+                .replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
     }
 
     @Override

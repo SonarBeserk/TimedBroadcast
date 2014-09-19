@@ -37,7 +37,8 @@ public class RemoveMessageStartPrompt extends MessagePrompt {
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageRemovalStart").replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageRemovalStart")
+                .replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
     }
 
     @Override

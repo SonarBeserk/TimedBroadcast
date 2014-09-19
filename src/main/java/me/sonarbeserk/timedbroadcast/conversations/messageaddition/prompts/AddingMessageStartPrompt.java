@@ -36,7 +36,8 @@ public class AddingMessageStartPrompt extends MessagePrompt {
 
     @Override
     public String getPromptText(ConversationContext conversationContext) {
-        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageAddStart").replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageAddStart")
+                .replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
     }
 
     @Override
