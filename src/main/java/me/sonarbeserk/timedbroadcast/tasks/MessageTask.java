@@ -29,11 +29,15 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class SecondTask extends BukkitRunnable {
+public class MessageTask extends BukkitRunnable {
     private TimedBroadcast plugin = null;
 
-    public SecondTask(TimedBroadcast plugin) {
+    private TimeUnit timeUnit = null;
+
+    public MessageTask(TimedBroadcast plugin, TimeUnit timeUnit) {
         this.plugin = plugin;
+
+        this.timeUnit = timeUnit;
     }
 
     @Override
@@ -47,7 +51,7 @@ public class SecondTask extends BukkitRunnable {
                 return;
             }
 
-            if (message.getUnit() == TimeUnit.SECOND) {
+            if (message.getUnit() == timeUnit) {
                 if (message.getCounter() >= message.getInterval()) {
                     broadcastMessage(message);
 

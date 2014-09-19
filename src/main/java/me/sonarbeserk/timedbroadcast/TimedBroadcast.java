@@ -25,8 +25,7 @@ import me.sonarbeserk.beserkcore.plugin.UpdatingJavaPlugin;
 import me.sonarbeserk.timedbroadcast.commands.MainCmd;
 import me.sonarbeserk.timedbroadcast.enums.MessageLocation;
 import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
-import me.sonarbeserk.timedbroadcast.tasks.MinuteTask;
-import me.sonarbeserk.timedbroadcast.tasks.SecondTask;
+import me.sonarbeserk.timedbroadcast.tasks.MessageTask;
 import me.sonarbeserk.timedbroadcast.wrapper.Message;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -38,9 +37,9 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
 
     private ArrayList<Message> messages = null;
 
-    private SecondTask secondTask = null;
+    private MessageTask secondTask = null;
 
-    private MinuteTask minuteTask = null;
+    private MessageTask minuteTask = null;
 
     private boolean broadcast = true;
 
@@ -99,10 +98,10 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
             }
         }
 
-        secondTask = new SecondTask(this);
+        secondTask = new MessageTask(this, TimeUnit.SECOND);
         secondTask.runTaskTimer(this, 0, 20);
 
-        minuteTask = new MinuteTask(this);
+        minuteTask = new MessageTask(this, TimeUnit.MINUTE);
         minuteTask.runTaskTimer(this, 0, 1200);
     }
 
@@ -183,7 +182,6 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
 
     public void onDisable() {
         secondTask.cancel();
-
         minuteTask.cancel();
 
         getData().set("broadcastsEnabled", String.valueOf(broadcast));
