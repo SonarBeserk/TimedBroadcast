@@ -22,7 +22,6 @@
 package me.sonarbeserk.timedbroadcast.conversations.messageremoval.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
-import me.sonarbeserk.timedbroadcast.conversations.generic.NoMessagesPrompt;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.MessagePrompt;
@@ -43,10 +42,6 @@ public class RemoveMessageStartPrompt extends MessagePrompt {
 
     @Override
     protected Prompt getNextPrompt(ConversationContext conversationContext) {
-        if (plugin.getMessages().size() == 0) {
-            return new NoMessagesPrompt(plugin);
-        }
-
         return new ChooseMessagePrompt(plugin);
     }
 }

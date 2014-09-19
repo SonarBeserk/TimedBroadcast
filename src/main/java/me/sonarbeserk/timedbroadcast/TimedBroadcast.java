@@ -137,6 +137,7 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
 
     /**
      * Returns the permission instance
+     *
      * @return the permission instance
      */
     public Permission getPermissions() {

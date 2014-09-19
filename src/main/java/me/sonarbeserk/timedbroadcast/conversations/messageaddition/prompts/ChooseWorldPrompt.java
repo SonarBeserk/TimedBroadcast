@@ -58,7 +58,7 @@ public class ChooseWorldPrompt extends StringPrompt {
             if (s.equalsIgnoreCase(worldName)) {
                 conversationContext.setSessionData("world", s);
 
-                if(plugin.getPermissions() != null) {
+                if (plugin.getPermissions() != null) {
                     return new RestrictedToGroupPrompt(plugin);
                 } else {
                     conversationContext.setSessionData("group", plugin.getLanguage().getMessage("termNo"));

@@ -22,11 +22,10 @@
 package me.sonarbeserk.timedbroadcast.commands;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
+import me.sonarbeserk.timedbroadcast.conversations.generic.NoMessagesPrompt;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder.MessageBuilderAbandonedListener;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder.MessageBuilderPrefix;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts.AddingMessageStartPrompt;
-import me.sonarbeserk.timedbroadcast.conversations.messagelisting.messagelister.MessageListerAbandonedListener;
-import me.sonarbeserk.timedbroadcast.conversations.messagelisting.messagelister.MessageListerPrefix;
 import me.sonarbeserk.timedbroadcast.conversations.messagelisting.prompts.ListMessageStartPrompt;
 import me.sonarbeserk.timedbroadcast.conversations.messageremoval.messageremover.MessageRemoverAbandonedListener;
 import me.sonarbeserk.timedbroadcast.conversations.messageremoval.messageremover.MessageRemoverPrefix;
@@ -37,6 +36,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.conversations.Conversable;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationFactory;
+import org.bukkit.conversations.Prompt;
 import org.bukkit.entity.Player;
 
 public class MainCmd implements CommandExecutor {
@@ -180,7 +180,18 @@ public class MainCmd implements CommandExecutor {
 
         ConversationFactory conversationFactory = new ConversationFactory(plugin);
 
-        Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageListerPrefix(plugin)).withFirstPrompt(new ListMessageStartPrompt(plugin)).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageListing")).addConversationAbandonedListener(new MessageListerAbandonedListener(plugin)).buildConversation((Conversable) sender);
+        Prompt startPrompt = null;
+
+        switch (plugin.getMessages().size()) {
+            case 0:
+                startPrompt = new NoMessagesPrompt(plugin);
+                break;
+            default:
+                startPrompt = new ListMessageStartPrompt(plugin);
+                break;
+        }
+
+        Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageRemoverPrefix(plugin)).withFirstPrompt(startPrompt).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageRemoval")).addConversationAbandonedListener(new MessageRemoverAbandonedListener(plugin)).buildConversation((Conversable) sender);
         conversation.begin();
     }
 
@@ -202,7 +213,18 @@ public class MainCmd implements CommandExecutor {
 
         ConversationFactory conversationFactory = new ConversationFactory(plugin);
 
-        Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageRemoverPrefix(plugin)).withFirstPrompt(new RemoveMessageStartPrompt(plugin)).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageRemoval")).addConversationAbandonedListener(new MessageRemoverAbandonedListener(plugin)).buildConversation((Conversable) sender);
+        Prompt startPrompt = null;
+
+        switch (plugin.getMessages().size()) {
+            case 0:
+                startPrompt = new NoMessagesPrompt(plugin);
+                break;
+            default:
+                startPrompt = new RemoveMessageStartPrompt(plugin);
+                break;
+        }
+
+        Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageRemoverPrefix(plugin)).withFirstPrompt(startPrompt).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageRemoval")).addConversationAbandonedListener(new MessageRemoverAbandonedListener(plugin)).buildConversation((Conversable) sender);
         conversation.begin();
     }
 

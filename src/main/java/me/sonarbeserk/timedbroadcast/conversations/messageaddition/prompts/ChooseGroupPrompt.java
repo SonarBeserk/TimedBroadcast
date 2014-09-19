@@ -23,7 +23,6 @@ package me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import org.bukkit.ChatColor;
-import org.bukkit.World;
 import org.bukkit.conversations.ConversationContext;
 import org.bukkit.conversations.Prompt;
 import org.bukkit.conversations.StringPrompt;
@@ -41,7 +40,7 @@ public class ChooseGroupPrompt extends StringPrompt {
 
         groupNames = new ArrayList<String>();
 
-        for (String groupName: plugin.getPermissions().getGroups()) {
+        for (String groupName : plugin.getPermissions().getGroups()) {
             groupNames.add(groupName);
         }
     }
