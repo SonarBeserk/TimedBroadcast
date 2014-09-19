@@ -22,8 +22,6 @@
 package me.sonarbeserk.timedbroadcast.conversations.messagelisting.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
-import me.sonarbeserk.timedbroadcast.enums.MessageLocation;
-import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
 import me.sonarbeserk.timedbroadcast.wrapper.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
@@ -41,37 +39,36 @@ public class MessageDetailsPrompt extends StringPrompt {
     public String getPromptText(ConversationContext conversationContext) {
         Message message = plugin.getMessages().get(Integer.valueOf(String.valueOf(conversationContext.getSessionData("messageID"))) - 1);
 
-        if (message.getUnit() == TimeUnit.SECOND) {
-            return ChatColor.translateAlternateColorCodes('&', replaceRestrictions(plugin.getLanguage().getMessage("promptDetails"), conversationContext)
-                            .replace("{message}", message.getMessage())
-                            .replace("{interval}", String.valueOf(message.getInterval()))
-                            .replace("{unit}", plugin.getLanguage().getMessage("termSecond"))
-                            .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
-                            .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
-            );
-        } else if (message.getUnit() == TimeUnit.MINUTE) {
-            return ChatColor.translateAlternateColorCodes('&', replaceRestrictions(plugin.getLanguage().getMessage("promptDetails"), conversationContext)
-                            .replace("{message}", message.getMessage())
-                            .replace("{interval}", String.valueOf(message.getInterval()))
-                            .replace("{unit}", plugin.getLanguage().getMessage("termMinute"))
-                            .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
-                            .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
-            );
+        String timeUnit = null;
+
+        switch (message.getUnit()) {
+            case SECOND:
+                timeUnit = plugin.getLanguage().getMessage("termSecond");
+                break;
+            case MINUTE:
+                timeUnit = plugin.getLanguage().getMessage("termMinute");
+                break;
         }
 
-        return null;
+        return ChatColor.translateAlternateColorCodes('&', replaceRestrictions(plugin.getLanguage().getMessage("promptDetails"), conversationContext)
+                        .replace("{message}", message.getMessage())
+                        .replace("{interval}", String.valueOf(message.getInterval()))
+                        .replace("{unit}", timeUnit)
+                        .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
+                        .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
+        );
     }
 
     private String replaceRestrictions(String input, ConversationContext context) {
         String newString = input;
 
-        if(context.getSessionData("world") == null) {
+        if (context.getSessionData("world") == null) {
             newString = newString.replace("{world}", plugin.getLanguage().getMessage("termNo"));
         } else {
             newString = newString.replace("{world", String.valueOf(context.getSessionData("world")));
         }
 
-        if(context.getSessionData("group") == null) {
+        if (context.getSessionData("group") == null) {
             newString = newString.replace("{group}", plugin.getLanguage().getMessage("termNo"));
         } else {
             newString = newString.replace("{group}", String.valueOf(context.getSessionData("group")));

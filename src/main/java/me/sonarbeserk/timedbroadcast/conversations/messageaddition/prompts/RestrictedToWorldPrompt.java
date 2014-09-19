@@ -37,8 +37,8 @@ public class RestrictedToWorldPrompt extends StringPrompt {
     @Override
     public String getPromptText(ConversationContext conversationContext) {
         return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptWorldRestricted")
-                .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
-                .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
+                        .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
+                        .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
         );
     }
 

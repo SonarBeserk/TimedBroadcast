@@ -23,7 +23,6 @@ package me.sonarbeserk.timedbroadcast.conversations.messageremoval.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
 import me.sonarbeserk.timedbroadcast.enums.MessageLocation;
-import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
 import me.sonarbeserk.timedbroadcast.wrapper.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
@@ -41,53 +40,38 @@ public class RemoveMessagePrompt extends StringPrompt {
     public String getPromptText(ConversationContext conversationContext) {
         Message message = plugin.getMessages().get(Integer.valueOf(String.valueOf(conversationContext.getSessionData("messageID"))) - 1);
 
-        if (message.getLocation() == MessageLocation.GLOBALLY) {
-            if (message.getUnit() == TimeUnit.SECOND) {
-                return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptRemoveMessage")
-                                .replace("{message}", message.getMessage())
-                                .replace("{interval}", String.valueOf(message.getInterval()))
-                                .replace("{unit}", plugin.getLanguage().getMessage("termSecond"))
-                                .replace("{world}", plugin.getLanguage().getMessage("termNo"))
-                                .replace("{termBack}", plugin.getLanguage().getMessage("termBack"))
-                                .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
-                                .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
-                );
-            } else if (message.getUnit() == TimeUnit.MINUTE) {
-                return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptRemoveMessage")
-                                .replace("{message}", message.getMessage())
-                                .replace("{interval}", String.valueOf(message.getInterval()))
-                                .replace("{unit}", plugin.getLanguage().getMessage("termMinute"))
-                                .replace("{world}", plugin.getLanguage().getMessage("termNo"))
-                                .replace("{termBack}", plugin.getLanguage().getMessage("termBack"))
-                                .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
-                                .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
-                );
-            }
-        } else {
-            if (message.getUnit() == TimeUnit.SECOND) {
-                return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptRemoveMessage")
-                                .replace("{message}", message.getMessage())
-                                .replace("{interval}", String.valueOf(message.getInterval()))
-                                .replace("{unit}", plugin.getLanguage().getMessage("termSecond"))
-                                .replace("{world}", message.getWorldName())
-                                .replace("{termBack}", plugin.getLanguage().getMessage("termBack"))
-                                .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
-                                .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
-                );
-            } else if (message.getUnit() == TimeUnit.MINUTE) {
-                return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptRemoveMessage")
-                                .replace("{message}", message.getMessage())
-                                .replace("{interval}", String.valueOf(message.getInterval()))
-                                .replace("{unit}", plugin.getLanguage().getMessage("termMinute"))
-                                .replace("{world}", message.getWorldName())
-                                .replace("{termBack}", plugin.getLanguage().getMessage("termBack"))
-                                .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
-                                .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
-                );
-            }
+        String timeUnit = null;
+
+        switch (message.getUnit()) {
+            case SECOND:
+                timeUnit = plugin.getLanguage().getMessage("termSecond");
+                break;
+            case MINUTE:
+                timeUnit = plugin.getLanguage().getMessage("termMinute");
+                break;
         }
 
-        return null;
+        if (message.getLocation() == MessageLocation.GLOBALLY) {
+            return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptRemoveMessage")
+                            .replace("{message}", message.getMessage())
+                            .replace("{interval}", String.valueOf(message.getInterval()))
+                            .replace("{unit}", timeUnit)
+                            .replace("{world}", plugin.getLanguage().getMessage("termNo"))
+                            .replace("{termBack}", plugin.getLanguage().getMessage("termBack"))
+                            .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
+                            .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
+            );
+        } else {
+            return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptRemoveMessage")
+                            .replace("{message}", message.getMessage())
+                            .replace("{interval}", String.valueOf(message.getInterval()))
+                            .replace("{unit}", timeUnit)
+                            .replace("{world}", message.getWorldName())
+                            .replace("{termBack}", plugin.getLanguage().getMessage("termBack"))
+                            .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
+                            .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
+            );
+        }
     }
 
     @Override

@@ -49,13 +49,13 @@ public class DetailsCorrectPrompt extends StringPrompt {
     private String replaceRestrictions(String input, ConversationContext context) {
         String newString = input;
 
-        if(context.getSessionData("world") == null) {
+        if (context.getSessionData("world") == null) {
             newString = newString.replace("{world}", plugin.getLanguage().getMessage("termNo"));
         } else {
             newString = newString.replace("{world", String.valueOf(context.getSessionData("world")));
         }
 
-        if(context.getSessionData("group") == null) {
+        if (context.getSessionData("group") == null) {
             newString = newString.replace("{group}", plugin.getLanguage().getMessage("termNo"));
         } else {
             newString = newString.replace("{group}", String.valueOf(context.getSessionData("group")));
