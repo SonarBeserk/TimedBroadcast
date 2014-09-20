@@ -116,7 +116,7 @@ messageListingCancelled: "&cMessage listing has either been cancelled or timed o
 # Prompt
 
 # The message to use for initial prompt for creating a message | {termExit} - term used for exit
-promptMessageAddStart: "&7You are adding a new message, Enter &c{termExit} &7 at any time to exit."
+promptMessageAddStart: "&7You are adding a new message, Enter &c{termExit} &7at any time to exit."
 
 # The message used when asking what message should be used
 promptMessage: "&7What should the message say? (Enter '{n}' to make the message go down a line, Chat Colors are supported.)"
@@ -146,7 +146,7 @@ promptDetailsCorrect: "&7Message Details: \n Message: &b{message} \n &7Message I
 promptDetailsCorrection: "&7What message detail is wrong? \n &b[{termMessage}, {termInterval}, {termUnit}, {termRestrictions}]"
 
 # The message to use for initial prompt for creating a message | {termExit} - term used for exit
-promptMessageRemovalStart: "&7You are removing a message, Enter &c{termExit} &7 at any time to exit."
+promptMessageRemovalStart: "&7You are removing a message, Enter &c{termExit} &7at any time to exit."
 
 # The message to use when asking what message should be shown | {count} - the amount of messages
 promptChooseMessage: "&7There are &b{count} &7messages. Please enter an id between (1-{count}) to show the message."
@@ -155,7 +155,7 @@ promptChooseMessage: "&7There are &b{count} &7messages. Please enter an id betwe
 promptMessageListEmpty: "&cThere are no messages to list!"
 
 # The message to use for initial prompt for creating a message | {termExit} - term used for exit
-promptMessageListStart: "&7You are listing messages, Enter &c{termExit} &7 at any time to exit."
+promptMessageListStart: "&7You are listing messages, Enter &c{termExit} &7at any time to exit."
 
 # The message used to confirm settings | {message} - the message for the message | {interval} - the interval between messages | {unit} - the time unit for messages | {world} - the world the message is restricted to | {group} - the group the message is restricted to | {termDone} - the term used for done | {termBack} - the term used for back
 promptDetails: "&7Details: \n Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Are you done or would you like to go back? \n &2{termDone} &7or {termBack}"
