@@ -155,7 +155,7 @@ promptGroup: "&7What group should this message only be visible to? &b{groups}"
 promptDetailsCorrect: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Are these settings correct? \n &r[&2{termYes}&r, &c{termNo}&r]"
 
 # The message used to confirm settings | {message} - the message for the message | {interval} - the interval between messages | {unit} - the time unit for messages | {world} - the world the message is restricted to | {group} - the group the message is restricted to | {termDone} - the term used for done | {termBack} - the term used for back
-promptDetails: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Are you done or would you like to go back? \n &r[&2{termYes}&r, &c{termNo}&r]"
+promptDetails: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Would you like to view another message? \n &r[&2{termYes}&r, &c{termNo}&r]"
 
 # The message used to ask if the message should be removed? | {message} - the message for the message | {interval} - the interval between messages | {unit} - the time unit for messages | {world} - the world the message is restricted to | {group} - the group the message is restricted to | {termYes} - the term used for yes | {termNo} - the term used for no
 promptRemoveMessage: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Do you want to remove this message? \n &r[&2{termYes}&r, &c{termNo}&r]"
