@@ -23,7 +23,6 @@ package me.sonarbeserk.timedbroadcast;
 
 import me.sonarbeserk.beserkcore.plugin.UpdatingJavaPlugin;
 import me.sonarbeserk.timedbroadcast.commands.MainCmd;
-import me.sonarbeserk.timedbroadcast.enums.MessageLocation;
 import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
 import me.sonarbeserk.timedbroadcast.tasks.MessageTask;
 import me.sonarbeserk.timedbroadcast.wrapper.Message;
@@ -78,17 +77,19 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
 
                 int interval = Integer.parseInt(String.valueOf(getData().get("messages." + entry + ".interval")));
 
-                MessageLocation location = null;
-
-                location = MessageLocation.valueOf(String.valueOf(getData().get("messages." + entry + ".location")));
-
                 String worldName = null;
 
                 if (getData().get("messages." + entry + ".worldName") != null) {
                     worldName = String.valueOf(getData().get("messages." + entry + ".worldName"));
                 }
 
-                Message messageWrapper = new Message(message, timeUnit, interval, location, worldName);
+                String groupName = null;
+
+                if (getData().get("messages." + entry + ".groupName") != null) {
+                    groupName = String.valueOf(getData().get("messages." + entry + ".groupName"));
+                }
+
+                Message messageWrapper = new Message(message, timeUnit, interval, worldName, groupName);
 
                 if (getData().get("messages." + entry + ".counter") != null) {
                     messageWrapper.setCounter(Integer.parseInt(String.valueOf(getData().get("messages." + entry + ".counter"))));
@@ -196,21 +197,12 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
         getData().set("broadcastsEnabled", String.valueOf(broadcast));
 
         for (int i = 0; i < getMessages().size(); i++) {
-            if (getMessages().get(i).getLocation() == MessageLocation.GLOBALLY) {
-                getData().set("messages." + i + ".message", getMessages().get(i).getMessage());
-                getData().set("messages." + i + ".unit", getMessages().get(i).getUnit().name());
-                getData().set("messages." + i + ".interval", getMessages().get(i).getInterval());
-                getData().set("messages." + i + ".location", getMessages().get(i).getLocation().name());
-                getData().set("messages." + i + ".worldName", getLanguage().getMessage("termNone"));
-                getData().set("messages." + i + ".counter", getMessages().get(i).getCounter());
-            } else if (getMessages().get(i).getLocation() == MessageLocation.WORLD) {
-                getData().set("messages." + i + ".message", getMessages().get(i).getMessage());
-                getData().set("messages." + i + ".unit", getMessages().get(i).getUnit().name());
-                getData().set("messages." + i + ".interval", getMessages().get(i).getInterval());
-                getData().set("messages." + i + ".location", getMessages().get(i).getLocation().name());
-                getData().set("messages." + i + ".worldName", getMessages().get(i).getWorldName());
-                getData().set("messages." + i + ".counter", getMessages().get(i).getCounter());
-            }
+            getData().set("messages." + i + ".message", getMessages().get(i).getMessage());
+            getData().set("messages." + i + ".unit", getMessages().get(i).getUnit().name());
+            getData().set("messages." + i + ".interval", getMessages().get(i).getInterval());
+            getData().set("messages." + i + ".worldName", String.valueOf(getMessages().get(i).getWorldName()));
+            getData().set("messages." + i + ".groupName", String.valueOf(getMessages().get(i).getGroupName()));
+            getData().set("messages." + i + ".counter", getMessages().get(i).getCounter());
         }
 
         super.onDisable();

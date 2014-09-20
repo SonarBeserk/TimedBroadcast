@@ -86,9 +86,12 @@ public class Message {
 
     /**
      * Returns the name of the group that this message should be restricted to
+     *
      * @return the name of the group that this message should be restricted to
      */
-    public String getGroupName() {return groupName;}
+    public String getGroupName() {
+        return groupName;
+    }
 
     /**
      * Returns the counter for the message

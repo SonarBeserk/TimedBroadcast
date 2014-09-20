@@ -65,26 +65,38 @@ public class MessageTask extends BukkitRunnable {
 
     private void broadcastMessage(Message message) {
         for (Player player : plugin.getServer().getOnlinePlayers()) {
-            if(message.getWorldName() != null) {
-                if(!worldCheckMessage(message, player)) {return;}
+            if (message.getWorldName() != null) {
+                if (!worldCheckMessage(message, player)) {
+                    continue;
+                }
+            }
 
-                if (plugin.getConfig().getBoolean("settings.broadcast.prefixEnabled")) {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("settings.broadcast.prefix") + message.getMessage()));
-                } else {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', message.getMessage()));
+            if (message.getGroupName() != null && plugin.getPermissions() != null) {
+                if (!groupCheckMessage(message, player)) {
+                    continue;
                 }
+            }
+
+            if (plugin.getConfig().getBoolean("settings.broadcast.prefixEnabled")) {
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("settings.broadcast.prefix") + message.getMessage()));
             } else {
-                if (plugin.getConfig().getBoolean("settings.broadcast.prefixEnabled")) {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("settings.broadcast.prefix") + message.getMessage()));
-                } else {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', message.getMessage()));
-                }
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', message.getMessage()));
             }
         }
     }
 
     private boolean worldCheckMessage(Message message, Player player) {
-        if(message == null || player == null || message.getWorldName() == null || player.getWorld() == null || !player.getWorld().getName().equalsIgnoreCase(message.getWorldName())) {return false;}
+        if (message == null || player == null || player.getWorld() == null || !player.getWorld().getName().equalsIgnoreCase(message.getWorldName())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean groupCheckMessage(Message message, Player player) {
+        if (message == null || player == null || plugin.getPermissions().getPrimaryGroup(player) == null || !plugin.getPermissions().getPrimaryGroup(player).equalsIgnoreCase(message.getGroupName())) {
+            return false;
+        }
 
         return true;
     }

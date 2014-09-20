@@ -22,7 +22,6 @@
 package me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
-import me.sonarbeserk.timedbroadcast.enums.MessageLocation;
 import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
 import me.sonarbeserk.timedbroadcast.wrapper.Message;
 import org.bukkit.ChatColor;
@@ -55,21 +54,19 @@ public class MessageBuilderAbandonedListener implements ConversationAbandonedLis
 
             int interval = Integer.parseInt(String.valueOf(conversationAbandonedEvent.getContext().getSessionData("interval")));
 
-            MessageLocation location = null;
-
-            if (String.valueOf(conversationAbandonedEvent.getContext().getSessionData("where")).equalsIgnoreCase(plugin.getLanguage().getMessage("termGlobally"))) {
-                location = MessageLocation.GLOBALLY;
-            } else if (String.valueOf(conversationAbandonedEvent.getContext().getSessionData("where")).equalsIgnoreCase(plugin.getLanguage().getMessage("termWorld"))) {
-                location = MessageLocation.WORLD;
-            }
-
             String worldName = null;
 
             if (conversationAbandonedEvent.getContext().getSessionData("world") != null) {
                 worldName = String.valueOf(conversationAbandonedEvent.getContext().getSessionData("world"));
             }
 
-            Message messageWrapper = new Message(message, timeUnit, interval, location, worldName);
+            String groupName = null;
+
+            if (conversationAbandonedEvent.getContext().getSessionData("group") != null) {
+                worldName = String.valueOf(conversationAbandonedEvent.getContext().getSessionData("group"));
+            }
+
+            Message messageWrapper = new Message(message, timeUnit, interval, worldName, groupName);
 
             plugin.addMessage(messageWrapper);
         } else {

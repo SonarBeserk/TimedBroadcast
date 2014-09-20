@@ -108,7 +108,7 @@ public class MainCmd implements CommandExecutor {
 
     private boolean permissionCheck(CommandSender sender, String permission, boolean autoMessage) {
         if (!sender.hasPermission(permission)) {
-            if(autoMessage) {
+            if (autoMessage) {
                 if (sender instanceof Player) {
                     plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
                     return false;
