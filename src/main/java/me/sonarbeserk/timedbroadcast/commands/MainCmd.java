@@ -106,6 +106,24 @@ public class MainCmd implements CommandExecutor {
         return true;
     }
 
+    private boolean permissionCheck(CommandSender sender, String permission, boolean autoMessage) {
+        if (!sender.hasPermission(permission)) {
+            if(autoMessage) {
+                if (sender instanceof Player) {
+                    plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
+                    return false;
+                } else {
+                    plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("noPermission"));
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
     private void helpSubCommand(CommandSender sender) {
         if (sender instanceof Player) {
             plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usageMain").replace("{name}", plugin.getDescription().getName()));
@@ -117,14 +135,8 @@ public class MainCmd implements CommandExecutor {
     }
 
     private void reloadSubCommand(CommandSender sender) {
-        if (!sender.hasPermission(plugin.getPermissionPrefix() + ".commands.reload")) {
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
-                return;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("noPermission"));
-                return;
-            }
+        if (!permissionCheck(sender, plugin.getPermissionPrefix() + ".commands.reload", true)) {
+            return;
         }
 
         plugin.getLanguage().reload();
@@ -146,14 +158,8 @@ public class MainCmd implements CommandExecutor {
             return;
         }
 
-        if (!sender.hasPermission(plugin.getPermissionPrefix() + ".commands.add")) {
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
-                return;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("noPermission"));
-                return;
-            }
+        if (!permissionCheck(sender, plugin.getPermissionPrefix() + ".commands.add", true)) {
+            return;
         }
 
         ConversationFactory conversationFactory = new ConversationFactory(plugin);
@@ -168,14 +174,8 @@ public class MainCmd implements CommandExecutor {
             return;
         }
 
-        if (!sender.hasPermission(plugin.getPermissionPrefix() + ".commands.list")) {
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
-                return;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("noPermission"));
-                return;
-            }
+        if (!permissionCheck(sender, plugin.getPermissionPrefix() + ".commands.list", true)) {
+            return;
         }
 
         ConversationFactory conversationFactory = new ConversationFactory(plugin);
@@ -201,14 +201,8 @@ public class MainCmd implements CommandExecutor {
             return;
         }
 
-        if (!sender.hasPermission(plugin.getPermissionPrefix() + ".commands.remove")) {
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
-                return;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("noPermission"));
-                return;
-            }
+        if (!permissionCheck(sender, plugin.getPermissionPrefix() + ".commands.remove", true)) {
+            return;
         }
 
         ConversationFactory conversationFactory = new ConversationFactory(plugin);
@@ -229,14 +223,8 @@ public class MainCmd implements CommandExecutor {
     }
 
     private void stopSubCommand(CommandSender sender) {
-        if (!sender.hasPermission(plugin.getPermissionPrefix() + ".commands.stop")) {
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
-                return;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("noPermission"));
-                return;
-            }
+        if (!permissionCheck(sender, plugin.getPermissionPrefix() + ".commands.stop", true)) {
+            return;
         }
 
         if (plugin.shouldBroadcast()) {
@@ -261,14 +249,8 @@ public class MainCmd implements CommandExecutor {
     }
 
     private void startSubCommand(CommandSender sender) {
-        if (!sender.hasPermission(plugin.getPermissionPrefix() + ".commands.start")) {
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
-                return;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("noPermission"));
-                return;
-            }
+        if (!permissionCheck(sender, plugin.getPermissionPrefix() + ".commands.start", true)) {
+            return;
         }
 
         if (!plugin.shouldBroadcast()) {
