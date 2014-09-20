@@ -115,14 +115,14 @@ messageListingCancelled: "&cMessage listing has either been cancelled or timed o
 
 # Prompt
 
-# The message to use for initial prompt for creating a message | {termExit} - term used for exit
-promptMessageAddStart: "&7You are adding a new message, Enter &c{termExit} &7at any time to exit."
+# The message to use for initial prompt for creating a message | {timeout} - the timeout |  {termExit} - term used for exit
+promptMessageAddStart: "&7You are adding a new message, you have &b{timeout}&7s before timeout, Enter &c{termExit} &7at any time to exit."
 
-# The message to use for initial prompt for creating a message | {termExit} - term used for exit
-promptMessageRemovalStart: "&7You are removing a message, Enter &c{termExit} &7at any time to exit."
+# The message to use for initial prompt for creating a message | {timeout} - the timeout |  {termExit} - term used for exit
+promptMessageRemovalStart: "&7You are removing a message, you have &b{timeout}&7s before timeout, Enter &c{termExit} &7at any time to exit."
 
-# The message to use for initial prompt for creating a message | {termExit} - term used for exit
-promptMessageListStart: "&7You are listing messages, Enter &c{termExit} &7at any time to exit."
+# The message to use for initial prompt for creating a message | {timeout} - the timeout | {termExit} - term used for exit
+promptMessageListStart: "&7You are listing messages, you have &b{timeout}&7s before timeout, Enter &c{termExit} &7at any time to exit."
 
 # The message used when the list of messages is empty
 promptMessageListEmpty: "&cThere are no messages to list!"
@@ -131,7 +131,7 @@ promptMessageListEmpty: "&cThere are no messages to list!"
 promptChooseMessage: "&7There are &b{count} &7messages. Please enter an id between (1-{count}) to show the message."
 
 # The message used when asking what message should be used
-promptMessage: "&7What should the message say? (Enter '{n}' to make the message go down a line, Chat Colors are supported.)"
+promptMessage: "&7What should the message say? (Chat Colors are supported, {n} may be used for new line.)"
 
 # The message used when asking what time unit should be used | {termSecond} - term used for second | {termMinute} - term used for minute
 promptTimeUnit: "&7What time unit should be used for this message? &b[{termSecond}, {termMinute}]"

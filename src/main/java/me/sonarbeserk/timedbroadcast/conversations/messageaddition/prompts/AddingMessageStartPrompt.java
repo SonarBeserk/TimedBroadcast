@@ -37,6 +37,7 @@ public class AddingMessageStartPrompt extends MessagePrompt {
     @Override
     public String getPromptText(ConversationContext conversationContext) {
         return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageAddStart")
+                .replace("{timeout}", plugin.getConfig().getString("settings.timeout.messageAddition"))
                 .replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
     }
 

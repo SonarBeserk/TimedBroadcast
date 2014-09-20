@@ -37,6 +37,7 @@ public class ListMessageStartPrompt extends MessagePrompt {
     @Override
     public String getPromptText(ConversationContext conversationContext) {
         return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageListStart")
+                .replace("{timeout}", plugin.getConfig().getString("settings.timeout.messageListing"))
                 .replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
     }
 
