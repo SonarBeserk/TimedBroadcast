@@ -152,13 +152,13 @@ promptWorld: "&7What world should this message only be visible to? &b{worlds}"
 promptGroup: "&7What group should this message only be visible to? &b{groups}"
 
 # The message used to confirm settings | {message} - the message for the message | {interval} - the interval between messages | {unit} - the time unit for messages | {world} - the world the message is restricted to | {group} - the group the message is restricted to | {termYes} - the term used for yes | {termNo} - the term used for no
-promptDetailsCorrect: "&7Message Details: \n Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Are these settings correct? \n &r[&2{termYes}&r, &c{termNo}&r]"
+promptDetailsCorrect: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Are these settings correct? \n &r[&2{termYes}&r, &c{termNo}&r]"
 
 # The message used to confirm settings | {message} - the message for the message | {interval} - the interval between messages | {unit} - the time unit for messages | {world} - the world the message is restricted to | {group} - the group the message is restricted to | {termDone} - the term used for done | {termBack} - the term used for back
-promptDetails: "&7Details: \n Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Are you done or would you like to go back? \n &r[&2{termYes}&r, &c{termNo}&r]"
+promptDetails: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Are you done or would you like to go back? \n &r[&2{termYes}&r, &c{termNo}&r]"
 
 # The message used to ask if the message should be removed? | {message} - the message for the message | {interval} - the interval between messages | {unit} - the time unit for messages | {world} - the world the message is restricted to | {group} - the group the message is restricted to | {termYes} - the term used for yes | {termNo} - the term used for no
-promptRemoveMessage: "&7Details: \n Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Do you want to remove this message? \n &r[&2{termYes}&r, &c{termNo}&r]"
+promptRemoveMessage: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Do you want to remove this message? \n &r[&2{termYes}&r, &c{termNo}&r]"
 
 # The message used to ask what detail needs to be corrected | {termMessage} - the term used for message | {termInterval} - the term use for message | {termUnit} - the term used for unit | {termRestrictions} - the term used for restrictions
 promptDetailsCorrection: "&7What message detail is wrong? \n &b[{termMessage}, {termInterval}, {termUnit}, {termRestrictions}]"
