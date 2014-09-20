@@ -26,6 +26,7 @@ import me.sonarbeserk.timedbroadcast.conversations.generic.NoMessagesPrompt;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder.MessageBuilderAbandonedListener;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder.MessageBuilderPrefix;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts.AddingMessageStartPrompt;
+import me.sonarbeserk.timedbroadcast.conversations.messagelisting.messagelister.MessageListerPrefix;
 import me.sonarbeserk.timedbroadcast.conversations.messagelisting.prompts.ListMessageStartPrompt;
 import me.sonarbeserk.timedbroadcast.conversations.messageremoval.messageremover.MessageRemoverAbandonedListener;
 import me.sonarbeserk.timedbroadcast.conversations.messageremoval.messageremover.MessageRemoverPrefix;
@@ -191,7 +192,7 @@ public class MainCmd implements CommandExecutor {
                 break;
         }
 
-        Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageRemoverPrefix(plugin)).withFirstPrompt(startPrompt).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageRemoval")).addConversationAbandonedListener(new MessageRemoverAbandonedListener(plugin)).buildConversation((Conversable) sender);
+        Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageListerPrefix(plugin)).withFirstPrompt(startPrompt).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageRemoval")).addConversationAbandonedListener(new MessageRemoverAbandonedListener(plugin)).buildConversation((Conversable) sender);
         conversation.begin();
     }
 
