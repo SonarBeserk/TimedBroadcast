@@ -47,7 +47,11 @@ public class RestrictedToWorldPrompt extends StringPrompt {
         if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termYes")) || s.equalsIgnoreCase(String.valueOf(plugin.getLanguage().getMessage("termYes").toCharArray()[0]))) {
             return new ChooseWorldPrompt(plugin);
         } else if (s.equalsIgnoreCase(plugin.getLanguage().getMessage("termNo")) || s.equalsIgnoreCase(String.valueOf(plugin.getLanguage().getMessage("termNo").toCharArray()[0]))) {
-            return new DetailsCorrectPrompt(plugin);
+            if(plugin.getPermissions() != null) {
+                return new RestrictedToGroupPrompt(plugin);
+            } else {
+                return new DetailsCorrectPrompt(plugin);
+            }
         }
 
         return this;
