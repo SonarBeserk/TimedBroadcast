@@ -21,7 +21,6 @@
 
 package me.sonarbeserk.timedbroadcast.wrapper;
 
-import me.sonarbeserk.timedbroadcast.enums.MessageLocation;
 import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
 
 public class Message {
@@ -31,22 +30,22 @@ public class Message {
 
     private int interval;
 
-    private MessageLocation location = null;
-
     private String worldName = null;
+
+    private String groupName = null;
 
     private int counter = 0;
 
-    public Message(String message, TimeUnit unit, int interval, MessageLocation location, String worldName) {
+    public Message(String message, TimeUnit unit, int interval, String worldName, String groupName) {
         this.message = message;
 
         this.unit = unit;
 
         this.interval = interval;
 
-        this.location = location;
-
         this.worldName = worldName;
+
+        this.groupName = groupName;
     }
 
     /**
@@ -77,15 +76,6 @@ public class Message {
     }
 
     /**
-     * Returns the location of the message
-     *
-     * @return the location of the message
-     */
-    public MessageLocation getLocation() {
-        return location;
-    }
-
-    /**
      * Returns the name of the world the message should show in
      *
      * @return the name of the world the message should show in
@@ -93,6 +83,12 @@ public class Message {
     public String getWorldName() {
         return worldName;
     }
+
+    /**
+     * Returns the name of the group that this message should be restricted to
+     * @return the name of the group that this message should be restricted to
+     */
+    public String getGroupName() {return groupName;}
 
     /**
      * Returns the counter for the message
