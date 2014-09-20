@@ -22,7 +22,6 @@
 package me.sonarbeserk.timedbroadcast.conversations.messageremoval.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
-import me.sonarbeserk.timedbroadcast.enums.MessageLocation;
 import me.sonarbeserk.timedbroadcast.wrapper.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
@@ -51,27 +50,31 @@ public class RemoveMessagePrompt extends StringPrompt {
                 break;
         }
 
-        if (message.getLocation() == MessageLocation.GLOBALLY) {
-            return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptRemoveMessage")
-                            .replace("{message}", message.getMessage())
-                            .replace("{interval}", String.valueOf(message.getInterval()))
-                            .replace("{unit}", timeUnit)
-                            .replace("{world}", plugin.getLanguage().getMessage("termNo"))
-                            .replace("{termBack}", plugin.getLanguage().getMessage("termBack"))
-                            .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
-                            .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
-            );
+        return ChatColor.translateAlternateColorCodes('&', replaceRestrictions(plugin.getLanguage().getMessage("promptRemoveMessage"), conversationContext)
+                        .replace("{message}", message.getMessage())
+                        .replace("{interval}", String.valueOf(message.getInterval()))
+                        .replace("{unit}", timeUnit)
+                        .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
+                        .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
+        );
+    }
+
+    private String replaceRestrictions(String input, ConversationContext context) {
+        String newString = input;
+
+        if (context.getSessionData("world") == null) {
+            newString = newString.replace("{world}", plugin.getLanguage().getMessage("termNo"));
         } else {
-            return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptRemoveMessage")
-                            .replace("{message}", message.getMessage())
-                            .replace("{interval}", String.valueOf(message.getInterval()))
-                            .replace("{unit}", timeUnit)
-                            .replace("{world}", message.getWorldName())
-                            .replace("{termBack}", plugin.getLanguage().getMessage("termBack"))
-                            .replace("{termYes}", plugin.getLanguage().getMessage("termYes"))
-                            .replace("{termNo}", plugin.getLanguage().getMessage("termNo"))
-            );
+            newString = newString.replace("{world", String.valueOf(context.getSessionData("world")));
         }
+
+        if (context.getSessionData("group") == null) {
+            newString = newString.replace("{group}", plugin.getLanguage().getMessage("termNo"));
+        } else {
+            newString = newString.replace("{group}", String.valueOf(context.getSessionData("group")));
+        }
+
+        return newString;
     }
 
     @Override
