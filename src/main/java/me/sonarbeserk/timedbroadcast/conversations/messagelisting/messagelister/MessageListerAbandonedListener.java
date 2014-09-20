@@ -39,6 +39,9 @@ public class MessageListerAbandonedListener implements ConversationAbandonedList
             return;
         }
 
+        // Prevent odd npe
+        if(plugin.getLanguage() == null) {return;}
+
         String prefix = plugin.getLanguage().getMessage("messageListerPrefix");
 
         if (!conversationAbandonedEvent.gracefulExit()) {

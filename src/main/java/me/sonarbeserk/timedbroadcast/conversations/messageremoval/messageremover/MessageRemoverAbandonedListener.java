@@ -40,6 +40,9 @@ public class MessageRemoverAbandonedListener implements ConversationAbandonedLis
             return;
         }
 
+        // Prevent odd npe
+        if(plugin.getLanguage() == null) {return;}
+
         String prefix = plugin.getLanguage().getMessage("messageRemoverPrefix");
 
         if (conversationAbandonedEvent.gracefulExit()) {
