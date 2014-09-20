@@ -22,7 +22,6 @@
 package me.sonarbeserk.timedbroadcast.tasks;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
-import me.sonarbeserk.timedbroadcast.enums.MessageLocation;
 import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
 import me.sonarbeserk.timedbroadcast.wrapper.Message;
 import org.bukkit.ChatColor;
@@ -66,21 +65,15 @@ public class MessageTask extends BukkitRunnable {
 
     private void broadcastMessage(Message message) {
         for (Player player : plugin.getServer().getOnlinePlayers()) {
-            if (message.getLocation() == MessageLocation.GLOBALLY) {
+            if(message.getWorldName() != null) {
+                if(!worldCheckMessage(message, player)) {return;}
+
                 if (plugin.getConfig().getBoolean("settings.broadcast.prefixEnabled")) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("settings.broadcast.prefix") + message.getMessage()));
                 } else {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', message.getMessage()));
                 }
-            } else if (message.getLocation() == MessageLocation.WORLD) {
-                if (message.getWorldName() == null) {
-                    continue;
-                }
-
-                if (!player.getWorld().getName().equalsIgnoreCase(message.getWorldName())) {
-                    continue;
-                }
-
+            } else {
                 if (plugin.getConfig().getBoolean("settings.broadcast.prefixEnabled")) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("settings.broadcast.prefix") + message.getMessage()));
                 } else {
@@ -88,5 +81,11 @@ public class MessageTask extends BukkitRunnable {
                 }
             }
         }
+    }
+
+    private boolean worldCheckMessage(Message message, Player player) {
+        if(message == null || player == null || message.getWorldName() == null || player.getWorld() == null || !player.getWorld().getName().equalsIgnoreCase(message.getWorldName())) {return false;}
+
+        return true;
     }
 }
