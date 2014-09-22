@@ -41,7 +41,7 @@ public class ChooseGroupPrompt extends StringPrompt {
         groupNames = new ArrayList<String>();
 
         for (String groupName : plugin.getPermissions().getGroups()) {
-            groupNames.add(groupName);
+            groupNames.add(groupName + ChatColor.RESET);
         }
     }
 

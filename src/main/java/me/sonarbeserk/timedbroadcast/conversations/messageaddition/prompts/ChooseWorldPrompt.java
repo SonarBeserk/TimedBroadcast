@@ -42,7 +42,7 @@ public class ChooseWorldPrompt extends StringPrompt {
         worldNames = new ArrayList<String>();
 
         for (World world : plugin.getServer().getWorlds()) {
-            worldNames.add(world.getName());
+            worldNames.add(world.getName() + ChatColor.RESET);
         }
     }
 
