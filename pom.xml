@@ -37,6 +37,11 @@
             <id>vault-repo</id>
             <url>http://nexus.theyeticave.net/content/repositories/pub_releases</url>
         </repository>
+
+        <repository>
+            <id>lilypad</id>
+            <url>http://ci.lilypadmc.org/plugin/repository/everything</url>
+        </repository>
     </repositories>
 
     <!-- Dependencies -->
@@ -51,6 +56,12 @@
             <groupId>me.sonarbeserk</groupId>
             <artifactId>beserkcore</artifactId>
             <version>1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>lilypad.client.connect</groupId>
+            <artifactId>api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
