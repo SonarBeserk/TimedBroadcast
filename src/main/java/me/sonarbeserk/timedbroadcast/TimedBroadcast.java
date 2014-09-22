@@ -21,6 +21,7 @@
 
 package me.sonarbeserk.timedbroadcast;
 
+import lilypad.client.connect.api.Connect;
 import me.sonarbeserk.beserkcore.plugin.UpdatingJavaPlugin;
 import me.sonarbeserk.timedbroadcast.commands.MainCmd;
 import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
@@ -32,6 +33,8 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import java.util.ArrayList;
 
 public class TimedBroadcast extends UpdatingJavaPlugin {
+    private Connect lilypadConnection = null;
+
     private Permission permission = null;
 
     private ArrayList<Message> messages = null;
@@ -45,6 +48,19 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
     public void onEnable() {
         super.onEnable();
 
+        if (getServer().getPluginManager().getPlugin("LilyPad-Connect") != null && getServer().getPluginManager().getPlugin("LilyPad-Connect").isEnabled()) {
+            lilypadConnection = getServer().getServicesManager().getRegistration(Connect.class).getProvider();
+            //lilypadConnection.registerEvents(new MessageListener(this));
+
+            //requester here
+
+            getLogger().info(getLanguage().getMessage("lilypadSupportEnabled"));
+        }
+
+        if (lilypadConnection != null) {
+            // claim counting here
+        }
+
         if (getServer().getPluginManager().getPlugin("Vault") != null && getServer().getPluginManager().getPlugin("Vault").isEnabled()) {
             setupPermissions();
 
@@ -57,8 +73,6 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
             getLogger().warning(getLanguage().getMessage("vaultHookFailed"));
         }
 
-        getCommand(getName().toLowerCase()).setExecutor(new MainCmd(this));
-
         messages = new ArrayList<Message>();
 
         if (getData().get("broadcastsEnabled") != null) {
@@ -67,7 +81,7 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
 
         if (getData().getConfigurationSection("messages") != null) {
             for (String entry : getData().getConfigurationSection("messages").getKeys(false)) {
-                if (getData().get("messages." + entry + ".message") == null || getData().get("messages." + entry + ".unit") == null || getData().get("messages." + entry + ".interval") == null || getData().get("messages." + entry + ".location") == null || getData().get("messages." + entry + ".worldName") == null) {
+                if (getData().get("messages." + entry + ".message") == null || getData().get("messages." + entry + ".unit") == null || getData().get("messages." + entry + ".interval") == null || getData().get("messages." + entry + ".location") == null || getData().get("messages." + entry + ".worldName") == null || getData().get("messages." + entry + ".groupName") == null) {
                     continue;
                 }
 
@@ -77,17 +91,9 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
 
                 int interval = Integer.parseInt(String.valueOf(getData().get("messages." + entry + ".interval")));
 
-                String worldName = null;
+                String worldName = String.valueOf(getData().get("messages." + entry + ".worldName"));
 
-                if (getData().get("messages." + entry + ".worldName") != null) {
-                    worldName = String.valueOf(getData().get("messages." + entry + ".worldName"));
-                }
-
-                String groupName = null;
-
-                if (getData().get("messages." + entry + ".groupName") != null) {
-                    groupName = String.valueOf(getData().get("messages." + entry + ".groupName"));
-                }
+                String groupName = String.valueOf(getData().get("messages." + entry + ".groupName"));
 
                 Message messageWrapper = new Message(message, timeUnit, interval, worldName, groupName);
 
@@ -104,6 +110,8 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
 
         minuteTask = new MessageTask(this, TimeUnit.MINUTE);
         minuteTask.runTaskTimer(this, 0, 1200);
+
+        getCommand(getName().toLowerCase()).setExecutor(new MainCmd(this));
     }
 
     @Override
@@ -134,6 +142,14 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
         }
 
         return (permission != null);
+    }
+
+    /**
+     * Returns the lilypad connection in use
+     * @return the lilypad connection in use
+     */
+    public Connect getLilypadConnection() {
+        return lilypadConnection;
     }
 
     /**
