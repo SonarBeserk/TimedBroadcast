@@ -103,11 +103,17 @@ messageRemoverPrefix: "&bMessage Remover: "
 # Prefix used for the message lister
 messageListerPrefix: "&bMessage Lister: "
 
+# Prefix used for the message distributor
+messageDistributorPrefix: "&bMessage Distributor: "
+
 # The message used when a message is added
 messageAdded: "&2Message has been added!"
 
 # The message used when a message is removed
 messageRemoved: "&2Message has been removed."
+
+# The message used when a message is distributed
+messageDistributed: "&2Message has been distributed."
 
 # The message used when message creation times out or is cancelled
 messageAdditionCancelled: "&cMessage creation has either been cancelled or timed out."
@@ -117,6 +123,9 @@ messageRemovalCancelled: "&cMessage removal has either been cancelled or timed o
 
 # The message used when message listing times out or is cancelled
 messageListingCancelled: "&cMessage listing has either been cancelled or timed out."
+
+# The message used when message distribution times out or is cancelled
+messageDistributionCancelled: "&cMessage distribution has either been cancelled or timed out."
 
 # Prompt
 
