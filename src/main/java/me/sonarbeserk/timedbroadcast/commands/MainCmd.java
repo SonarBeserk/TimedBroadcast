@@ -155,11 +155,6 @@ public class MainCmd implements CommandExecutor {
     }
 
     private void addSubCommand(CommandSender sender) {
-        if (!(sender instanceof Player)) {
-            plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("commandPlayerRequired"));
-            return;
-        }
-
         if (!permissionCheck(sender, plugin.getPermissionPrefix() + ".commands.add", true)) {
             return;
         }
@@ -171,11 +166,6 @@ public class MainCmd implements CommandExecutor {
     }
 
     private void listSubCommand(CommandSender sender) {
-        if (!(sender instanceof Player)) {
-            plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("commandPlayerRequired"));
-            return;
-        }
-
         if (!permissionCheck(sender, plugin.getPermissionPrefix() + ".commands.list", true)) {
             return;
         }
@@ -198,11 +188,6 @@ public class MainCmd implements CommandExecutor {
     }
 
     private void removeSubCommand(CommandSender sender) {
-        if (!(sender instanceof Player)) {
-            plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("commandPlayerRequired"));
-            return;
-        }
-
         if (!permissionCheck(sender, plugin.getPermissionPrefix() + ".commands.remove", true)) {
             return;
         }
