@@ -25,6 +25,7 @@ import lilypad.client.connect.api.Connect;
 import me.sonarbeserk.beserkcore.plugin.UpdatingJavaPlugin;
 import me.sonarbeserk.timedbroadcast.commands.MainCmd;
 import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
+import me.sonarbeserk.timedbroadcast.lilypad.listeners.MessageListener;
 import me.sonarbeserk.timedbroadcast.tasks.MessageTask;
 import me.sonarbeserk.timedbroadcast.wrapper.Message;
 import net.milkbowl.vault.permission.Permission;
@@ -50,7 +51,7 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
 
         if (getServer().getPluginManager().getPlugin("LilyPad-Connect") != null && getServer().getPluginManager().getPlugin("LilyPad-Connect").isEnabled()) {
             lilypadConnection = getServer().getServicesManager().getRegistration(Connect.class).getProvider();
-            //lilypadConnection.registerEvents(new MessageListener(this));
+            lilypadConnection.registerEvents(new MessageListener(this));
 
             //requester here
 
