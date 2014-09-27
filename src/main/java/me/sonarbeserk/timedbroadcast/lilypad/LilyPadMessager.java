@@ -42,7 +42,7 @@ public class LilyPadMessager {
      */
     public void distributeMessage(Message message) {
         try {
-            plugin.getLilypadConnection().request(new MessageRequest(new ArrayList<String>(), "tb.request.lilypad.distribute", message.getMessage().trim() + "|" + String.valueOf(message.getUnit()).trim() + "|" + String.valueOf(message.getInterval()).trim() + "|" + String.valueOf(message.getWorldName()).trim() + "|" + String.valueOf(message.getGroupName()).trim()));
+            plugin.getLilypadConnection().request(new MessageRequest(new ArrayList<String>(), "tb.request.lilypad.distribute", message.getMessage().trim() + "|" + String.valueOf(message.getUnit()).trim() + "|" + String.valueOf(message.getInterval()).trim() + "|" + String.valueOf(message.getWorldName()).trim() + "|" + String.valueOf(message.getGroupName()).trim() + "|" + String.valueOf(message.getCounter())));
         } catch (RequestException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
