@@ -26,6 +26,8 @@ import me.sonarbeserk.timedbroadcast.conversations.generic.NoMessagesPrompt;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder.MessageBuilderAbandonedListener;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.messagebuilder.MessageBuilderPrefix;
 import me.sonarbeserk.timedbroadcast.conversations.messageaddition.prompts.AddingMessageStartPrompt;
+import me.sonarbeserk.timedbroadcast.conversations.messagedistribution.messagedistributor.MessageDistributorAbandonedListener;
+import me.sonarbeserk.timedbroadcast.conversations.messagedistribution.messagedistributor.MessageDistributorPrefix;
 import me.sonarbeserk.timedbroadcast.conversations.messagelisting.messagelister.MessageListerAbandonedListener;
 import me.sonarbeserk.timedbroadcast.conversations.messagelisting.messagelister.MessageListerPrefix;
 import me.sonarbeserk.timedbroadcast.conversations.messagelisting.prompts.ListMessageStartPrompt;
@@ -93,6 +95,11 @@ public class MainCmd implements CommandExecutor {
 
             if (args[0].equalsIgnoreCase("start")) {
                 startSubCommand(sender);
+                return true;
+            }
+
+            if (args[0].equalsIgnoreCase("distribute")) {
+                distributeSubCommand(sender);
                 return true;
             }
 
@@ -259,5 +266,27 @@ public class MainCmd implements CommandExecutor {
                 return;
             }
         }
+    }
+
+    private void distributeSubCommand(CommandSender sender) {
+        if (!permissionCheck(sender, plugin.getPermissionPrefix() + ".commands.distribute", true)) {
+            return;
+        }
+
+        ConversationFactory conversationFactory = new ConversationFactory(plugin);
+
+        Prompt startPrompt = null;
+
+        switch (plugin.getMessages().size()) {
+            case 0:
+                startPrompt = new NoMessagesPrompt(plugin);
+                break;
+            default:
+                startPrompt = new DistributeMessageStartPrompt(plugin);
+                break;
+        }
+
+        Conversation conversation = conversationFactory.withModality(true).withLocalEcho(false).withPrefix(new MessageDistributorPrefix(plugin)).withFirstPrompt(startPrompt).withEscapeSequence(plugin.getLanguage().getMessage("termExit")).withTimeout(plugin.getConfig().getInt("settings.timeout.messageDistribution")).addConversationAbandonedListener(new MessageDistributorAbandonedListener(plugin)).buildConversation((Conversable) sender);
+        conversation.begin();
     }
 }

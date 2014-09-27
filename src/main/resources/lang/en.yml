@@ -40,7 +40,7 @@ commandPlayerRequired: "You must be a player to use this command!"
 # Usage
 
 # Usage for the plugin master command | {name} - the name of the plugin
-usageMain: "&7Subcommands: \n reload - reloads the all the plugin's files \n add - guides you through adding a new message for broadcasting \n list - guides you through listing messages \n remove - guides you through removing a message \n stop - stops broadcasts \n start - starts broadcasts"
+usageMain: "&7Subcommands: \n reload - reloads the all the plugin's files \n add - guides you through adding a new message for broadcasting \n list - guides you through listing messages \n remove - guides you through removing a message \n stop - stops broadcasts \n start - starts broadcasts \n distribute - distributes a message across the lilypad network"
 
 # LilyPad
 
