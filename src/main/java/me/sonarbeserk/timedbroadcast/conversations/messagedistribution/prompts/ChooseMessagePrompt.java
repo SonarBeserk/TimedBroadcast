@@ -42,11 +42,7 @@ public class ChooseMessagePrompt extends NumericPrompt {
 
     @Override
     protected Prompt acceptValidatedInput(ConversationContext conversationContext, Number number) {
-        if (!(number instanceof Integer)) {
-            return new ChooseMessagePrompt(plugin);
-        }
-
-        if (number.intValue() > plugin.getMessages().size()) {
+        if (!(number instanceof Integer) || number.intValue() > plugin.getMessages().size()) {
             return new ChooseMessagePrompt(plugin);
         }
 
