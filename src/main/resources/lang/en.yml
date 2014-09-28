@@ -44,6 +44,7 @@ usageMain: "&7Subcommands: \n reload - reloads the all the plugin's files \n add
 
 # LilyPad
 
+# Sent when lilypad is found and support is enabled
 lilypadSupportEnabled: "Lilypad has been found and support has been enabled."
 
 # Vault
@@ -132,10 +133,10 @@ messageDistributionCancelled: "&cMessage distribution has either been cancelled 
 # The message to use for initial prompt for creating a message | {timeout} - the timeout |  {termExit} - term used for exit
 promptMessageAddStart: "&7You are adding a new message, you have &b{timeout}&7s before timeout, Enter &c{termExit} &7at any time to exit."
 
-# The message to use for initial prompt for creating a message | {timeout} - the timeout |  {termExit} - term used for exit
+# The message to use for initial prompt for removing a message | {timeout} - the timeout |  {termExit} - term used for exit
 promptMessageRemovalStart: "&7You are removing a message, you have &b{timeout}&7s before timeout, Enter &c{termExit} &7at any time to exit."
 
-# The message to use for initial prompt for creating a message | {timeout} - the timeout | {termExit} - term used for exit
+# The message to use for initial prompt for listing a message | {timeout} - the timeout | {termExit} - term used for exit
 promptMessageListStart: "&7You are listing messages, you have &b{timeout}&7s before timeout, Enter &c{termExit} &7at any time to exit."
 
 # The message used when the list of messages is empty
@@ -144,7 +145,7 @@ promptMessageListEmpty: "&cThere are no messages to list!"
 # The message to use when asking what message should be shown | {count} - the amount of messages
 promptChooseMessage: "&7There are &b{count} &7messages. Please enter an id between (1-{count}) to show the message."
 
-# The message used when asking what message should be used
+# The message used when asking for the message to put in a message
 promptMessage: "&7What should the message say? (Chat Colors are supported, {n} may be used for new line.)"
 
 # The message used when asking what time unit should be used | {termSecond} - term used for second | {termMinute} - term used for minute
@@ -168,8 +169,8 @@ promptGroup: "&7What group should this message only be visible to? &r{groups}"
 # The message used to confirm settings | {message} - the message for the message | {interval} - the interval between messages | {unit} - the time unit for messages | {world} - the world the message is restricted to | {group} - the group the message is restricted to | {termYes} - the term used for yes | {termNo} - the term used for no
 promptDetailsCorrect: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Are these settings correct? \n &r[&2{termYes}&r, &c{termNo}&r]"
 
-# The message used to confirm settings | {message} - the message for the message | {interval} - the interval between messages | {unit} - the time unit for messages | {world} - the world the message is restricted to | {group} - the group the message is restricted to | {termDone} - the term used for done | {termBack} - the term used for back
-promptDetails: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Would you like to view another message? \n &r[&2{termYes}&r, &c{termNo}&r]"
+# The message used when listing messages | {message} - the message for the message | {interval} - the interval between messages | {unit} - the time unit for messages | {world} - the world the message is restricted to | {group} - the group the message is restricted to | {termDone} - the term used for done | {termBack} - the term used for back
+promptDetailsList: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Would you like to view another message? \n &r[&2{termYes}&r, &c{termNo}&r]"
 
 # The message used to ask if the message should be removed? | {message} - the message for the message | {interval} - the interval between messages | {unit} - the time unit for messages | {world} - the world the message is restricted to | {group} - the group the message is restricted to | {termYes} - the term used for yes | {termNo} - the term used for no
 promptRemoveMessage: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Do you want to remove this message? \n &r[&2{termYes}&r, &c{termNo}&r]"

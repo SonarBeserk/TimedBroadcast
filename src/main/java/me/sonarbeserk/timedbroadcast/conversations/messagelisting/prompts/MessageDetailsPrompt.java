@@ -50,7 +50,7 @@ public class MessageDetailsPrompt extends StringPrompt {
                 break;
         }
 
-        return ChatColor.translateAlternateColorCodes('&', replaceRestrictions(plugin.getLanguage().getMessage("promptDetails"), conversationContext)
+        return ChatColor.translateAlternateColorCodes('&', replaceRestrictions(plugin.getLanguage().getMessage("promptDetailsList"), conversationContext)
                         .replace("{message}", message.getMessage())
                         .replace("{interval}", String.valueOf(message.getInterval()))
                         .replace("{unit}", timeUnit)
