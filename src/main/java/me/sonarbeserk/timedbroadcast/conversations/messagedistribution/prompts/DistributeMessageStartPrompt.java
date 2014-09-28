@@ -1,30 +1,27 @@
 package me.sonarbeserk.timedbroadcast.conversations.messagedistribution.prompts;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
+import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationContext;
+import org.bukkit.conversations.MessagePrompt;
 import org.bukkit.conversations.Prompt;
 
-/**
- * Created by SonarBeserk on 9/27/2014.
- */
-public class DistributeMessageStartPrompt implements Prompt {
+public class DistributeMessageStartPrompt extends MessagePrompt {
+    private TimedBroadcast plugin = null;
 
     public DistributeMessageStartPrompt(TimedBroadcast plugin) {
-
+        this.plugin = plugin;
     }
 
     @Override
-    public String getPromptText(ConversationContext context) {
-        return null;
+    public String getPromptText(ConversationContext conversationContext) {
+        return ChatColor.translateAlternateColorCodes('&', plugin.getLanguage().getMessage("promptMessageDistributeStart")
+                .replace("{timeout}", plugin.getConfig().getString("settings.timeout.messageDistribute"))
+                .replace("{termExit}", plugin.getLanguage().getMessage("termExit")));
     }
 
     @Override
-    public boolean blocksForInput(ConversationContext context) {
-        return false;
-    }
-
-    @Override
-    public Prompt acceptInput(ConversationContext context, String s) {
-        return null;
+    protected Prompt getNextPrompt(ConversationContext conversationContext) {
+        return new ChooseMessagePrompt(plugin);
     }
 }
