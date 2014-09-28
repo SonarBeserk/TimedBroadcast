@@ -40,6 +40,10 @@ public class MessageDistributorAbandonedListener implements ConversationAbandone
         // Prevent odd npe
         if(plugin.getLanguage() == null) {return;}
 
+        if (conversationAbandonedEvent.getContext().getSessionData("noMessages") != null) {
+            return;
+        }
+
         String prefix = plugin.getLanguage().getMessage("messageDistributorPrefix");
 
         if (conversationAbandonedEvent.gracefulExit()) {

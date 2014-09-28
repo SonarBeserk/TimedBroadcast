@@ -35,12 +35,12 @@ public class MessageListerAbandonedListener implements ConversationAbandonedList
 
     @Override
     public void conversationAbandoned(ConversationAbandonedEvent conversationAbandonedEvent) {
+        // Prevent odd npe
+        if(plugin.getLanguage() == null) {return;}
+
         if (conversationAbandonedEvent.getContext().getSessionData("noMessages") != null) {
             return;
         }
-
-        // Prevent odd npe
-        if(plugin.getLanguage() == null) {return;}
 
         String prefix = plugin.getLanguage().getMessage("messageListerPrefix");
 
