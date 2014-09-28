@@ -25,6 +25,7 @@ import lilypad.client.connect.api.Connect;
 import me.sonarbeserk.beserkcore.plugin.UpdatingJavaPlugin;
 import me.sonarbeserk.timedbroadcast.commands.MainCmd;
 import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
+import me.sonarbeserk.timedbroadcast.lilypad.LilyPadMessenger;
 import me.sonarbeserk.timedbroadcast.lilypad.listeners.MessageListener;
 import me.sonarbeserk.timedbroadcast.tasks.MessageTask;
 import me.sonarbeserk.timedbroadcast.wrapper.Message;
@@ -35,6 +36,8 @@ import java.util.ArrayList;
 
 public class TimedBroadcast extends UpdatingJavaPlugin {
     private Connect lilypadConnection = null;
+
+    private LilyPadMessenger lilyPadMessenger = null;
 
     private Permission permission = null;
 
@@ -53,7 +56,7 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
             lilypadConnection = getServer().getServicesManager().getRegistration(Connect.class).getProvider();
             lilypadConnection.registerEvents(new MessageListener(this));
 
-            //requester here
+            lilyPadMessenger = new LilyPadMessenger(this);
 
             getLogger().info(getLanguage().getMessage("lilypadSupportEnabled"));
         }
@@ -153,6 +156,13 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
     public Connect getLilypadConnection() {
         return lilypadConnection;
     }
+
+    /**
+     * Returns the lilypad messenger in use
+     * 
+     * @return the lilypad messenger in use
+     */
+    public LilyPadMessenger getLilyPadMessenger() {return lilyPadMessenger;}
 
     /**
      * Returns the permission instance
