@@ -48,6 +48,6 @@ public class ChooseMessagePrompt extends NumericPrompt {
 
         conversationContext.setSessionData("messageID", number.intValue());
 
-        return new MessageDetailsPrompt(plugin);
+        return new DistributePrompt(plugin);
     }
 }

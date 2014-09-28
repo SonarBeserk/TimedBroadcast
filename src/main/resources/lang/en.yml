@@ -179,6 +179,9 @@ promptDetailsList: "&7Message: &b{message} \n &7Message Interval: &b{interval} {
 # The message used to ask if the message should be removed? | {message} - the message for the message | {interval} - the interval between messages | {unit} - the time unit for messages | {world} - the world the message is restricted to | {group} - the group the message is restricted to | {termYes} - the term used for yes | {termNo} - the term used for no
 promptRemoveMessage: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Do you want to remove this message? \n &r[&2{termYes}&r, &c{termNo}&r]"
 
+# The message used when distributing messages | {message} - the message for the message | {interval} - the interval between messages | {unit} - the time unit for messages | {world} - the world the message is restricted to | {group} - the group the message is restricted to | {termDone} - the term used for done | {termBack} - the term used for back
+promptDetailsDistribution: "&7Message: &b{message} \n &7Message Interval: &b{interval} {unit}(s) \n &7Restricted to world: &b{world} \n &7Restricted to group: &b{group} \n &7Would you like to distribute this message? \n &r[&2{termYes}&r, &c{termNo}&r]"
+
 # The message used to ask what detail needs to be corrected | {termMessage} - the term used for message | {termInterval} - the term use for message | {termUnit} - the term used for unit | {termRestrictions} - the term used for restrictions
 promptDetailsCorrection: "&7What message detail is wrong? \n &b[{termMessage}, {termInterval}, {termUnit}, {termRestrictions}]"
 
