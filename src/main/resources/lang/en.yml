@@ -140,7 +140,7 @@ promptMessageRemovalStart: "&7You are removing a message, you have &b{timeout}&7
 promptMessageListStart: "&7You are listing messages, you have &b{timeout}&7s before timeout, Enter &c{termExit} &7at any time to exit."
 
 # The message to use for initial prompt for distributing a message | {timeout} - the timeout | {termExit} - term used for exit
-promptMessageListStart: "&7You are distributing a message, you have &b{timeout}&7s before timeout, Enter &c{termExit} &7at any time to exit."
+promptMessageDistributeStart: "&7You are distributing a message, you have &b{timeout}&7s before timeout, Enter &c{termExit} &7at any time to exit."
 
 
 # The message used when the list of messages is empty

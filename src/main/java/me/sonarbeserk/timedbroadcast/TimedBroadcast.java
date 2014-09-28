@@ -159,10 +159,12 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
 
     /**
      * Returns the lilypad messenger in use
-     * 
+     *
      * @return the lilypad messenger in use
      */
-    public LilyPadMessenger getLilyPadMessenger() {return lilyPadMessenger;}
+    public LilyPadMessenger getLilyPadMessenger() {
+        return lilyPadMessenger;
+    }
 
     /**
      * Returns the permission instance
