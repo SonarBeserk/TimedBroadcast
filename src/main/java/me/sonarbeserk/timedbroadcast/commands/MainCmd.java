@@ -274,6 +274,16 @@ public class MainCmd implements CommandExecutor {
             return;
         }
 
+        if(plugin.getLilypadConnection() == null) {
+            if (sender instanceof Player) {
+                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("lilypadNotFoundCanNotUse"));
+                return;
+            } else {
+                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("lilypadNotFoundCanNotUse"));
+                return;
+            }
+        }
+
         ConversationFactory conversationFactory = new ConversationFactory(plugin);
 
         Prompt startPrompt = null;

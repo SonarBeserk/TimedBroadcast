@@ -47,6 +47,9 @@ usageMain: "&7Subcommands: \n reload - reloads the all the plugin's files \n add
 # Sent when lilypad is found and support is enabled
 lilypadSupportEnabled: "Lilypad has been found and support has been enabled."
 
+# Sent when something that needs is used but lilypad is not found
+lilypadNotFoundCanNotUse: "&cLilypad was not found so this can not be used!"
+
 # Vault
 
 # Message to send when Vault was successfully hooked
