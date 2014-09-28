@@ -37,3 +37,7 @@ permissions:
   ${project.name.lowercase}.commands.start:
     description: "Allows use of the start subcommand"
     default: op
+
+  ${project.name.lowercase}.commands.distribute:
+    description: "Allows use of the distribute subcommand"
+    default: op

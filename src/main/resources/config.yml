@@ -27,6 +27,9 @@ settings:
     # How long should a player be able to idle when removing a message? (In Seconds)
     messageRemoval: 60
 
+    # How long should a player be able to idle when distributing a message? (In Seconds)
+    messageDistribute: 60
+
   # Broadcast settings
   broadcast:
 
