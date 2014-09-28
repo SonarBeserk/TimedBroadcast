@@ -37,7 +37,9 @@ public class MessageRemoverAbandonedListener implements ConversationAbandonedLis
     @Override
     public void conversationAbandoned(ConversationAbandonedEvent conversationAbandonedEvent) {
         // Prevent odd npe
-        if(plugin.getLanguage() == null) {return;}
+        if (plugin.getLanguage() == null) {
+            return;
+        }
 
         if (conversationAbandonedEvent.getContext().getSessionData("noMessages") != null) {
             return;

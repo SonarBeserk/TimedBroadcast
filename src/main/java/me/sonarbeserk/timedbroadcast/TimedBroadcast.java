@@ -147,6 +147,7 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
 
     /**
      * Returns the lilypad connection in use
+     *
      * @return the lilypad connection in use
      */
     public Connect getLilypadConnection() {

@@ -38,21 +38,25 @@ public class MessageListener {
 
     @EventListener()
     public void messageEvent(MessageEvent e) {
-        if(!e.getChannel().startsWith("tb")) {return;}
+        if (!e.getChannel().startsWith("tb")) {
+            return;
+        }
 
-        if(e.getChannel().equalsIgnoreCase("tb.request.lilypad.distribute")) {
+        if (e.getChannel().equalsIgnoreCase("tb.request.lilypad.distribute")) {
             try {
                 String[] splitMessage = e.getMessageAsString().split("\\|");
 
-                if(splitMessage.length < 6) {return;}
+                if (splitMessage.length < 6) {
+                    return;
+                }
 
                 String worldName = null, groupName = null;
 
-                if(!splitMessage[3].equalsIgnoreCase("null")) {
+                if (!splitMessage[3].equalsIgnoreCase("null")) {
                     worldName = splitMessage[3];
                 }
 
-                if(!splitMessage[4].equalsIgnoreCase("null")) {
+                if (!splitMessage[4].equalsIgnoreCase("null")) {
                     groupName = splitMessage[4];
                 }
 

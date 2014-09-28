@@ -22,8 +22,6 @@
 package me.sonarbeserk.timedbroadcast.conversations.messagedistribution.messagedistributor;
 
 import me.sonarbeserk.timedbroadcast.TimedBroadcast;
-import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
-import me.sonarbeserk.timedbroadcast.wrapper.Message;
 import org.bukkit.ChatColor;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.conversations.ConversationAbandonedListener;
@@ -38,7 +36,9 @@ public class MessageDistributorAbandonedListener implements ConversationAbandone
     @Override
     public void conversationAbandoned(ConversationAbandonedEvent conversationAbandonedEvent) {
         // Prevent odd npe
-        if(plugin.getLanguage() == null) {return;}
+        if (plugin.getLanguage() == null) {
+            return;
+        }
 
         if (conversationAbandonedEvent.getContext().getSessionData("noMessages") != null) {
             return;

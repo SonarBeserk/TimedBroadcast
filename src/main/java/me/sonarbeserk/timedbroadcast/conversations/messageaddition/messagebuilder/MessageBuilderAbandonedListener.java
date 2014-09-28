@@ -38,7 +38,9 @@ public class MessageBuilderAbandonedListener implements ConversationAbandonedLis
     @Override
     public void conversationAbandoned(ConversationAbandonedEvent conversationAbandonedEvent) {
         // Prevent odd npe
-        if(plugin.getLanguage() == null) {return;}
+        if (plugin.getLanguage() == null) {
+            return;
+        }
 
         String prefix = plugin.getLanguage().getMessage("messageBuilderPrefix");
 

@@ -38,6 +38,7 @@ public class LilyPadMessager {
 
     /**
      * Distributes a message to all current servers
+     *
      * @param message the message to distribute to all servers
      */
     public void distributeMessage(Message message) {
