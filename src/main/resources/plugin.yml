@@ -11,6 +11,9 @@ commands:
     description: master command system for the ${project.name}
     usage: "${project.name} Usage: /${project.name.lowercase} help"
     aliases: [${project.name.short}]
+  broadcast:
+    description: master command for message management
+    aliases: [broad]
 permissions:
 
   # Singular Nodes
@@ -19,25 +22,25 @@ permissions:
     default: op
 
   ${project.name.lowercase}.commands.add:
-    description: "Allows use of the add subcommand"
+    description: "Allows use of the add subcommand of the broadcast command"
     default: op
 
   ${project.name.lowercase}.commands.list:
-    description: "Allows use of the list subcommand"
+    description: "Allows use of the list subcommand of the broadcast command"
     default: op
 
   ${project.name.lowercase}.commands.remove:
-    description: "Allows use of the remove subcommand"
+    description: "Allows use of the remove subcommand of the broadcast command"
     default: op
 
   ${project.name.lowercase}.commands.stop:
-    description: "Allows use of the stop subcommand"
+    description: "Allows use of the stop subcommand of the broadcast command"
     default: op
 
   ${project.name.lowercase}.commands.start:
-    description: "Allows use of the start subcommand"
+    description: "Allows use of the start subcommand of the broadcast command"
     default: op
 
   ${project.name.lowercase}.commands.distribute:
-    description: "Allows use of the distribute subcommand"
+    description: "Allows use of the distribute subcommand of the broadcast command"
     default: op

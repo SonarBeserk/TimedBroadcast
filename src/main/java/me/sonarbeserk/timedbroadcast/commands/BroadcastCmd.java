@@ -44,10 +44,10 @@ import org.bukkit.conversations.ConversationFactory;
 import org.bukkit.conversations.Prompt;
 import org.bukkit.entity.Player;
 
-public class MainCmd implements CommandExecutor {
+public class BroadcastCmd implements CommandExecutor {
     private TimedBroadcast plugin = null;
 
-    public MainCmd(TimedBroadcast plugin) {
+    public BroadcastCmd(TimedBroadcast plugin) {
         this.plugin = plugin;
     }
 
@@ -55,10 +55,10 @@ public class MainCmd implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
             if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usageMain").replace("{name}", plugin.getDescription().getName()));
+                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usageBroadcast"));
                 return true;
             } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("usageMain").replace("{name}", plugin.getDescription().getName()));
+                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("usageBroadcast"));
                 return true;
             }
         }
@@ -66,11 +66,6 @@ public class MainCmd implements CommandExecutor {
         if (args.length > 0) {
             if (args[0].equalsIgnoreCase("help")) {
                 helpSubCommand(sender);
-                return true;
-            }
-
-            if (args[0].equalsIgnoreCase("reload")) {
-                reloadSubCommand(sender);
                 return true;
             }
 
@@ -105,10 +100,10 @@ public class MainCmd implements CommandExecutor {
             }
 
             if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usageMain").replace("{name}", plugin.getDescription().getName()));
+                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usageBroadcast"));
                 return true;
             } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("usageMain").replace("{name}", plugin.getDescription().getName()));
+                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("usageBroadcast"));
                 return true;
             }
         }
@@ -136,28 +131,10 @@ public class MainCmd implements CommandExecutor {
 
     private void helpSubCommand(CommandSender sender) {
         if (sender instanceof Player) {
-            plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usageMain").replace("{name}", plugin.getDescription().getName()));
+            plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usageBroadcast"));
             return;
         } else {
-            plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("usageMain").replace("{name}", plugin.getDescription().getName()));
-            return;
-        }
-    }
-
-    private void reloadSubCommand(CommandSender sender) {
-        if (!permissionCheck(sender, plugin.getPermissionPrefix() + ".commands.reload", true)) {
-            return;
-        }
-
-        plugin.getLanguage().reload();
-        plugin.getData().reload();
-        plugin.reloadConfig();
-
-        if (sender instanceof Player) {
-            plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("reloaded"));
-            return;
-        } else {
-            plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("reloaded"));
+            plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("usageBroadcast"));
             return;
         }
     }

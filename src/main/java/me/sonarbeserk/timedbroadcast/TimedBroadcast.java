@@ -23,7 +23,7 @@ package me.sonarbeserk.timedbroadcast;
 
 import lilypad.client.connect.api.Connect;
 import me.sonarbeserk.beserkcore.plugin.UpdatingJavaPlugin;
-import me.sonarbeserk.timedbroadcast.commands.MainCmd;
+import me.sonarbeserk.timedbroadcast.commands.BroadcastCmd;
 import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
 import me.sonarbeserk.timedbroadcast.lilypad.LilyPadMessenger;
 import me.sonarbeserk.timedbroadcast.lilypad.listeners.MessageListener;
@@ -115,7 +115,7 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
         minuteTask = new MessageTask(this, TimeUnit.MINUTE);
         minuteTask.runTaskTimer(this, 0, 1200);
 
-        getCommand(getName().toLowerCase()).setExecutor(new MainCmd(this));
+        getCommand(getName().toLowerCase()).setExecutor(new BroadcastCmd(this));
     }
 
     @Override
