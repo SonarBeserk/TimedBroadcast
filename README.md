@@ -1,4 +1,4 @@
 TimedBroadcast
 ==============
 
-Repo for bukkit plugin TimedBroadcast http://dev.bukkit.org/bukkit-plugins/timedbroadcast/
+Bukkit plugin to allow scheduling broadcasts for set times.
