@@ -25,9 +25,6 @@ outOfDateConfig: "&cThe version of the config file being run is out of date! Ple
 # Message to send when the language file being run is out of date
 outOfDateLanguage: "&cThe version of the language file being run is out of date! Please delete the file and reload the plugin to generate the new version! (Backup the old version first!)"
 
-# Sent when a sender lacks permission to do something
-noPermission: "&cYou do not have permission to do that!"
-
 # Updater
 
 # Sent when the updater reports it is up to date
@@ -44,6 +41,9 @@ updateFound: "&2The latest released version is {new}. Please go to {link} to dow
 
 # Sent when a user with permission is authed, it is used to inform them that the plugin has been updated and to restart the server
 updateDownloaded: "&2The latest released version: {new} has been downloaded and will be loaded upon the next restart!"
+
+# Sent when a sender lacks permission to do something
+noPermission: "&cYou do not have permission to do that!"
 
 # Sent when the config is reloaded
 reloaded: "&2The configuration has been reloaded!"
@@ -163,7 +163,6 @@ promptMessageListStart: "&7You are listing messages, you have &b{timeout}&7s bef
 
 # The message to use for initial prompt for distributing a message | {timeout} - the timeout | {termExit} - term used for exit
 promptMessageDistributeStart: "&7You are distributing a message, you have &b{timeout}&7s before timeout, Enter &c{termExit} &7at any time to exit."
-
 
 # The message used when the list of messages is empty
 promptMessageListEmpty: "&cThere are no messages to list!"
