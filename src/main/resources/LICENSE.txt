@@ -1,7 +1,7 @@
 *********************************************************************************************************************
 TimedBroadcast - Automatically broadcasts messages to the server
 =====================================================================================================================
- Copyright (C) 2012-2014 by SonarBeserk
+ Copyright (C) 2012-2015 by SonarBeserk
 http://dev.bukkit.org/bukkit-plugins/timedbroadcast/
 *********************************************************************************************************************
 This program is free software: you can redistribute it and/or modify

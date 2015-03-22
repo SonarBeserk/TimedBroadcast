@@ -21,8 +21,8 @@
 
 package me.sonarbeserk.timedbroadcast;
 
+import com.serkprojects.serkcore.plugin.JavaPlugin;
 import lilypad.client.connect.api.Connect;
-import me.sonarbeserk.beserkcore.plugin.UpdatingJavaPlugin;
 import me.sonarbeserk.timedbroadcast.commands.BroadcastCmd;
 import me.sonarbeserk.timedbroadcast.enums.TimeUnit;
 import me.sonarbeserk.timedbroadcast.lilypad.LilyPadMessenger;
@@ -34,7 +34,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.ArrayList;
 
-public class TimedBroadcast extends UpdatingJavaPlugin {
+public class TimedBroadcast extends JavaPlugin {
     private Connect lilypadConnection = null;
 
     private LilyPadMessenger lilyPadMessenger = null;
@@ -59,10 +59,6 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
             lilyPadMessenger = new LilyPadMessenger(this);
 
             getLogger().info(getLanguage().getMessage("lilypadSupportEnabled"));
-        }
-
-        if (lilypadConnection != null) {
-            // claim counting here
         }
 
         if (getServer().getPluginManager().getPlugin("Vault") != null && getServer().getPluginManager().getPlugin("Vault").isEnabled()) {
@@ -119,11 +115,6 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
     }
 
     @Override
-    public int getProjectID() {
-        return 0; // Replace at distribution
-    }
-
-    @Override
     public boolean shouldSaveData() {
         return true;
     }
@@ -136,6 +127,10 @@ public class TimedBroadcast extends UpdatingJavaPlugin {
     @Override
     public String getPermissionPrefix() {
         return getName().toLowerCase();
+    }
+
+    @Override
+    public void onReload() {
     }
 
     private boolean setupPermissions() {

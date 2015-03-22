@@ -42,7 +42,6 @@ import org.bukkit.conversations.Conversable;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationFactory;
 import org.bukkit.conversations.Prompt;
-import org.bukkit.entity.Player;
 
 public class BroadcastCmd implements CommandExecutor {
     private TimedBroadcast plugin = null;
@@ -54,13 +53,8 @@ public class BroadcastCmd implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usageBroadcast"));
-                return true;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("usageBroadcast"));
-                return true;
-            }
+            plugin.getMessaging().sendMessage(sender, true, plugin.getLanguage().getMessage("usageBroadcast"));
+            return true;
         }
 
         if (args.length > 0) {
@@ -99,13 +93,8 @@ public class BroadcastCmd implements CommandExecutor {
                 return true;
             }
 
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usageBroadcast"));
-                return true;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("usageBroadcast"));
-                return true;
-            }
+            plugin.getMessaging().sendMessage(sender, true, plugin.getLanguage().getMessage("usageBroadcast"));
+            return true;
         }
 
         return true;
@@ -114,13 +103,8 @@ public class BroadcastCmd implements CommandExecutor {
     private boolean permissionCheck(CommandSender sender, String permission, boolean autoMessage) {
         if (!sender.hasPermission(permission)) {
             if (autoMessage) {
-                if (sender instanceof Player) {
-                    plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("noPermission"));
-                    return false;
-                } else {
-                    plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("noPermission"));
-                    return false;
-                }
+                plugin.getMessaging().sendMessage(sender, true, plugin.getLanguage().getMessage("noPermission"));
+                return false;
             } else {
                 return false;
             }
@@ -130,13 +114,7 @@ public class BroadcastCmd implements CommandExecutor {
     }
 
     private void helpSubCommand(CommandSender sender) {
-        if (sender instanceof Player) {
-            plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("usageBroadcast"));
-            return;
-        } else {
-            plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("usageBroadcast"));
-            return;
-        }
+        plugin.getMessaging().sendMessage(sender, true, plugin.getLanguage().getMessage("usageBroadcast"));
     }
 
     private void addSubCommand(CommandSender sender) {
@@ -201,22 +179,9 @@ public class BroadcastCmd implements CommandExecutor {
 
         if (plugin.shouldBroadcast()) {
             plugin.shouldBroadcast(false);
-
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("broadcastsStopped"));
-                return;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("broadcastsStopped"));
-                return;
-            }
+            plugin.getMessaging().sendMessage(sender, true, plugin.getLanguage().getMessage("broadcastsStopped"));
         } else {
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("broadcastsAlreadyStopped"));
-                return;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("broadcastsAlreadyStopped"));
-                return;
-            }
+            plugin.getMessaging().sendMessage(sender, true, plugin.getLanguage().getMessage("broadcastsAlreadyStopped"));
         }
     }
 
@@ -227,22 +192,9 @@ public class BroadcastCmd implements CommandExecutor {
 
         if (!plugin.shouldBroadcast()) {
             plugin.shouldBroadcast(true);
-
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("broadcastsStarted"));
-                return;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("broadcastsStarted"));
-                return;
-            }
+            plugin.getMessaging().sendMessage(sender, true, plugin.getLanguage().getMessage("broadcastsStarted"));
         } else {
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("broadcastsAlreadyStarted"));
-                return;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("broadcastsAlreadyStarted"));
-                return;
-            }
+            plugin.getMessaging().sendMessage(sender, true, plugin.getLanguage().getMessage("broadcastsAlreadyStarted"));
         }
     }
 
@@ -252,13 +204,8 @@ public class BroadcastCmd implements CommandExecutor {
         }
 
         if(plugin.getLilypadConnection() == null) {
-            if (sender instanceof Player) {
-                plugin.getMessaging().sendMessage(sender, true, true, plugin.getLanguage().getMessage("lilypadNotFoundCanNotUse"));
-                return;
-            } else {
-                plugin.getMessaging().sendMessage(sender, false, false, plugin.getLanguage().getMessage("lilypadNotFoundCanNotUse"));
-                return;
-            }
+            plugin.getMessaging().sendMessage(sender, true, plugin.getLanguage().getMessage("lilypadNotFoundCanNotUse"));
+            return;
         }
 
         ConversationFactory conversationFactory = new ConversationFactory(plugin);
