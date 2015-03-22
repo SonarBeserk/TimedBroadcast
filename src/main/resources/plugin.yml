@@ -1,6 +1,6 @@
 name: ${project.name}
 version: ${project.version}
-authors: [${project.author}]
+authors: [${project.authors}]
 description: ${project.description}
 
 depend: ${project.depends}
