@@ -25,23 +25,6 @@ outOfDateConfig: "&cThe version of the config file being run is out of date! Ple
 # Message to send when the language file being run is out of date
 outOfDateLanguage: "&cThe version of the language file being run is out of date! Please delete the file and reload the plugin to generate the new version! (Backup the old version first!)"
 
-# Updater
-
-# Sent when the updater reports it is up to date
-updaterUpToDate: "The version of the plugin being run is up to date!"
-
-# Sent when the updater finds a new plugin version | {new} - new version | {link} - link to the new version
-updaterNotify: "The latest released version is {new}. Please go to {link} to download!"
-
-# Sent when the updater downloads the new plugin version | {new} - new version
-updaterUpdated: "The latest released version: {new} has been downloaded and will be loaded upon the next restart!"
-
-# Sent when a user with permission is authed, it is used to inform them of the plugin update
-updateFound: "&2The latest released version is {new}. Please go to {link} to download!"
-
-# Sent when a user with permission is authed, it is used to inform them that the plugin has been updated and to restart the server
-updateDownloaded: "&2The latest released version: {new} has been downloaded and will be loaded upon the next restart!"
-
 # Sent when a sender lacks permission to do something
 noPermission: "&cYou do not have permission to do that!"
 

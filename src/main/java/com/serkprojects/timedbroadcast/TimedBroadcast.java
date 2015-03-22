@@ -126,7 +126,7 @@ public class TimedBroadcast extends JavaPlugin {
 
     @Override
     public String getPermissionPrefix() {
-        return getName().toLowerCase();
+        return getConfig().getString("settings.permissionPrefix");
     }
 
     @Override

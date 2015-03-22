@@ -15,9 +15,10 @@
     <properties>
         <project.name.lowercase>timedbroadcast</project.name.lowercase>
         <project.name.short>tb</project.name.short>
+        <project.permissionprefix>timebroad</project.permissionprefix>
 
         <project.main>com.serkprojects.timedbroadcast.TimedBroadcast</project.main>
-        <project.author>SonarBeserk</project.author>
+        <project.authors>SonarBeserk</project.authors>
 
         <project.depends>[SerkCore]</project.depends>
 
